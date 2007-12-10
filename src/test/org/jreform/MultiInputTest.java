@@ -4,7 +4,7 @@ import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
 import org.jreform.HtmlForm;
-import org.jreform.Input;
+import org.jreform.MultiInput;
 
 //
 // test required and optional fields:
@@ -12,7 +12,7 @@ import org.jreform.Input;
 //    without criteria
 //
 
-public class InputTest extends BaseTestCase
+public class MultiInputTest extends BaseTestCase
 {
     private static final int MIN = 10;
     private static final int MAX = 20;
@@ -43,8 +43,8 @@ public class InputTest extends BaseTestCase
     {
         assertFalse(validateForm());
         
-        assertEquals(form.requiredInt().getValueAttribute(), "");
-        assertEquals(form.requiredString().getValueAttribute(), "");
+        assertTrue(form.requiredInt().getValueAttributes().length == 0);
+        assertTrue(form.requiredString().getValueAttributes().length == 0);
         
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.requiredString().isValid());
@@ -56,13 +56,19 @@ public class InputTest extends BaseTestCase
     /** Input fails if value can't be converted to input's type */
     public void testFieldFailsIfGivenInvalidType()
     {
-        setRequiredFields("Passing string instead of an int.", "some value");
-        setOptionalFields("Passing string instead of an int.", "some value");
+        setRequiredFields(
+                new String[] {"Passing string instead of an int."},
+                new String[] {"some value"});
+        
+        setOptionalFields(
+                new String[] {"Passing string instead of an int."},
+                new String[] {"some value"});
+        
         
         assertFalse(validateForm());
         
-        assertNull(form.requiredInt().getValue());
-        assertNull(form.optionalInt().getValue());
+        assertTrue(form.requiredInt().getValues().isEmpty());
+        assertTrue(form.optionalInt().getValues().isEmpty());
         
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.optionalInt().isValid());
@@ -74,13 +80,18 @@ public class InputTest extends BaseTestCase
         String stringTooShort = "x";
         Integer numTooBig = 100;
         
-        setRequiredFields(String.valueOf(numTooBig), "some input");
-        setOptionalFields(String.valueOf(15), stringTooShort);
+        setRequiredFields(
+                new String[] {String.valueOf(numTooBig)},
+                new String[] {"some input"});
+        
+        setOptionalFields(
+                new String[] {String.valueOf(15)},
+                new String[] {stringTooShort});
         
         assertFalse("Criteria not satisfied", validateForm());
         
-        assertEquals(stringTooShort, form.optionalString().getValueAttribute());
-        assertEquals(numTooBig, form.requiredInt().getValue());
+        assertEquals(stringTooShort, form.optionalString().getValueAttributes()[0]);
+        assertEquals(numTooBig, form.requiredInt().getValues().get(0));
         
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.optionalString().isValid());
@@ -96,44 +107,48 @@ public class InputTest extends BaseTestCase
     {
         int number = 15;
         
-        setRequiredFields(String.valueOf(number), "some input");
+        setRequiredFields(
+                new String[] {String.valueOf(number)},
+                new String[] {"some input"});
         
         assertTrue(number >= MIN && number <= MAX);
         assertTrue(validateForm());
         
         assertTrue(form.requiredInt().isValid());
-        assertTrue(form.requiredInt().getValue() == number);
-        assertTrue(form.requiredInt().getValue() >= MIN);
-        assertTrue(form.requiredInt().getValue() <= MAX);
+        
+        int parsedInt = form.requiredInt().getValues().get(0);
+        assertTrue(parsedInt == number);
+        assertTrue(parsedInt >= MIN);
+        assertTrue(parsedInt <= MAX);
         
         assertTrue(form.requiredString().isValid());
-        assertTrue(form.requiredString().getValue().length() >= MIN_LENGTH);
+        assertTrue(form.requiredString().getValues().get(0).length() >= MIN_LENGTH);
     }
     
     /** Optional input passes without a value */
     public void testOptionalFieldPassesWithoutAValue()
     {
-        setRequiredFields("15", "some input");
+        setRequiredFields(new String[] {"15"}, new String[] {"some input"});
         
         assertTrue(validateForm());
         
-        assertNull(form.optionalInt().getValue());
-        assertEquals(form.optionalInt().getValueAttribute(), "");
+        assertTrue(form.optionalInt().getValues().isEmpty());
+        assertTrue(form.optionalInt().getValueAttributes().length == 0);
         
-        assertNull(form.optionalString().getValue());
-        assertEquals(form.optionalString().getValueAttribute(), "");
+        assertTrue(form.optionalString().getValues().isEmpty());
+        assertTrue(form.optionalString().getValueAttributes().length == 0);
     }
     
-    private void setRequiredFields(String intField, String stringField)
+    private void setRequiredFields(String[] intField, String[] stringField)
     {
-        setParameter(REQ_INT, intField);
-        setParameter(REQ_STRING, stringField);
+        setParameters(REQ_INT, intField);
+        setParameters(REQ_STRING, stringField);
     }
 
-    private void setOptionalFields(String intField, String stringField)
+    private void setOptionalFields(String[] intField, String[] stringField)
     {
-        setParameter(OPT_INT, intField);
-        setParameter(OPT_STRING, stringField);
+        setParameters(OPT_INT, intField);
+        setParameters(OPT_STRING, stringField);
     }
     
     private class TestForm extends HtmlForm
@@ -141,32 +156,32 @@ public class InputTest extends BaseTestCase
         public TestForm()
         {
             // required and optional fields with criteria
-            add(intType(), REQ_INT, range(MIN, MAX));
-            add(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
+            addMulti(intType(), REQ_INT, range(MIN, MAX));
+            addMulti(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
             
             // required and optional fields without criteria
-            add(stringType(), REQ_STRING);
-            add(intType(), OPT_INT).optional();
+            addMulti(stringType(), REQ_STRING);
+            addMulti(intType(), OPT_INT).optional();
         }
         
-        public Input<Integer> requiredInt()
+        public MultiInput<Integer> requiredInt()
         {
-            return getInput(REQ_INT);
+            return getMultiInput(REQ_INT);
         }
         
-        public Input<Integer> optionalInt()
+        public MultiInput<Integer> optionalInt()
         {
-            return getInput(OPT_INT);
+            return getMultiInput(OPT_INT);
         }
         
-        public Input<String> requiredString()
+        public MultiInput<String> requiredString()
         {
-            return getInput(REQ_STRING);
+            return getMultiInput(REQ_STRING);
         }
         
-        public Input<String> optionalString()
+        public MultiInput<String> optionalString()
         {
-            return getInput(OPT_STRING);
+            return getMultiInput(OPT_STRING);
         }
     }
     

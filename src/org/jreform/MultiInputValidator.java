@@ -50,15 +50,15 @@ class MultiInputValidator<T>
         List<T> parsedValues = new ArrayList<T>(valueAttributes.length);
         ValueAttributeValidator<T> validator = new ValueAttributeValidator<T>(input);
         
+        // parse in all values even if they don't satisfy the criteria
         for(String valueAttribute : valueAttributes)
         {
             ValidationResult<T> result = validator.validate(valueAttribute);
             
-            if(result.isValid())
-            {
-                 parsedValues.add(result.getParsedValue());
-            }
-            else
+            if(result.getParsedValue() != null)
+                parsedValues.add(result.getParsedValue());
+            
+            if(!result.isValid())
             {
                 allValid = false;
                 errorMessage = result.getErrorMessage();
@@ -66,7 +66,7 @@ class MultiInputValidator<T>
             }
         }
         
-        values = allValid ? parsedValues : null; // all or nothing
+        values = parsedValues;
         
         return allValid;
     }

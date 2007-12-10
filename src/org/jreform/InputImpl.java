@@ -28,9 +28,13 @@ class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         this.value = value;
     }
     
+    /**
+     * Returns the <tt>value</tt> attribute or an empty string
+     * if it's <code>null</code>.
+     */
     public final String getValueAttribute()
     {
-        return valueAttribute;
+        return valueAttribute == null ? "" : valueAttribute;
     }
     
     public final void setValueAttribute(String input)
@@ -38,6 +42,11 @@ class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         valueAttribute = input == null ? null : input.trim();
     }
     
+    /**
+     * Returns the string representation of the value as returned
+     * by <tt>getValue().toString()</tt> or an empty string if the
+     * value is <code>null</code>.
+     */
     // XXX: "null" or empty string?
     public final String getStringValue()
     {

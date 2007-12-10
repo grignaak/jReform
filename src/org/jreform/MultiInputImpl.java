@@ -14,6 +14,8 @@ import org.jreform.core.InputDataType;
  */
 class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
+    private static final String[] EMPTY_ARRAY = {};
+    
     private List<T> values;
     private String[] valueAttributes;
     
@@ -22,6 +24,9 @@ class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
         super(type, name, criteria);
     }
     
+    /**
+     * Returns a list of parsed values or an empty list if none.
+     */
     @SuppressWarnings("unchecked")
     public final List<T> getValues()
     {
@@ -33,9 +38,12 @@ class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
         this.values = value;
     }
     
+    /**
+     * Returns an array of <tt>value</tt> attributes or an empty array if none.
+     */
     public final String[] getValueAttributes()
     {
-        return valueAttributes;
+        return valueAttributes == null ? EMPTY_ARRAY : valueAttributes;
     }
     
     public final void setValueAttributes(String[] input)
@@ -50,6 +58,9 @@ class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
     
     boolean validate(HttpServletRequest req)
     {
+        String[] values = req.getParameterValues(getInputName());
+        setValueAttributes(values);
+
         MultiInputValidator<T> validator = new MultiInputValidator<T>(this);
         ValidationResult<List<T>> result = validator.validate(valueAttributes);
         
