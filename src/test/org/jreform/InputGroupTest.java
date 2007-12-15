@@ -43,7 +43,7 @@ public class InputGroupTest extends BaseTestCase
         try
         {
             // add to the form
-            form.add(SURNAME);
+            form.input(SURNAME);
             fail("cannot add inputs with identical names");
         }
         catch(DuplicateNameException ex) { /* empty */ }
@@ -51,7 +51,7 @@ public class InputGroupTest extends BaseTestCase
         try
         {
             // add to another group
-            form.getGroup(METRIC).add(SURNAME);
+            form.getGroup(METRIC).input(SURNAME);
             fail("cannot add inputs with identical names");
         }
         catch(DuplicateNameException ex) { /* empty */ }
@@ -210,18 +210,18 @@ public class InputGroupTest extends BaseTestCase
         public TestForm()
         {
             InputGroup contact = requiredGroup(CONTACT);
-            contact.add(SURNAME);
-            contact.add(PHONE);
-            contact.add(EMAIL, emailAddress()).optional();
+            contact.input(SURNAME);
+            contact.input(PHONE);
+            contact.input(EMAIL, emailAddress()).optional();
             
             InputGroup metric = optionalGroup(METRIC);
-            metric.add(doubleType(), HEIGHT_M);
-            metric.add(intType(), WEIGHT_KG);
+            metric.input(doubleType(), HEIGHT_M);
+            metric.input(intType(), WEIGHT_KG);
             
             InputGroup imperial = optionalGroup(IMPERIAL);
-            imperial.add(intType(), HEIGHT_FT);
-            imperial.add(intType(), HEIGHT_IN);
-            imperial.add(intType(), WEIGHT_LB);
+            imperial.input(intType(), HEIGHT_FT);
+            imperial.input(intType(), HEIGHT_IN);
+            imperial.input(intType(), WEIGHT_LB);
         }
         
         protected void additionalValidate()

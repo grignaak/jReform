@@ -141,12 +141,12 @@ public class InputTest extends BaseTestCase
         public TestForm()
         {
             // required and optional fields with criteria
-            add(intType(), REQ_INT, range(MIN, MAX));
-            add(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
+            input(intType(), REQ_INT, range(MIN, MAX));
+            input(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
             
             // required and optional fields without criteria
-            add(stringType(), REQ_STRING);
-            add(intType(), OPT_INT).optional();
+            input(stringType(), REQ_STRING);
+            input(intType(), OPT_INT).optional();
         }
         
         public Input<Integer> requiredInt()

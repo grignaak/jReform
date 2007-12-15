@@ -156,12 +156,12 @@ public class MultiInputTest extends BaseTestCase
         public TestForm()
         {
             // required and optional fields with criteria
-            addMulti(intType(), REQ_INT, range(MIN, MAX));
-            addMulti(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
+            multiInput(intType(), REQ_INT, range(MIN, MAX));
+            multiInput(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
             
             // required and optional fields without criteria
-            addMulti(stringType(), REQ_STRING);
-            addMulti(intType(), OPT_INT).optional();
+            multiInput(stringType(), REQ_STRING);
+            multiInput(intType(), OPT_INT).optional();
         }
         
         public MultiInput<Integer> requiredInt()
