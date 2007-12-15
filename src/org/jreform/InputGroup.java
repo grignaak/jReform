@@ -115,7 +115,7 @@ public class InputGroup extends AbstractInputCollection implements Group
             {
                 String[] values = req.getParameterValues(input.getInputName());
                 
-                if(values != null && values.length > 0) // TODO: tests
+                if(values != null && values.length > 0)
                     foundInputData = true;
             }
         }

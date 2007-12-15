@@ -3,22 +3,22 @@ package org.jreform.criteria;
 import java.util.Arrays;
 
 /**
- * Checks that value is equal to one of the passed in values.
+ * Checks that value is equal to one of the acceptable values.
  * 
  * @author armandino (at) gmail.com
  */
-public class Values<T> extends AbstractCriterion<T>
+public class Accept<T> extends AbstractCriterion<T>
 {
-    private T[] values;
+    private T[] acceptableValues;
     
-    Values(T...values)
+    Accept(T...values)
     {
-        this.values = values;   
+        this.acceptableValues = values;   
     }
     
     protected final boolean verify(T value)
     {
-        for(T v : values)
+        for(T v : acceptableValues)
         {
             if(areEqual(v, value))
                 return true;
@@ -34,7 +34,7 @@ public class Values<T> extends AbstractCriterion<T>
     
     protected String generateErrorMessage()
     {
-        return "Please enter one of the allowed values " +Arrays.asList(values);
+        return "Please enter one of the allowed values " +Arrays.asList(acceptableValues);
     }
     
 }

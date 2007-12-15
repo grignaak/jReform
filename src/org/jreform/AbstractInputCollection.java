@@ -107,7 +107,7 @@ abstract class AbstractInputCollection
     /**
      * Add a single-value input.
      */
-    public final <T> InputControlModifier add(
+    public final <T> InputControlModifier input(
             InputDataType<T> type, String name, Criterion...criteria)
     {
         AbstractInputControl<T> input = new InputImpl<T>(type, name, criteria);
@@ -118,15 +118,15 @@ abstract class AbstractInputCollection
     /**
      * Add a single-value input of type string.
      */
-    public final <T> InputControlModifier add(String name, Criterion...criteria)
+    public final <T> InputControlModifier input(String name, Criterion...criteria)
     {
-        return add(StringType.stringType(), name, criteria);
+        return input(StringType.stringType(), name, criteria);
     }
     
     /**
      * Add a multi-value input.
      */
-    public final <T> InputControlModifier addMulti(
+    public final <T> InputControlModifier multiInput(
             InputDataType<T> type, String name, Criterion...criteria)
     {
         AbstractInputControl<T> input = new MultiInputImpl<T>(type, name, criteria);
@@ -137,9 +137,9 @@ abstract class AbstractInputCollection
     /**
      * Add a multi-value input of type string.
      */
-    public final <T> InputControlModifier addMulti(String name, Criterion...criteria)
+    public final <T> InputControlModifier multiInput(String name, Criterion...criteria)
     {
-        return addMulti(StringType.stringType(), name, criteria);
+        return multiInput(StringType.stringType(), name, criteria);
     }
     
     public String toString()

@@ -11,7 +11,7 @@ import org.jreform.core.InputDataType;
  * 
  * @author armandino (at) gmail.com
  */
-public abstract class AbstractInputControl<T> implements InputControl<T>
+abstract class AbstractInputControl<T> implements InputControl<T>
 {
     private InputDataType<T> type;
     private String name;

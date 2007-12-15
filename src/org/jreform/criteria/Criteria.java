@@ -21,14 +21,14 @@ public class Criteria
         return new Or(criteria);
     }
     
-    public static <T> Criterion<T> values(T...values)
+    public static <T> Criterion<T> accept(T...values)
     {
-        return new Values<T>(values);
+        return new Accept<T>(values);
     }
     
-    public static StringValues values(String...values)
+    public static AcceptString acceptString(String...values)
     {
-        return new StringValues(values);
+        return new AcceptString(values);
     }
     
     public static <T extends Comparable<T>> Criterion min(T min)
@@ -46,9 +46,14 @@ public class Criteria
         return new Range<T>(min, max);
     }
     
-    public static Criterion length(int length)
+    public static Criterion length(int min, int max)
     {
-        return new Length<CharSequence>(length);
+        return new Length<CharSequence>(min, max);
+    }
+    
+    public static Criterion exactLength(int length)
+    {
+        return new ExactLength<CharSequence>(length);
     }
     
     public static Criterion minLength(int min)

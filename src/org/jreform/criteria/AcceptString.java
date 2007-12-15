@@ -7,11 +7,11 @@ import org.jreform.core.Criterion;
  * 
  * @author armandino (at) gmail.com
  */
-public final class StringValues extends Values<String>
+public final class AcceptString extends Accept<String>
 {
-    private boolean caseSensitive = false;
+    private boolean caseSensitive = true;
     
-    StringValues(String...values)
+    AcceptString(String...values)
     {
         super(values);
     }
@@ -25,11 +25,11 @@ public final class StringValues extends Values<String>
     }
     
     /**
-     * Specifies string comparison to be case-sensitive. 
+     * Specifies string comparison to be case-insensitive. 
      */
-    public Criterion<String> caseSensitive()
+    public Criterion<String> ignoreCase()
     {
-        caseSensitive = true;
+        caseSensitive = false;
         return this;
     }
     
