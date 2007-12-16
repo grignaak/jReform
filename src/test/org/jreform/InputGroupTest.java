@@ -3,9 +3,9 @@ package test.org.jreform;
 import static org.jreform.criteria.Criteria.emailAddress;
 
 import org.jreform.DuplicateNameException;
+import org.jreform.Group;
 import org.jreform.HtmlForm;
 import org.jreform.Input;
-import org.jreform.InputGroup;
 
 public class InputGroupTest extends BaseTestCase
 {
@@ -209,16 +209,16 @@ public class InputGroupTest extends BaseTestCase
     {
         public TestForm()
         {
-            InputGroup contact = requiredGroup(CONTACT);
+            Group contact = requiredGroup(CONTACT);
             contact.input(SURNAME);
             contact.input(PHONE);
             contact.input(EMAIL, emailAddress()).optional();
             
-            InputGroup metric = optionalGroup(METRIC);
+            Group metric = optionalGroup(METRIC);
             metric.input(doubleType(), HEIGHT_M);
             metric.input(intType(), WEIGHT_KG);
             
-            InputGroup imperial = optionalGroup(IMPERIAL);
+            Group imperial = optionalGroup(IMPERIAL);
             imperial.input(intType(), HEIGHT_FT);
             imperial.input(intType(), HEIGHT_IN);
             imperial.input(intType(), WEIGHT_LB);
@@ -226,8 +226,8 @@ public class InputGroupTest extends BaseTestCase
         
         protected void additionalValidate()
         {
-            InputGroup metric = getGroup(METRIC);
-            InputGroup imperial = getGroup(IMPERIAL);
+            Group metric = getGroup(METRIC);
+            Group imperial = getGroup(IMPERIAL);
             
             if(metric.isEmpty() && imperial.isEmpty())
             {
