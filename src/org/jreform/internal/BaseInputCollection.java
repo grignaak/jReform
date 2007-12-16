@@ -60,57 +60,45 @@ class BaseInputCollection extends AbstractInputCollection
     // ------------ Convenience methods for adding inputs -----------------
     // --------------------------------------------------------------------
     
-    public final <T> InputControlModifier input(
-            InputDataType<T> type, String name, Criterion...criteria)
-    {
-        AbstractInputControl<T> input = new InputImpl<T>(type, name, criteria);
-        add(input);
-        return new InputControlModifier(input);
-    }
-    
     public final <T> InputControlModifier input(String name, Criterion...criteria)
     {
         return input(StringType.stringType(), name, criteria);
     }
     
+    public final <T> InputControlModifier input(
+            InputDataType<T> type, String name, Criterion...criteria)
+    {
+        return create(new InputImpl<T>(type, name, criteria));
+    }
+    
     public final <T> InputControlModifier checkbox(
             InputDataType<T> type, String name, Criterion...criteria)
     {
-        AbstractInputControl<T> input = new CheckboxImpl<T>(type, name, criteria);
-        add(input);
-        return new InputControlModifier(input);
+        return create(new CheckboxImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier multiCheckbox(
             InputDataType<T> type, String name, Criterion...criteria)
     {
-        AbstractInputControl<T> input = new MultiCheckboxImpl<T>(type, name, criteria);
-        add(input);
-        return new InputControlModifier(input);
+        return create(new MultiCheckboxImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier radio(
             InputDataType<T> type, String name, Criterion...criteria)
     {
-        AbstractInputControl<T> input = new RadioImpl<T>(type, name, criteria);
-        add(input);
-        return new InputControlModifier(input);
+        return create(new RadioImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier select(
             InputDataType<T> type, String name, Criterion...criteria)
     {
-        AbstractInputControl<T> input = new SelectImpl<T>(type, name, criteria);
-        add(input);
-        return new InputControlModifier(input);
+        return create(new SelectImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier multiSelect(
             InputDataType<T> type, String name, Criterion...criteria)
     {
-        AbstractInputControl<T> input = new MultiSelectImpl<T>(type, name, criteria);
-        add(input);
-        return new InputControlModifier(input);
+        return create(new MultiSelectImpl<T>(type, name, criteria));
     }
     
     @Override
@@ -123,5 +111,11 @@ class BaseInputCollection extends AbstractInputCollection
      * Perform additional validation of form data where necessary.
      */
     protected void additionalValidate() {}
+    
+    private <T> InputControlModifier create(AbstractInputControl<T> input)
+    {
+        add(input);
+        return new InputControlModifier(input);
+    }
     
 }
