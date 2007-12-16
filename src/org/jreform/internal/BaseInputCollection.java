@@ -88,11 +88,6 @@ class BaseInputCollection extends AbstractInputCollection
         return new InputControlModifier(input);
     }
     
-    public final <T> InputControlModifier multiInput(String name, Criterion...criteria)
-    {
-        return multiInput(StringType.stringType(), name, criteria);
-    }
-    
     public final <T> InputControlModifier checkbox(
             InputDataType<T> type, String name, Criterion...criteria)
     {

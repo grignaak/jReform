@@ -18,7 +18,6 @@ public interface InputCollection
     public <T> InputControlModifier input(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier input(String name, Criterion...criteria);
     public <T> InputControlModifier multiInput(InputDataType<T> type, String name, Criterion...criteria);
-    public <T> InputControlModifier multiInput(String name, Criterion...criteria);
     public <T> InputControlModifier checkbox(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier multiCheckbox(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier radio(InputDataType<T> type, String name, Criterion...criteria);
