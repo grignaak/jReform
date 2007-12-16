@@ -22,43 +22,43 @@ import org.jreform.types.StringType;
 class BaseInputCollection extends AbstractInputCollection
 {
     @SuppressWarnings("unchecked")
-    public <T> Input<T> getInput(String name)
+    public final <T> Input<T> getInput(String name)
     {
         return (Input<T>)getInputControl(name);
     }
     
     @SuppressWarnings("unchecked")
-    public <T> MultiInput<T> getMultiInput(String name)
+    public final <T> MultiInput<T> getMultiInput(String name)
     {
         return (MultiInput<T>)getInputControl(name);
     }
     
     @SuppressWarnings("unchecked")
-    public <T> Checkbox<T> getCheckbox(String name)
+    public final <T> Checkbox<T> getCheckbox(String name)
     {
         return (Checkbox<T>)getInputControl(name);
     }
     
     @SuppressWarnings("unchecked")
-    public <T> MultiCheckbox<T> getMultiCheckbox(String name)
+    public final <T> MultiCheckbox<T> getMultiCheckbox(String name)
     {
         return (MultiCheckbox<T>)getInputControl(name);
     }
     
     @SuppressWarnings("unchecked")
-    public <T> Radio<T> getRadio(String name)
+    public final <T> Radio<T> getRadio(String name)
     {
         return (Radio<T>)getInputControl(name);
     }
     
     @SuppressWarnings("unchecked")
-    public <T> Select<T> getSelect(String name)
+    public final <T> Select<T> getSelect(String name)
     {
         return (Select<T>)getInputControl(name);
     }
     
     @SuppressWarnings("unchecked")
-    public <T> MultiSelect<T> getMultiSelect(String name)
+    public final <T> MultiSelect<T> getMultiSelect(String name)
     {
         return (MultiSelect<T>)getInputControl(name);
     }
@@ -128,7 +128,7 @@ class BaseInputCollection extends AbstractInputCollection
         return new InputControlModifier(input);
     }
     
-    
+    @Override
     boolean validate(HttpServletRequest req)
     {
         throw new UnsupportedOperationException();
