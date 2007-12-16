@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.jreform.core.InputDataType;
+import org.jreform.InputDataType;
 
 public final class DateType implements InputDataType<Date>
 {

@@ -1,8 +1,13 @@
-package org.jreform;
+package org.jreform.internal;
 
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.jreform.Group;
+import org.jreform.Input;
+import org.jreform.InputControl;
+
 
 /**
  * An input group maintains its own set of inputs and errors and has its
@@ -17,12 +22,12 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author armandino (at) gmail.com
  */
-public class InputGroup extends AbstractInputCollection implements Group
+class GroupImpl extends BaseInputCollection implements Group
 {
     private AbstractForm parent;
     private String name;
     private boolean isRequired;
-    private boolean isEmpty;
+    private boolean isEmpty = true;
     
     /**
      * Create a new input group.
@@ -30,12 +35,11 @@ public class InputGroup extends AbstractInputCollection implements Group
      * @param name of the group.
      * @param isRequired if this group should be treated as valid when empty.
      */
-    InputGroup(AbstractForm parent, String name, boolean isRequired)
+    GroupImpl(AbstractForm parent, String name, boolean isRequired)
     {
         this.parent = parent;
         this.name = name;
         this.isRequired = isRequired;
-        isEmpty = true;
     }
     
     /**

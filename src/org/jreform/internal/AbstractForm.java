@@ -1,4 +1,4 @@
-package org.jreform;
+package org.jreform.internal;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -6,16 +6,18 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+import org.jreform.DuplicateNameException;
+import org.jreform.Form;
+import org.jreform.Group;
 
 /**
- * A form contains a set of own inputs, errors and input groups.
- * It also references inputs of its child groups.
+ * A form that contains a set of its own inputs, errors and input groups.
+ * It also contains references to inputs of its child groups.
  * Input names and input group names must be unique within a form.
  * 
  * @author armandino (at) gmail.com
  */
-abstract class AbstractForm extends AbstractInputCollection implements Form
+class AbstractForm extends BaseInputCollection implements Form
 {
     private final Map<String,Group> groups;
     
@@ -41,9 +43,9 @@ abstract class AbstractForm extends AbstractInputCollection implements Form
         groups.put(name, group);
     }
     
-    public final InputGroup getGroup(String name)
+    public final Group getGroup(String name)
     {
-        return (InputGroup)groups.get(name);
+        return (GroupImpl)groups.get(name);
     }
     
     public final boolean validate(HttpServletRequest req)

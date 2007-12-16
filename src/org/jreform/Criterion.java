@@ -1,4 +1,4 @@
-package org.jreform.core;
+package org.jreform;
 
 /**
  * A criterion that can evaluate to <code>true</code> or <code>false</code>.

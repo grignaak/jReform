@@ -1,6 +1,6 @@
 package org.jreform.criteria;
 
-import org.jreform.core.Criterion;
+import org.jreform.Criterion;
 
 /**
  * Performs an <tt>OR</tt> over all criteria on the given value.

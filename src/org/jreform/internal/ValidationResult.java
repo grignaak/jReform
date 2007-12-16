@@ -1,4 +1,4 @@
-package org.jreform;
+package org.jreform.internal;
 
 /**
  * The result of a validation operation by a {@link ValueAttributeValidator}.

@@ -1,9 +1,10 @@
-package org.jreform;
+package org.jreform.internal;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jreform.core.Criterion;
-import org.jreform.core.InputDataType;
+import org.jreform.Criterion;
+import org.jreform.InputControl;
+import org.jreform.InputDataType;
 
 /**
  * Base class for single- and multi-value input controls.

@@ -1,6 +1,6 @@
-package org.jreform;
+package org.jreform.internal;
 
-import org.jreform.core.Criterion;
+import org.jreform.Criterion;
 
 /**
  * Validator for the <tt>value</tt> attribute of an input.

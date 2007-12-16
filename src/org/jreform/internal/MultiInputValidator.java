@@ -1,8 +1,9 @@
-package org.jreform;
+package org.jreform.internal;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jreform.MultiInput;
 
 /**
  * Validates a multi-value input.

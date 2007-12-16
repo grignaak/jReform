@@ -1,7 +1,7 @@
-package org.jreform.core;
+package org.jreform;
 
 /**
- * This class represents the type of an input field's data.
+ * Represents the type of an input field's data.
  * 
  * @author armandino (at) gmail.com
  */

@@ -1,6 +1,6 @@
 package org.jreform.criteria;
 
-import org.jreform.core.Criterion;
+import org.jreform.Criterion;
 
 /**
  * A collection of static methods to create commonly used criteria.

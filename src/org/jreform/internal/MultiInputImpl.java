@@ -1,4 +1,4 @@
-package org.jreform;
+package org.jreform.internal;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -6,8 +6,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jreform.core.Criterion;
-import org.jreform.core.InputDataType;
+import org.jreform.Criterion;
+import org.jreform.InputDataType;
+import org.jreform.MultiInput;
 
 /**
  * @author armandino (at) gmail.com

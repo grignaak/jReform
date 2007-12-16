@@ -1,6 +1,6 @@
 package org.jreform.criteria;
 
-import org.jreform.core.Criterion;
+import org.jreform.Criterion;
 
 /**
  * Checks if string is equal to one of the passed in strings.

@@ -1,10 +1,8 @@
 package org.jreform;
 
-import org.jreform.core.MessageOnError;
-import org.jreform.core.InputDataType;
 
 /**
- * An input control in an html form.
+ * Defines an input control in an html form.
  * 
  * @author armandino (at) gmail.com
  * @param <T> data type of this input.

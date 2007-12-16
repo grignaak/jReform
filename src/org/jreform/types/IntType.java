@@ -1,6 +1,6 @@
 package org.jreform.types;
 
-import org.jreform.core.InputDataType;
+import org.jreform.InputDataType;
 
 public final class IntType implements InputDataType<Integer>
 {

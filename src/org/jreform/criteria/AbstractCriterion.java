@@ -1,6 +1,6 @@
 package org.jreform.criteria;
 
-import org.jreform.core.Criterion;
+import org.jreform.Criterion;
 
 /**
  * An abstract criterion that verifies itself and sets an error message

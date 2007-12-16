@@ -1,9 +1,10 @@
-package org.jreform;
+package org.jreform.internal;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jreform.core.Criterion;
-import org.jreform.core.InputDataType;
+import org.jreform.Criterion;
+import org.jreform.Input;
+import org.jreform.InputDataType;
 
 /**
  * @author armandino (at) gmail.com
@@ -53,7 +54,7 @@ class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         return value == null ? "" : value.toString();
     }
     
-    final boolean validate(HttpServletRequest req)
+    boolean validate(HttpServletRequest req)
     {
         String value = req.getParameter(getInputName());
         setValueAttribute(value);

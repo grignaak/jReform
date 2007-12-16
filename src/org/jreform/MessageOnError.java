@@ -1,4 +1,4 @@
-package org.jreform.core;
+package org.jreform;
 
 /**
  * A description of an object's invalid state.

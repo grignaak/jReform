@@ -1,4 +1,4 @@
-package org.jreform;
+package org.jreform.internal;
 
 /**
  * @author armandino (at) gmail.com

@@ -2,7 +2,7 @@ package org.jreform;
 
 import java.util.Date;
 
-import org.jreform.core.InputDataType;
+import org.jreform.internal.BaseHtmlForm;
 import org.jreform.types.CharType;
 import org.jreform.types.DateType;
 import org.jreform.types.DoubleType;
@@ -15,25 +15,10 @@ import org.jreform.types.StringType;
 /**
  * This is a base class that should be extended to create a form.
  * 
- * It contains methods for adding inputs and input groups to the form,
- * and some syntactic sugar to make common tasks easier. 
- * 
  * @author armandino (at) gmail.com
  */
-public class HtmlForm extends AbstractForm
+public class HtmlForm extends BaseHtmlForm
 {
-    protected HtmlForm() {}
-    
-    protected final InputGroup requiredGroup(String name)
-    {
-        return addNewGroup(name, true);
-    }
-    
-    protected final InputGroup optionalGroup(String name)
-    {
-        return addNewGroup(name, false);
-    }
-    
     // --------------------------------------------------------------------
     // ---------------- Types supported out-of-the-box---------------------
     // --------------------------------------------------------------------
@@ -76,13 +61,6 @@ public class HtmlForm extends AbstractForm
     public static InputDataType<Date> dateType(String dateFormatPattern)
     {
         return DateType.dateType(dateFormatPattern);
-    }
-    
-    private InputGroup addNewGroup(String name, boolean isRequired)
-    {
-        Group group = new InputGroup(this, name, isRequired);
-        addGroup(group);
-        return (InputGroup)group;
     }
     
 }

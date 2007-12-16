@@ -5,7 +5,7 @@ package org.jreform;
  * 
  * @author armandino (at) gmail.com
  */
-public interface Group
+public interface Group extends InputCollection
 {
     /**
      * Returns the name of this group.
@@ -25,5 +25,10 @@ public interface Group
      *         are blank, <code>false</code> otherwise.
      */
     public boolean isEmpty();
+    
+    /**
+     * Checks whether this group is valid.
+     */
+    public boolean isValid();
     
 }
