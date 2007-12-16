@@ -15,6 +15,8 @@ class CheckboxImpl<T> extends InputImpl<T> implements Checkbox<T>
     CheckboxImpl(InputDataType<T> type, String name, Criterion...criteria)
     {
         super(type, name, criteria);
+        
+        setRequired(false); // single checkbox always optional
     }
     
     /**
@@ -23,8 +25,6 @@ class CheckboxImpl<T> extends InputImpl<T> implements Checkbox<T>
      */
     boolean validate(HttpServletRequest req)
     {
-        setRequired(false); // TODO: remove from here and implement properly
-        
         return super.validate(req);
     }
     
