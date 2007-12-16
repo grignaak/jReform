@@ -8,7 +8,6 @@ import org.jreform.internal.InputControlModifier;
 public interface InputCollection
 {
     public <T> Input<T> getInput(String name);
-    public <T> MultiInput<T> getMultiInput(String name);
     public <T> Checkbox<T> getCheckbox(String name);
     public <T> MultiCheckbox<T> getMultiCheckbox(String name);
     public <T> Radio<T> getRadio(String name);
@@ -17,7 +16,6 @@ public interface InputCollection
     
     public <T> InputControlModifier input(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier input(String name, Criterion...criteria);
-    public <T> InputControlModifier multiInput(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier checkbox(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier multiCheckbox(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier radio(InputDataType<T> type, String name, Criterion...criteria);

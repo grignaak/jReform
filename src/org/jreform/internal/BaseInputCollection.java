@@ -8,7 +8,6 @@ import org.jreform.Input;
 import org.jreform.InputCollection;
 import org.jreform.InputDataType;
 import org.jreform.MultiCheckbox;
-import org.jreform.MultiInput;
 import org.jreform.MultiSelect;
 import org.jreform.Radio;
 import org.jreform.Select;
@@ -25,12 +24,6 @@ class BaseInputCollection extends AbstractInputCollection
     public final <T> Input<T> getInput(String name)
     {
         return (Input<T>)getInputControl(name);
-    }
-    
-    @SuppressWarnings("unchecked")
-    public final <T> MultiInput<T> getMultiInput(String name)
-    {
-        return (MultiInput<T>)getInputControl(name);
     }
     
     @SuppressWarnings("unchecked")
@@ -78,14 +71,6 @@ class BaseInputCollection extends AbstractInputCollection
     public final <T> InputControlModifier input(String name, Criterion...criteria)
     {
         return input(StringType.stringType(), name, criteria);
-    }
-    
-    public final <T> InputControlModifier multiInput(
-            InputDataType<T> type, String name, Criterion...criteria)
-    {
-        AbstractInputControl<T> input = new MultiInputImpl<T>(type, name, criteria);
-        add(input);
-        return new InputControlModifier(input);
     }
     
     public final <T> InputControlModifier checkbox(

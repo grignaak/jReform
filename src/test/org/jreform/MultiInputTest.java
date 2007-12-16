@@ -4,7 +4,8 @@ import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
 import org.jreform.HtmlForm;
-import org.jreform.MultiInput;
+import org.jreform.MultiCheckbox;
+import org.jreform.MultiSelect;
 
 //
 // test required and optional fields:
@@ -156,32 +157,32 @@ public class MultiInputTest extends BaseTestCase
         public TestForm()
         {
             // required and optional fields with criteria
-            multiInput(intType(), REQ_INT, range(MIN, MAX));
-            multiInput(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
+            multiSelect(intType(), REQ_INT, range(MIN, MAX));
+            multiCheckbox(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
             
             // required and optional fields without criteria
-            multiInput(stringType(), REQ_STRING);
-            multiInput(intType(), OPT_INT).optional();
+            multiCheckbox(stringType(), REQ_STRING);
+            multiSelect(intType(), OPT_INT).optional();
         }
         
-        public MultiInput<Integer> requiredInt()
+        public MultiSelect<Integer> requiredInt()
         {
-            return getMultiInput(REQ_INT);
+            return getMultiSelect(REQ_INT);
         }
         
-        public MultiInput<Integer> optionalInt()
+        public MultiSelect<Integer> optionalInt()
         {
-            return getMultiInput(OPT_INT);
+            return getMultiSelect(OPT_INT);
         }
         
-        public MultiInput<String> requiredString()
+        public MultiCheckbox<String> requiredString()
         {
-            return getMultiInput(REQ_STRING);
+            return getMultiCheckbox(REQ_STRING);
         }
         
-        public MultiInput<String> optionalString()
+        public MultiCheckbox<String> optionalString()
         {
-            return getMultiInput(OPT_STRING);
+            return getMultiCheckbox(OPT_STRING);
         }
     }
     
