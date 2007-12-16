@@ -20,6 +20,10 @@ import org.jreform.types.StringType;
  */
 class BaseInputCollection extends AbstractInputCollection
 {
+    // --------------------------------------------------------------------
+    // -------------- Getters for different input types -------------------
+    // --------------------------------------------------------------------
+    
     @SuppressWarnings("unchecked")
     public final <T> Input<T> getInput(String name)
     {
