@@ -21,7 +21,9 @@ class RadioImpl<T> extends InputImpl<T> implements Radio<T>
     {
         super(type, name, criteria);
         
-        stateMap = new HashMap<String, CheckableState>();
+        stateMap = new DefaultValueMap<String, CheckableState>(
+                new HashMap<String, CheckableState>(),
+                CheckableState.UNCHECKED);
     }
     
     boolean validate(HttpServletRequest req)

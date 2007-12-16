@@ -21,7 +21,9 @@ class MultiSelectImpl<T> extends MultiInputImpl<T> implements MultiSelect<T>
     {
         super(type, name, criteria);
         
-        stateMap = new HashMap<String, SelectableState>();
+        stateMap = new DefaultValueMap<String, SelectableState>(
+                new HashMap<String, SelectableState>(),
+                SelectableState.UNSELECTED);
     }
     
     boolean validate(HttpServletRequest req)
