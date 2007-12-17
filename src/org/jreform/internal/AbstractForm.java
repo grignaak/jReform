@@ -45,7 +45,7 @@ class AbstractForm extends BaseInputCollection implements Form
     
     public final Group getGroup(String name)
     {
-        return (GroupImpl)groups.get(name);
+        return groups.get(name);
     }
     
     public final boolean validate(HttpServletRequest req)

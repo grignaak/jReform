@@ -11,7 +11,6 @@ import org.jreform.MultiCheckbox;
 import org.jreform.MultiSelect;
 import org.jreform.Radio;
 import org.jreform.Select;
-import org.jreform.types.StringType;
 
 /**
  * Implements methods from the {@link InputCollection}.
@@ -63,11 +62,6 @@ class BaseInputCollection extends AbstractInputCollection
     // --------------------------------------------------------------------
     // ------------ Convenience methods for adding inputs -----------------
     // --------------------------------------------------------------------
-    
-    public final <T> InputControlModifier input(String name, Criterion...criteria)
-    {
-        return input(StringType.stringType(), name, criteria);
-    }
     
     public final <T> InputControlModifier input(
             InputDataType<T> type, String name, Criterion...criteria)

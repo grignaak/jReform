@@ -15,7 +15,6 @@ public interface InputCollection
     public <T> MultiSelect<T> getMultiSelect(String name);
     
     public <T> InputControlModifier input(InputDataType<T> type, String name, Criterion...criteria);
-    public <T> InputControlModifier input(String name, Criterion...criteria);
     public <T> InputControlModifier checkbox(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier multiCheckbox(InputDataType<T> type, String name, Criterion...criteria);
     public <T> InputControlModifier radio(InputDataType<T> type, String name, Criterion...criteria);

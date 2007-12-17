@@ -1,6 +1,7 @@
 package test.org.jreform;
 
 import static org.jreform.criteria.Criteria.emailAddress;
+import static org.jreform.types.StringType.stringType;
 
 import org.jreform.DuplicateNameException;
 import org.jreform.Group;
@@ -43,7 +44,7 @@ public class InputGroupTest extends BaseTestCase
         try
         {
             // add to the form
-            form.input(SURNAME);
+            form.input(stringType(), SURNAME);
             fail("cannot add inputs with identical names");
         }
         catch(DuplicateNameException ex) { /* empty */ }
@@ -51,7 +52,7 @@ public class InputGroupTest extends BaseTestCase
         try
         {
             // add to another group
-            form.getGroup(METRIC).input(SURNAME);
+            form.getGroup(METRIC).input(stringType(), SURNAME);
             fail("cannot add inputs with identical names");
         }
         catch(DuplicateNameException ex) { /* empty */ }
@@ -210,9 +211,9 @@ public class InputGroupTest extends BaseTestCase
         public TestForm()
         {
             Group contact = requiredGroup(CONTACT);
-            contact.input(SURNAME);
-            contact.input(PHONE);
-            contact.input(EMAIL, emailAddress()).optional();
+            contact.input(stringType(), SURNAME);
+            contact.input(stringType(), PHONE);
+            contact.input(stringType(), EMAIL, emailAddress()).optional();
             
             Group metric = optionalGroup(METRIC);
             metric.input(doubleType(), HEIGHT_M);
