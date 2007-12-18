@@ -8,7 +8,7 @@ import org.jreform.Criterion;
  * 
  * @author armandino (at) gmail.com
  */
-abstract class AbstractCriterion<T> implements Criterion<T>
+public abstract class AbstractCriterion<T> implements Criterion<T>
 {
     private String messageOnError;
     
