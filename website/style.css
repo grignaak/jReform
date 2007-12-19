@@ -1,0 +1,106 @@
+
+/*
+ * layout
+ */
+body {
+  margin: 0 auto;
+  font-family: arial, sans-serif;
+  font-size: 13px;
+
+}
+
+#menu {
+  float: left;
+  padding: 10px;
+  width: 170px;
+  height: 650px;
+}
+
+#main {
+  float: left;
+  padding-left: 30px;
+  width: 600px;
+}
+
+#footer {
+  text-align: right;
+  color: #777;
+  padding: 3px;
+  background-color: #eee;
+  border-top: 1px solid #777;
+  border-bottom: 1px solid #777;
+  clear: both;
+}
+
+
+/*
+ * misc
+ */
+
+h3 {
+  font-family: Helvetica, sans-serif;
+  margin-top: 30px;
+  font-size: 20px;
+  color: #662211;
+}
+
+code {
+  color: #00c;
+}
+
+div.header {
+  padding: 20px;
+  background-color: #ffcc33;
+  border-bottom: 1px solid #cc6600;
+}
+
+a.menu_link {
+  color: #cc6600;
+  text-decoration: none;
+}
+
+a.api_link {
+  font-family: Courier New, Courier, monospace;
+}
+
+p.howto_title {
+  font-weight: bold;
+  color: #900;
+}
+
+div.menu_title {
+  font-weight: bold;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background-color: #ffcc66;
+}
+
+div.menu_item {
+  padding-left: 10px;
+  padding-top: 2px;
+  background-color: #ffffcc;
+}
+div.menu_item:hover {
+  background-color: #ffeebb;
+}
+
+pre.code {
+  padding: 10px;
+  padding-left: 30px;
+  background-color: #ffffcc;
+  border: 1px solid grey;
+  font-family: Courier New, Courier, monospace;
+  font-size: 12px;
+}
+
+table {
+  border-bottom: 1px #cc9966 solid;
+  border-collapse: collapse;
+}
+
+tr.header td {
+  background-color: #ffff99;
+  border-top: 1px #cc9966 solid;
+  border-bottom: 1px #cc9966 solid;
+}
