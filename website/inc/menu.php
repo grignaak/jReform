@@ -10,7 +10,7 @@
 </div>
 <br>
 <div style="border: 1px #ff9933 dotted;">
-  <div class="menu_title">Documentation</div>
+  <div class="menu_title">Download</div>
   <div class="menu_item"><a href="download.php" class="menu_link">Download</a></div>
   <div class="menu_item"><a href="sourcecode.php" class="menu_link">Source code</a></div>
   <div class="menu_item"><a href="license.php" class="menu_link">License</a></div>
