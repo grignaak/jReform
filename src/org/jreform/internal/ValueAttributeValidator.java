@@ -29,15 +29,12 @@ class ValueAttributeValidator<T>
         }
         else
         {
-            if(!input.isRequired())
-            {
-                isValid = true;
-            }
-            else
-            {
-                errorMessage = "Missing required field";
-            }
+            // blank input is valid if it's not required
+            isValid = !input.isRequired();
         }
+        
+        if(!isValid && errorMessage == null)
+            errorMessage = "Invalid or missing value";
         
         return new ValidationResult<T>(parsedValue, isValid, errorMessage);
     }

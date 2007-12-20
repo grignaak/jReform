@@ -50,8 +50,8 @@ public class MultiInputTest extends BaseTestCase
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.requiredString().isValid());
         
-        assertTrue(form.requiredInt().getOnError().startsWith("Missing required"));
-        assertTrue(form.requiredString().getOnError().startsWith("Missing required"));
+        assertTrue(form.requiredInt().getOnError().startsWith("Invalid or missing value"));
+        assertTrue(form.requiredString().getOnError().startsWith("Invalid or missing value"));
     }
     
     /** Input fails if value can't be converted to input's type */
@@ -73,6 +73,12 @@ public class MultiInputTest extends BaseTestCase
         
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.optionalInt().isValid());
+        
+        assertNotNull(form.requiredInt().getOnError());
+        assertNotNull(form.optionalInt().getOnError());
+        
+        assertTrue(form.requiredInt().getOnError().startsWith("Invalid or missing value"));
+        assertTrue(form.optionalInt().getOnError().startsWith("Invalid or missing value"));
     }
     
     /** Field fails if criteria are not satisfied */

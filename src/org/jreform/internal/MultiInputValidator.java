@@ -38,7 +38,7 @@ class MultiInputValidator<T>
             }
             else
             {
-                errorMessage = "Missing required field";
+                errorMessage = "Invalid or missing value";
             }
         }
         
