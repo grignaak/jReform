@@ -16,13 +16,13 @@
 
 <p><b>Binary</b></p>
 <ul>
-  <li><a href="http://downloads.sourceforge.net/jreform/jreform-1.1.3.jar?use_mirror=osdn">1.1.3 (jar)</a>
+  <li><a href="http://downloads.sourceforge.net/jreform/jreform-1.2.jar?use_mirror=osdn">1.2 (jar)</a>
 </ul>
 
 <p><b>Source code</b></p>
 <ul>
-  <li><a href="http://downloads.sourceforge.net/jreform/jreform-1.1.3-src.zip?use_mirror=osdn">1.1.3 (zip)</a>
-  <li><a href="http://downloads.sourceforge.net/jreform/jreform-1.1.3-src.tar.gz?use_mirror=osdn">1.1.3 (tar.gz)</a>
+  <li><a href="http://downloads.sourceforge.net/jreform/jreform-1.2-src.zip?use_mirror=osdn">1.2 (zip)</a>
+  <li><a href="http://downloads.sourceforge.net/jreform/jreform-1.2-src.tar.gz?use_mirror=osdn">1.2 (tar.gz)</a>
 </ul>
 
 
