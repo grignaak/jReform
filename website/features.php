@@ -129,8 +129,8 @@ for a number. Note that not all criteria are applicable to all data types. For e
 if a numeric range restriction is placed on a string input, an exception will be thrown at runtime.
 </p>
 
-<p>The following table provides a brief summary of main criteria types. Defening custom criteria
-is also possible.
+<p>The following table provides a brief summary of main criteria types.
+It is also possible to define custom criteria.
 </p>
 
 <table width="100%">

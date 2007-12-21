@@ -69,7 +69,7 @@ that user's input can be converted to the proper type.
 <h3>Validating a form</h3>
 <p>To validate the form we simply call the <code>validate(HttpServletRequest)</code> method.
 This method will check that all required values have been given and will be convert those values into
-specified type. If validation is successfull input values can be accessed as follows:</p>
+specified type. If validation is successful input values can be accessed as follows:</p>
 
 <pre class="code">
 SimpleForm form = new SimpleForm();

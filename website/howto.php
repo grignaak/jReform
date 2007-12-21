@@ -23,7 +23,7 @@ input(stringType(), "username", length(6, 12));
 </pre>
 
 <p class="howto_title">Create an optional input</p>
-<p>An input can be flaggeed as optional by invoking the
+<p>An input can be flagged as optional by invoking the
 <code>optional()</code> method. An optional input is valid either
 if it has no value, or if its value satisfies all criteria.
 In this case, the input is valid if it is left blank or if its
@@ -35,13 +35,13 @@ input(stringType(), "address", minLength(8)).optional();
 <p class="howto_title">Create an input with a int value</p>
 <p>This creates a required input whose value must be an integer.
 If the value provided is not an integer or if it is less than 0,
-the input is considered valid.
+the input is considered invalid.
 </p>
 <pre class="code">
 input(intType(), "positive", min(0));
 </pre>
 
-<p class="howto_title">Specifiy a custom error message</p>
+<p class="howto_title">Specify a custom error message</p>
 <p>Each criterion has a default error message that describes
 a validation error. The default message can be overridden
 where necessary by invoking the <code>setOnError(...)</code>
@@ -104,10 +104,10 @@ multiCheckbox(stringType(), "toppings", accept("peppers", "olives", "ham"));
 </pre>
 
 <p class="howto_title">Create a select input</p>
-<p>The following example creates a single value select input. The input allows
-only one selection. The default selection 'Select a country' has a value
-that is just an empty string. Therefore, if no selection is made validation
-will fail since this is a required input.
+<p>The following example creates a select input. This input supports only
+a single selection. In this example, the default option 'Select a country'
+has a value that is just an empty string. Therefore, if no selection is
+made validation will fail since this is a required input.
 </p>
 <pre class="code">
 select(stringType(), "country");
