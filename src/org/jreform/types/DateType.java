@@ -14,10 +14,9 @@ public final class DateType implements InputDataType<Date>
     private DateType(String dateFormatPattern)
     {
         dateFormat = new SimpleDateFormat(dateFormatPattern);
+        dateFormat.setLenient(false);
     }
     
-    // TODO: test the parseValue method - dateFormat sometimes doesn't
-    //       fail if the input string is "invalid"
     public Date parseValue(String value)
     {
         try
