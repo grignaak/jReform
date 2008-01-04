@@ -20,7 +20,7 @@ class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
     private List<T> values;
     private String[] valueAttributes;
     
-    MultiInputImpl(InputDataType<T> type, String name, Criterion...criteria)
+    MultiInputImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
     }

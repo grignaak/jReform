@@ -17,6 +17,7 @@ class MultiInputValidator<T>
     private boolean isValid;
     private String errorMessage;
     
+    @SuppressWarnings("unchecked")
     MultiInputValidator(MultiInput<T> input)
     {
         this.input = (AbstractInputControl<T>)input;

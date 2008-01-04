@@ -17,7 +17,7 @@ class RadioImpl<T> extends InputImpl<T> implements Radio<T>
 {
     private Map<String, CheckableState> stateMap;
     
-    RadioImpl(InputDataType<T> type, String name, Criterion...criteria)
+    RadioImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         

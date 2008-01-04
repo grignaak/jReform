@@ -9,10 +9,10 @@ import org.jreform.Criterion;
  */
 public final class Or<T> extends AbstractCriterion<T>
 {
-    private Criterion[] criteria;
-    private Criterion failedCriteron;
+    private Criterion<T>[] criteria;
+    private Criterion<T> failedCriteron;
     
-    Or(Criterion...criteria)
+    Or(Criterion<T>...criteria)
     {
         if(criteria.length < 2)
             throw new IllegalArgumentException(getClass().getName()

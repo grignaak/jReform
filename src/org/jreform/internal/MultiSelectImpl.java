@@ -17,7 +17,7 @@ class MultiSelectImpl<T> extends MultiInputImpl<T> implements MultiSelect<T>
 {
     private Map<String, SelectableState> stateMap;
     
-    MultiSelectImpl(InputDataType<T> type, String name, Criterion...criteria)
+    MultiSelectImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         

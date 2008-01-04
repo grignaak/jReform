@@ -20,7 +20,7 @@ abstract class AbstractInputControl<T> implements InputControl<T>
     private boolean isRequired;
     private boolean isValid;
     private boolean isGroupInput;
-    private Criterion[] criteria;
+    private Criterion<T>[] criteria;
     
     /**
      * Constructor.
@@ -30,7 +30,7 @@ abstract class AbstractInputControl<T> implements InputControl<T>
      * @param isRequired is this a required or optional input field.
      * @param criteria this input's data must satisfy.
      */
-    AbstractInputControl(InputDataType<T> type, String name, Criterion...criteria)
+    AbstractInputControl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         this.type = type;
         this.name = name;
@@ -99,7 +99,7 @@ abstract class AbstractInputControl<T> implements InputControl<T>
         this.isGroupInput = isGroupInput;
     }
     
-    protected final Criterion[] getCriteria()
+    protected final Criterion<T>[] getCriteria()
     {
         return criteria;
     }

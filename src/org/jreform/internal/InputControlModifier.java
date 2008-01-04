@@ -5,9 +5,9 @@ package org.jreform.internal;
  */
 public class InputControlModifier
 {
-    private AbstractInputControl input;
+    private AbstractInputControl<?> input;
     
-    public InputControlModifier(AbstractInputControl input)
+    public InputControlModifier(AbstractInputControl<?> input)
     {
         this.input = input;
     }

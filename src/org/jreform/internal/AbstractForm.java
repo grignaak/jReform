@@ -52,7 +52,7 @@ class AbstractForm extends BaseInputCollection implements Form
     {
         validateInputs(req);
         
-        Iterator iter = groups.keySet().iterator();
+        Iterator<String> iter = groups.keySet().iterator();
         AbstractInputCollection group;
         
         // validate input groups
@@ -73,12 +73,12 @@ class AbstractForm extends BaseInputCollection implements Form
     
     final void validateInputs(HttpServletRequest req)
     {
-        Iterator iter = getInputs().keySet().iterator();
-        AbstractInputControl input;
+        Iterator<String> iter = getInputs().keySet().iterator();
+        AbstractInputControl<?> input;
         
         while(iter.hasNext())
         {
-            input = (AbstractInputControl)getInputs().get(iter.next());
+            input = (AbstractInputControl<?>)getInputs().get(iter.next());
             
             // an input that belongs to a group is validated by its parent group
             if(!input.isGroupInput() && !input.validate(req))

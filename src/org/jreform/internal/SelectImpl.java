@@ -17,7 +17,7 @@ class SelectImpl<T> extends InputImpl<T> implements Select<T>
 {
     private Map<String, SelectableState> stateMap;
     
-    SelectImpl(InputDataType<T> type, String name, Criterion...criteria)
+    SelectImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         

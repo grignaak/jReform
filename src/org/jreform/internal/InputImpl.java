@@ -14,7 +14,7 @@ class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
     private T value;
     private String valueAttribute;
     
-    InputImpl(InputDataType<T> type, String name, Criterion...criteria)
+    InputImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
     }

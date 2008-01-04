@@ -14,11 +14,11 @@ public interface InputCollection
     public <T> Select<T> getSelect(String name);
     public <T> MultiSelect<T> getMultiSelect(String name);
     
-    public <T> InputControlModifier input(InputDataType<T> type, String name, Criterion...criteria);
-    public <T> InputControlModifier checkbox(InputDataType<T> type, String name, Criterion...criteria);
-    public <T> InputControlModifier multiCheckbox(InputDataType<T> type, String name, Criterion...criteria);
-    public <T> InputControlModifier radio(InputDataType<T> type, String name, Criterion...criteria);
-    public <T> InputControlModifier select(InputDataType<T> type, String name, Criterion...criteria);
-    public <T> InputControlModifier multiSelect(InputDataType<T> type, String name, Criterion...criteria);
+    public <T> InputControlModifier input(InputDataType<T> type, String name, Criterion<T>...criteria);
+    public <T> InputControlModifier checkbox(InputDataType<T> type, String name, Criterion<T>...criteria);
+    public <T> InputControlModifier multiCheckbox(InputDataType<T> type, String name, Criterion<T>...criteria);
+    public <T> InputControlModifier radio(InputDataType<T> type, String name, Criterion<T>...criteria);
+    public <T> InputControlModifier select(InputDataType<T> type, String name, Criterion<T>...criteria);
+    public <T> InputControlModifier multiSelect(InputDataType<T> type, String name, Criterion<T>...criteria);
     
 }

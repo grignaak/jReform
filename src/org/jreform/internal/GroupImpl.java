@@ -83,12 +83,12 @@ class GroupImpl extends BaseInputCollection implements Group
     
     final void validateInputs(HttpServletRequest req)
     {
-        Iterator iter = getInputs().keySet().iterator();
-        AbstractInputControl input;
+        Iterator<String> iter = getInputs().keySet().iterator();
+        AbstractInputControl<?> input;
         
         while(iter.hasNext())
         {
-            input = (AbstractInputControl)getInputs().get(iter.next());
+            input = (AbstractInputControl<?>)getInputs().get(iter.next());
             
             if(!input.validate(req))
                 getErrors().add(input.getInputName());
@@ -102,11 +102,11 @@ class GroupImpl extends BaseInputCollection implements Group
     private boolean containsInputData(HttpServletRequest req)
     {
         boolean foundInputData = false;
-        Iterator iter = getInputs().keySet().iterator();
+        Iterator<String> iter = getInputs().keySet().iterator();
         
         while(iter.hasNext() && !foundInputData)
         {
-            InputControl input = getInputs().get(iter.next());
+            InputControl<?> input = getInputs().get(iter.next());
             
             if(input instanceof Input)
             {

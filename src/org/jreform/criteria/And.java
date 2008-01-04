@@ -9,10 +9,10 @@ import org.jreform.Criterion;
  */
 public final class And<T> extends AbstractCriterion<T>
 {
-    private Criterion[] criteria;
-    private Criterion failedCriterion;
+    private Criterion<T>[] criteria;
+    private Criterion<T> failedCriterion;
     
-    And(Criterion...criteria)
+    And(Criterion<T>...criteria)
     {
         if(criteria.length < 2)
             throw new IllegalArgumentException(getClass().getName()

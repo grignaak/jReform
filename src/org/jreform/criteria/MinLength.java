@@ -5,7 +5,7 @@ package org.jreform.criteria;
  * 
  * @author armandino (at) gmail.com
  */
-public final class MinLength<T extends CharSequence> extends AbstractCriterion<T>
+public final class MinLength extends AbstractCriterion<String>
 {
     private int minLength;
     
@@ -14,7 +14,7 @@ public final class MinLength<T extends CharSequence> extends AbstractCriterion<T
         this.minLength = minLength;
     }
     
-    protected boolean verify(T value)
+    protected boolean verify(String value)
     {
         return value.length() >= minLength;
     }

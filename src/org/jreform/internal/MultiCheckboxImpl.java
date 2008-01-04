@@ -14,7 +14,7 @@ class MultiCheckboxImpl<T> extends MultiInputImpl<T> implements MultiCheckbox<T>
 {
     private Map<String, CheckableState> stateMap;
     
-    MultiCheckboxImpl(InputDataType<T> type, String name, Criterion...criteria)
+    MultiCheckboxImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         

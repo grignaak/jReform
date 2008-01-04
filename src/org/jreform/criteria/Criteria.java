@@ -11,14 +11,14 @@ public class Criteria
 {
     private static final Email email = new Email();
     
-    public static Criterion and(Criterion...criteria)
+    public static <T> Criterion<T> and(Criterion<T>...criteria)
     {
-        return new And(criteria);
+        return new And<T>(criteria);
     }
     
-    public static Criterion or(Criterion...criteria)
+    public static <T> Criterion<T> or(Criterion<T>...criteria)
     {
-        return new Or(criteria);
+        return new Or<T>(criteria);
     }
     
     public static <T> Criterion<T> accept(T...values)
@@ -31,52 +31,52 @@ public class Criteria
         return new AcceptString(values);
     }
     
-    public static <T extends Comparable<T>> Criterion min(T min)
+    public static <T extends Comparable<T>> Criterion<T> min(T min)
     {
         return new Min<T>(min);
     }
     
-    public static <T extends Comparable<T>> Criterion max(T max)
+    public static <T extends Comparable<T>> Criterion<T> max(T max)
     {
         return new Max<T>(max);
     }
     
-    public static <T extends Comparable<T>> Criterion range(T min, T max)
+    public static <T extends Comparable<T>> Criterion<T> range(T min, T max)
     {
         return new Range<T>(min, max);
     }
     
-    public static Criterion length(int min, int max)
+    public static <T extends CharSequence> Criterion<T> length(int min, int max)
     {
-        return new Length<CharSequence>(min, max);
+        return new Length<T>(min, max);
     }
     
-    public static Criterion exactLength(int length)
+    public static <T extends CharSequence> Criterion<T> exactLength(int length)
     {
-        return new ExactLength<CharSequence>(length);
+        return new ExactLength<T>(length);
     }
     
-    public static Criterion minLength(int min)
+    public static Criterion<String> minLength(int min)
     {
-        return new MinLength<CharSequence>(min);
+        return new MinLength(min);
     }
     
-    public static Criterion maxLength(int max)
+    public static Criterion<String> maxLength(int max)
     {
-        return new MaxLength<CharSequence>(max);
+        return new MaxLength(max);
     }
     
-    public static Criterion regex(String pattern)
+    public static Criterion<String> regex(String pattern)
     {
         return new Regex(pattern);
     }
     
-    public static Criterion startsWith(String...prefix)
+    public static Criterion<String> startsWith(String...prefix)
     {
         return new StartsWith(prefix);
     }
     
-    public static Criterion emailAddress()
+    public static Criterion<String> emailAddress()
     {
         return email;
     }

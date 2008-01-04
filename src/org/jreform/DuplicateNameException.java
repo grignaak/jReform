@@ -5,7 +5,6 @@ package org.jreform;
  */
 public class DuplicateNameException extends RuntimeException
 {
-    
     public DuplicateNameException(String msg)
     {
         super(msg);

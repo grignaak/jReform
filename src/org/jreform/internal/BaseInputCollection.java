@@ -64,37 +64,37 @@ class BaseInputCollection extends AbstractInputCollection
     // --------------------------------------------------------------------
     
     public final <T> InputControlModifier input(
-            InputDataType<T> type, String name, Criterion...criteria)
+            InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         return create(new InputImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier checkbox(
-            InputDataType<T> type, String name, Criterion...criteria)
+            InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         return create(new CheckboxImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier multiCheckbox(
-            InputDataType<T> type, String name, Criterion...criteria)
+            InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         return create(new MultiCheckboxImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier radio(
-            InputDataType<T> type, String name, Criterion...criteria)
+            InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         return create(new RadioImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier select(
-            InputDataType<T> type, String name, Criterion...criteria)
+            InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         return create(new SelectImpl<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier multiSelect(
-            InputDataType<T> type, String name, Criterion...criteria)
+            InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         return create(new MultiSelectImpl<T>(type, name, criteria));
     }

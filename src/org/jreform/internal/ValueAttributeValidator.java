@@ -44,7 +44,7 @@ class ValueAttributeValidator<T>
         if(parsedValue == null)
             return false;
         
-        Criterion[] criteria = input.getCriteria();
+        Criterion<T>[] criteria = input.getCriteria();
         for(Criterion<T> criterion : criteria)
         {
             if(!criterion.isSatisfied(parsedValue))

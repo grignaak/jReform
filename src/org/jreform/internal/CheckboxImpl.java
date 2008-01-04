@@ -12,7 +12,7 @@ import org.jreform.InputDataType;
 
 class CheckboxImpl<T> extends InputImpl<T> implements Checkbox<T>
 {
-    CheckboxImpl(InputDataType<T> type, String name, Criterion...criteria)
+    CheckboxImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         
