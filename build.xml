@@ -34,13 +34,13 @@
     </target>
 
     <target name="javadoc" depends="build" description="Generate API documentation">
-        <javadoc destdir="${api.docs}" author="true"
+        <javadoc destdir="${api.docs}" author="true" private="true"
                  version="true" use="true" windowtitle="${name}">
             <packageset dir="src" defaultexcludes="yes">
                 <include name="org/**"/>
             </packageset>
             <doctitle><![CDATA[<h1>${name} API Documentation</h1>]]></doctitle>
-            <bottom><![CDATA[<i>Copyright &#169; 2007
+            <bottom><![CDATA[<i>Copyright &#169; 2007-2008
                      <a href="http://www.jreform.org">jReform</a></i>]]></bottom>
             <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
         </javadoc>
