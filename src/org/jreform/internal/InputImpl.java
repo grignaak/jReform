@@ -48,7 +48,6 @@ class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
      * by <tt>getValue().toString()</tt> or an empty string if the
      * value is <code>null</code>.
      */
-    // XXX: "null" or empty string?
     public final String getStringValue()
     {
         return value == null ? "" : value.toString();
