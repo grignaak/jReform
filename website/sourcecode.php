@@ -15,7 +15,7 @@
 <p>Latest version of the source code can be checked out through the subversion
 repository:</p>
 
-<code>svn checkout https://svn.sourceforge.net/svnroot/jreform jreform</code>
+<code> svn co https://jreform.svn.sourceforge.net/svnroot/jreform/trunk jreform</code>
 
 <p>The repository can be also be browsed online:</p>
 
