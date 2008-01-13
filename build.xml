@@ -21,6 +21,11 @@
         <mkdir dir="${dist.dir}"/>
     </target>
 
+    <target name="clean" description="Clean target directories">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
     <target name="build" depends="init" description="Compile source code">
         <javac destdir="${build.dir}" target="1.5" debug="true"
                deprecation="false" optimize="false" failonerror="true">
@@ -29,12 +34,20 @@
         </javac>
     </target>
 
-    <target name="clean" description="Clean target directories">
-        <delete dir="${build.dir}"/>
-        <delete dir="${dist.dir}"/>
+    <target name="test" depends="build" description="Run unit tests">
+        <junit printsummary="yes" haltonfailure="yes">
+            <classpath refid="master-classpath"/>
+	    <formatter type="brief" usefile="false"/>
+            <batchtest fork="yes" todir=".">
+                <fileset dir="${src.dir}">
+                  <include name="**/*Test.java"/>
+                  <exclude name="**/AllTests.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
     </target>
 
-    <target name="javadoc" depends="build" description="Generate API documentation">
+    <target name="javadoc" depends="build" description="Generate API docs">
         <javadoc destdir="${api.docs}" author="true" private="true"
                  version="true" use="true" windowtitle="${name}">
             <packageset dir="src" defaultexcludes="yes">
@@ -42,23 +55,10 @@
             </packageset>
             <doctitle><![CDATA[<h1>${name} API Documentation</h1>]]></doctitle>
             <bottom><![CDATA[<i>Copyright &#169; 2007-2008
-                     <a href="http://www.jreform.org">jReform</a></i>]]></bottom>
+                     <a href="http://www.jreform.org">jReform</a></i>]]>
+            </bottom>
             <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
         </javadoc>
-    </target>
-
-    <target name="test" depends="build" description="Run unit tests">
-        <junit printsummary="yes" haltonfailure="yes">
-            <classpath refid="master-classpath"/>
-	    <formatter type="brief" usefile="false"/>
-            <batchtest fork="yes" todir=".">
-                <fileset dir="${src.dir}">
-                  <include name="**/*Test*.java"/>
-                  <exclude name="**/AllTests.java"/>
-                  <exclude name="**/BaseTestCase.java"/>
-                </fileset>
-            </batchtest>
-        </junit>
     </target>
 
     <target name="jar" depends="build" description="Create a jar file">
@@ -96,7 +96,6 @@
     </target>
 
     <target name="sf-release" description="Build and upload to SF.net">
-        <mkdir dir="${dist.dir}"/>
         <antcall target="clean"/>
         <antcall target="jar"/>
         <antcall target="zip"/>
