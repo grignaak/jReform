@@ -6,6 +6,7 @@
     <property file="build.properties"/>
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="bin"/>
+    <property name="dist.dir" value="dist"/>
     <property name="api.docs" value="docs/api"/>
 
     <path id="master-classpath">
@@ -15,8 +16,12 @@
         <pathelement path="${build.dir}"/>
     </path>
 
-    <target name="build" description="Compile main source tree java files">
+    <target name="init">
         <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="build" depends="init" description="Compile source code">
         <javac destdir="${build.dir}" target="1.5" debug="true"
                deprecation="false" optimize="false" failonerror="true">
             <src path="${src.dir}"/>
@@ -24,13 +29,9 @@
         </javac>
     </target>
 
-    <target name="jar" description="Create a jar file" depends="build">
-        <jar destfile="jreform-${version}.jar" basedir="${build.dir}"
-             excludes="examples/**,test/**"/>
-    </target>
-
     <target name="clean" description="Clean target directories">
         <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
     </target>
 
     <target name="javadoc" depends="build" description="Generate API documentation">
@@ -46,4 +47,62 @@
         </javadoc>
     </target>
 
+    <target name="test" depends="build" description="Run unit tests">
+        <junit printsummary="yes" haltonfailure="yes">
+            <classpath refid="master-classpath"/>
+	    <formatter type="brief" usefile="false"/>
+            <batchtest fork="yes" todir=".">
+                <fileset dir="${src.dir}">
+                  <include name="**/*Test*.java"/>
+                  <exclude name="**/AllTests.java"/>
+                  <exclude name="**/BaseTestCase.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="jar" depends="build" description="Create a jar file">
+        <jar destfile="${dist.dir}/jreform-${version}.jar"
+	     basedir="${build.dir}"
+             excludes="**/examples/**,**/test/**"/>
+    </target>
+
+    <target name="zip" description="Create a zip file">
+        <zip destfile="${dist.dir}/jreform-${version}-src.zip"
+             basedir="../"
+             includes="jreform/**"
+             excludes="**/${build.dir}/**,**/${dist.dir}/**,**/.svn/**"/>
+    </target>
+
+    <target name="tar" description="Create a tar file">
+        <tar destfile="${dist.dir}/jreform-${version}-src.tar"
+             basedir="../"
+             includes="jreform/**"
+             excludes="**/${build.dir}/**,**/${dist.dir}/**,**/.svn/**"/>
+    </target>
+
+    <target name="gzip" depends="tar" description="Compress the tar file">
+        <gzip zipfile="${dist.dir}/jreform-${version}-src.tar.gz"
+              src="${dist.dir}/jreform-${version}-src.tar"/>
+        <delete file="${dist.dir}/jreform-${version}-src.tar"/>
+    </target>
+
+    <target name="sf-ftp-upload" description="FTP upload to SF.net">
+        <ftp server="upload.sourceforge.net" remotedir="incoming"
+             userid="anonymous" password="" binary="yes" passive="yes"
+	     verbose="yes">
+          <fileset dir="${dist.dir}"/>
+        </ftp>
+    </target>
+
+    <target name="sf-release" description="Build and upload to SF.net">
+        <mkdir dir="${dist.dir}"/>
+        <antcall target="clean"/>
+        <antcall target="jar"/>
+        <antcall target="zip"/>
+        <antcall target="gzip"/>
+        <antcall target="sf-ftp-upload"/>
+    </target>
+
 </project>
+
