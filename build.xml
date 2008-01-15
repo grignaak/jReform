@@ -57,7 +57,8 @@
             <bottom><![CDATA[<i>Copyright &#169; 2007-2008
                      <a href="http://www.jreform.org">jReform</a></i>]]>
             </bottom>
-            <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
+            <classpath refid="master-classpath"/>
+            <link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
         </javadoc>
     </target>
 
