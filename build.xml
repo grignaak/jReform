@@ -62,6 +62,15 @@
         </javadoc>
     </target>
 
+    <target name="war" depends="build" description="Create a war file">
+        <war destfile="jreform.war" webxml="src/web/examples/WEB-INF/web.xml">
+            <classes dir="${build.dir}" excludes="**/test/**"/>
+            <fileset dir="${src.dir}/web/examples">
+                <include name="**/*.jsp"/>
+            </fileset>
+        </war>
+    </target>
+
     <target name="jar" depends="build" description="Create a jar file">
         <jar destfile="${dist.dir}/jreform-${version}.jar"
 	     basedir="${build.dir}"
