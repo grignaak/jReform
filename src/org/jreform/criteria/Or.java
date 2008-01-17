@@ -10,7 +10,6 @@ import org.jreform.Criterion;
 public final class Or<T> extends AbstractCriterion<T>
 {
     private Criterion<T>[] criteria;
-    private Criterion<T> failedCriteron;
     
     Or(Criterion<T>...criteria)
     {
@@ -27,8 +26,6 @@ public final class Or<T> extends AbstractCriterion<T>
         {
             if(criterion.isSatisfied(value))
                 return true;
-            else
-                failedCriteron = criterion;
         }
         
         return false;
@@ -36,7 +33,7 @@ public final class Or<T> extends AbstractCriterion<T>
     
     protected String generateErrorMessage()
     {
-        return failedCriteron.getOnError();
+        return "Invalid input value";
     }
     
 }
