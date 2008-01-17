@@ -5,7 +5,7 @@ package org.jreform.criteria;
  * 
  * @author armandino (at) gmail.com
  */
-public final class ExactLength<T extends CharSequence> extends AbstractCriterion<T>
+public final class ExactLength extends AbstractCriterion<String>
 {
     private int length;
     
@@ -14,7 +14,7 @@ public final class ExactLength<T extends CharSequence> extends AbstractCriterion
         this.length = length;
     }
     
-    protected boolean verify (T value)
+    protected boolean verify (String value)
     {
         return value.length() == length;
     }

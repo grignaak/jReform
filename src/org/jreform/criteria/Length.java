@@ -5,7 +5,7 @@ package org.jreform.criteria;
  * 
  * @author armandino (at) gmail.com
  */
-public final class Length<T extends CharSequence> extends AbstractCriterion<T>
+public final class Length extends AbstractCriterion<String>
 {
     private int min;
     private int max;
@@ -16,7 +16,7 @@ public final class Length<T extends CharSequence> extends AbstractCriterion<T>
         this.max = max;
     }
     
-    protected boolean verify (T value)
+    protected boolean verify (String value)
     {
         return value.length() <= max && value.length() >= min;
     }

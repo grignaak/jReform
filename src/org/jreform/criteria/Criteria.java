@@ -46,14 +46,14 @@ public class Criteria
         return new Range<T>(min, max);
     }
     
-    public static <T extends CharSequence> Criterion<T> length(int min, int max)
+    public static Criterion<String> length(int min, int max)
     {
-        return new Length<T>(min, max);
+        return new Length(min, max);
     }
     
-    public static <T extends CharSequence> Criterion<T> exactLength(int length)
+    public static Criterion<String> exactLength(int length)
     {
-        return new ExactLength<T>(length);
+        return new ExactLength(length);
     }
     
     public static Criterion<String> minLength(int min)
