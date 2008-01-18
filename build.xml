@@ -7,6 +7,7 @@
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="bin"/>
     <property name="dist.dir" value="dist"/>
+    <property name="examples.dir" value="src/web/examples"/>
     <property name="api.docs" value="docs/api"/>
 
     <path id="master-classpath">
@@ -62,47 +63,37 @@
         </javadoc>
     </target>
 
-    <target name="war" depends="build" description="Create a war file">
-        <war destfile="jreform.war" webxml="src/web/examples/WEB-INF/web.xml">
+    <target name="war" depends="build" description="Create war with examples">
+        <war destfile="${dist.dir}/${name}.war"
+             webxml="${examples.dir}/WEB-INF/web.xml">
             <classes dir="${build.dir}" excludes="**/test/**"/>
-            <fileset dir="${src.dir}/web/examples">
+            <fileset dir="${examples.dir}">
                 <include name="**/*.jsp"/>
             </fileset>
         </war>
     </target>
 
     <target name="jar" depends="build" description="Create a jar file">
-        <jar destfile="${dist.dir}/jreform-${version}.jar"
+        <jar destfile="${dist.dir}/${name}-${version}.jar"
 	     basedir="${build.dir}"
              excludes="**/examples/**,**/test/**"/>
     </target>
 
     <target name="zip" description="Create a zip file">
-        <zip destfile="${dist.dir}/jreform-${version}-src.zip"
+        <zip destfile="${dist.dir}/${name}-${version}-src.zip"
              basedir="../"
              includes="jreform/**"
-             excludes="**/${build.dir}/**,**/${dist.dir}/**,**/.svn/**"/>
+             excludes="**/${build.dir}/**,**/${dist.dir}/**"/>
     </target>
 
-    <target name="tar" description="Create a tar file">
-        <tar destfile="${dist.dir}/jreform-${version}-src.tar"
+    <target name="gzip" description="Compress the tar file">
+        <tar destfile="${dist.dir}/${name}-${version}-src.tar"
              basedir="../"
              includes="jreform/**"
-             excludes="**/${build.dir}/**,**/${dist.dir}/**,**/.svn/**"/>
-    </target>
-
-    <target name="gzip" depends="tar" description="Compress the tar file">
-        <gzip zipfile="${dist.dir}/jreform-${version}-src.tar.gz"
-              src="${dist.dir}/jreform-${version}-src.tar"/>
-        <delete file="${dist.dir}/jreform-${version}-src.tar"/>
-    </target>
-
-    <target name="sf-ftp-upload" description="FTP upload to SF.net">
-        <ftp server="upload.sourceforge.net" remotedir="incoming"
-             userid="anonymous" password="" binary="yes" passive="yes"
-	     verbose="yes">
-          <fileset dir="${dist.dir}"/>
-        </ftp>
+             excludes="**/${build.dir}/**,**/${dist.dir}/**"/>
+        <gzip zipfile="${dist.dir}/${name}-${version}-src.tar.gz"
+              src="${dist.dir}/${name}-${version}-src.tar"/>
+        <delete file="${dist.dir}/${name}-${version}-src.tar"/>
     </target>
 
     <target name="sf-release" description="Build and upload to SF.net">
@@ -110,7 +101,15 @@
         <antcall target="jar"/>
         <antcall target="zip"/>
         <antcall target="gzip"/>
-        <antcall target="sf-ftp-upload"/>
+        <ftp server="upload.sourceforge.net" remotedir="incoming"
+             userid="anonymous" password="" binary="yes" passive="yes"
+	     verbose="yes">
+            <fileset dir="${dist.dir}">
+                <include name="**/*.jar"/>
+                <include name="**/*.zip"/>
+                <include name="**/*.tar.gz"/>
+            </fileset>
+        </ftp>
     </target>
 
 </project>
