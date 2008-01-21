@@ -124,7 +124,7 @@ abstract class AbstractInputCollection implements InputCollection
     public final <T> List<T> getMultiInputValue(String name)
     {
         MultiInput<?> input = (MultiInput<?>)getInputs().get(name);
-        return (List<T>)List.class.cast(input.getValues());
+        return List.class.cast(input.getValues());
     }
     
     
