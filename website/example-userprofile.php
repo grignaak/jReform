@@ -155,10 +155,11 @@ throws ServletException, IOException {
 
 <h3>Download Example</h3>
 
-<p>Complete source code for this example can be downloaded as a war file. You will also need the jReform jar on your classpath.
+<p>The source code for this example is included in source archives
+available from the <a href="download.php">downloads page</a> or from
+<a href="http://sourceforge.net/project/platformdownload.php?group_id=198446">Sourceforge</a>. Use the <code>war</code> target to generate a web archive
+using Ant.
 </p>
-
-<p><a href="http://sourceforge.net/project/platformdownload.php?group_id=198446">Download link</a></p>
 
 </div>
 <div id="footer"><?php include("inc/footer.php");?></div>

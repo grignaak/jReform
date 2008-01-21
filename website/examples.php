@@ -12,8 +12,6 @@
 <div class="main" id="main">
 
 <h3>jReform Examples</h3>
-<p>This page contains complete examples with downloadable source code.</p>
-
 <ul>
   <li><a href="example-userprofile.php">User profile</a>
 </ul>
