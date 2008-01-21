@@ -22,7 +22,7 @@ import org.jreform.InputControl;
  *
  * @author armandino (at) gmail.com
  */
-class GroupImpl extends BaseInputCollection implements Group
+class GroupImpl extends AbstractInputCollection implements Group
 {
     private AbstractForm parent;
     private String name;
@@ -67,7 +67,12 @@ class GroupImpl extends BaseInputCollection implements Group
         return isEmpty;
     }
     
-    final boolean validate(HttpServletRequest req)
+    public void setRequired(boolean isRequired)
+    {
+        this.isRequired = isRequired;
+    }
+    
+    public final boolean validate(HttpServletRequest req)
     {
         isEmpty = !containsInputData(req);
         

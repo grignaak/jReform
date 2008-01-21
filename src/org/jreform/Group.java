@@ -13,11 +13,16 @@ public interface Group extends InputCollection
     public String getName();
     
     /**
-     * If <b>required</b> all inputs must satisfy imposed criteria for the
-     * group to be valid. If <b>optional</b> either all inputs must be null
+     * If <tt>required</tt> all inputs must satisfy imposed criteria for the
+     * group to be valid. If <tt>optional</tt> either all inputs must be null
      * OR all inputs must satisfy their criteria for the group to be valid.
      */
     public boolean isRequired();
+    
+    /**
+     * Set whether this group is <tt>required</tt>. 
+     */
+    public void setRequired(boolean isRequired);
     
     /**
      * Checks if this group has input data.

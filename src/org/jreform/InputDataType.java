@@ -13,8 +13,8 @@ public interface InputDataType<T>
     public T parseValue(String value);
     
     /**
-     * Returns class underlying the data type.
+     * Returns class of input's data.
      */
-    public Class<T> getType();
+    public Class<T> getInputDataClass();
     
 }

@@ -17,7 +17,7 @@ import org.jreform.Group;
  * 
  * @author armandino (at) gmail.com
  */
-class AbstractForm extends BaseInputCollection implements Form
+class AbstractForm extends AbstractInputCollection implements Form
 {
     private final Map<String,Group> groups;
     
@@ -52,13 +52,13 @@ class AbstractForm extends BaseInputCollection implements Form
     {
         validateInputs(req);
         
-        Iterator<String> iter = groups.keySet().iterator();
-        AbstractInputCollection group;
+        Iterator<String> groupIter = groups.keySet().iterator();
+        Group group;
         
         // validate input groups
-        while(iter.hasNext())
+        while(groupIter.hasNext())
         {
-            group = (AbstractInputCollection)groups.get(iter.next());
+            group = groups.get(groupIter.next());
             
             if(!group.validate(req))
                 getErrors().addAll(group.getErrors());

@@ -1,7 +1,20 @@
 package test.org.jreform.criteria;
 
+import static org.jreform.criteria.Criteria.accept;
+import static org.jreform.criteria.Criteria.acceptString;
+import static org.jreform.criteria.Criteria.and;
+import static org.jreform.criteria.Criteria.emailAddress;
+import static org.jreform.criteria.Criteria.exactLength;
+import static org.jreform.criteria.Criteria.length;
 import static org.jreform.criteria.Criteria.max;
-import static org.jreform.criteria.Criteria.*;
+import static org.jreform.criteria.Criteria.maxLength;
+import static org.jreform.criteria.Criteria.min;
+import static org.jreform.criteria.Criteria.minLength;
+import static org.jreform.criteria.Criteria.or;
+import static org.jreform.criteria.Criteria.postcodeCA;
+import static org.jreform.criteria.Criteria.range;
+import static org.jreform.criteria.Criteria.startsWith;
+import static org.jreform.criteria.Criteria.zipcode;
 import junit.framework.TestCase;
 
 @SuppressWarnings("unchecked")
@@ -137,11 +150,41 @@ public class CriteriaTest extends TestCase
     
     public void testEmail()
     {
-        assertTrue(emailAddress().isSatisfied("arman@arman.com"));
-        assertTrue(emailAddress().isSatisfied("arman@arman.co.uk"));
-        assertTrue(emailAddress().isSatisfied("arman@dialup.ptt.ru"));
-        assertTrue(emailAddress().isSatisfied("arman.s.a@dialup.ptt.ru"));
-        assertTrue(emailAddress().isSatisfied("arm_-#%$&^*(&*an.s.a@dialup.ptt.ru.cossssssm"));
+        assertTrue(emailAddress().isSatisfied("xxxx@domain.xx"));
+        assertTrue(emailAddress().isSatisfied("xxxx@domain.xx.xx"));
+        assertTrue(emailAddress().isSatisfied("xxxx@subdomain.domain.xx"));
+        assertTrue(emailAddress().isSatisfied("xxxx.x.x@subdomain.domain.xx"));
+        assertTrue(emailAddress().isSatisfied("xxx_-#%$&^*(&*xx.x.x@subdomain.domain.xx.xxxxxxx"));
+    }
+    
+    public void testZipcode()
+    {
+        assertTrue(zipcode().isSatisfied("12345"));
+        assertTrue(zipcode().isSatisfied("12345-2345"));
+        
+        assertFalse(zipcode().isSatisfied("1234"));
+        assertFalse(zipcode().isSatisfied("123456"));
+        assertFalse(zipcode().isSatisfied("1234534-2345"));
+        assertFalse(zipcode().isSatisfied("1234X"));
+        assertFalse(zipcode().isSatisfied("-12345"));
+        assertFalse(zipcode().isSatisfied("x12345"));
+        assertFalse(zipcode().isSatisfied("abcde"));
+    }
+    
+    public void testPostcodeCA()
+    {
+        assertTrue(postcodeCA().isSatisfied("V1V 1V1"));
+        assertTrue(postcodeCA().isSatisfied("v1v 1v1"));
+        
+        assertFalse(postcodeCA().isSatisfied("1V1V 1V1"));
+        assertFalse(postcodeCA().isSatisfied("V1V 1V11"));
+        
+        assertFalse(postcodeCA().isSatisfied("V1V  1V1"));
+        assertFalse(postcodeCA().isSatisfied("V1V1V1"));
+        assertFalse(postcodeCA().isSatisfied("VVV 1V1"));
+        assertFalse(postcodeCA().isSatisfied("1A1 1V1"));
+        
+        assertFalse(postcodeCA().isSatisfied("Z1Z 1Z1"));
     }
     
 }

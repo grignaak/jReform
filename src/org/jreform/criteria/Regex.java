@@ -3,22 +3,22 @@ package org.jreform.criteria;
 import java.util.regex.Pattern;
 
 /**
- * Checks if the regular expression matches the given value.
+ * Checks if a string matches a regular expression.
  * 
  * @author armandino (at) gmail.com
  */
 public class Regex extends AbstractCriterion<String>
 {
-    private String pattern;
+    private Pattern pattern;
     
     Regex(String pattern)
     {
-        this.pattern = pattern;
+        this.pattern = Pattern.compile(pattern);
     }
     
     protected boolean verify(String value)
     {
-        return Pattern.compile(pattern).matcher(value).find();
+        return pattern.matcher(value).find();
     }
     
     protected String generateErrorMessage()

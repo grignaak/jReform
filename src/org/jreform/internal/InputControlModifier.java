@@ -3,22 +3,22 @@ package org.jreform.internal;
 /**
  * @author armandino (at) gmail.com
  */
-public class InputControlModifier
+public class InputControlModifier<T>
 {
-    private AbstractInputControl<?> input;
+    private AbstractInputControl<T> input;
     
-    public InputControlModifier(AbstractInputControl<?> input)
+    public InputControlModifier(AbstractInputControl<T> input)
     {
         this.input = input;
     }
     
-    public InputControlModifier optional()
+    public InputControlModifier<T> optional()
     {
         input.setRequired(false);
         return this;
     }
     
-    public InputControlModifier onError(String message)
+    public InputControlModifier<T> onError(String message)
     {
         input.setOnError(message);
         return this;

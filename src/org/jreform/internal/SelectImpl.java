@@ -15,6 +15,8 @@ import org.jreform.SelectableState;
  */
 class SelectImpl<T> extends InputImpl<T> implements Select<T>
 {
+    private static final int MAP_CAPACITY = 1;
+    
     private Map<String, SelectableState> stateMap;
     
     SelectImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
@@ -22,16 +24,14 @@ class SelectImpl<T> extends InputImpl<T> implements Select<T>
         super(type, name, criteria);
         
         stateMap = new DefaultValueMap<String, SelectableState>(
-                new HashMap<String, SelectableState>(),
+                new HashMap<String, SelectableState>(MAP_CAPACITY),
                 SelectableState.UNSELECTED);
     }
     
     boolean validate(HttpServletRequest req)
     {
         boolean isValid = super.validate(req);
-        
         stateMap.put(getValueAttribute(), SelectableState.SELECTED);
-        
         return isValid;
     }
     

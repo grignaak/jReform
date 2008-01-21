@@ -47,8 +47,10 @@ class DefaultValueMap<K, V> implements Map<K, V>
 
     public V get(Object key)
     {
-        V value = map.get(key);
+        // NOTE: key.toString() is a workaround for jsp EL which allows
+        //       passing arbitrary objects (e.g. Integer) as keys.
         
+        V value = map.get(key.toString());
         return value == null ? defaultValue : value;
     }
 
@@ -91,4 +93,11 @@ class DefaultValueMap<K, V> implements Map<K, V>
     {
         return map.values();
     }
+    
+    @Override
+    public String toString()
+    {
+        return map.toString();
+    }
+    
 }

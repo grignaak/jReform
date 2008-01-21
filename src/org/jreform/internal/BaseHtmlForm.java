@@ -9,21 +9,21 @@ public class BaseHtmlForm extends AbstractForm
 {
     protected BaseHtmlForm() {}
     
-    protected final GroupImpl requiredGroup(String name)
+    protected final Group requiredGroup(String name)
     {
         return addNewGroup(name, true);
     }
     
-    protected final GroupImpl optionalGroup(String name)
+    protected final Group optionalGroup(String name)
     {
         return addNewGroup(name, false);
     }
     
-    private GroupImpl addNewGroup(String name, boolean isRequired)
+    private Group addNewGroup(String name, boolean isRequired)
     {
         Group group = new GroupImpl(this, name, isRequired);
         addGroup(group);
-        return (GroupImpl)group;
+        return group;
     }
     
 }
