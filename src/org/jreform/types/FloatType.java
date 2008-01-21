@@ -20,14 +20,14 @@ public final class FloatType implements InputDataType<Float>
         }
     }
     
-    public Class<Float> getType()
+    public Class<Float> getInputDataClass()
     {
-        return float.class;
+        return Float.class;
     }
     
     public String toString()
     {
-        return getType().getName().toString();
+        return getInputDataClass().getName().toString();
     }
     
     public static InputDataType<Float> floatType()

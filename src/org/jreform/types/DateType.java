@@ -29,7 +29,7 @@ public final class DateType implements InputDataType<Date>
         }
     }
     
-    public Class<Date> getType()
+    public Class<Date> getInputDataClass()
     {
         return Date.class;
     }

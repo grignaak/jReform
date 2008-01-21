@@ -20,14 +20,14 @@ public final class ShortType implements InputDataType<Short>
         }
     }
     
-    public Class<Short> getType()
+    public Class<Short> getInputDataClass()
     {
-        return short.class;
+        return Short.class;
     }
     
     public String toString()
     {
-        return getType().getName().toString();
+        return getInputDataClass().getName().toString();
     }
     
     public static InputDataType<Short> shortType()

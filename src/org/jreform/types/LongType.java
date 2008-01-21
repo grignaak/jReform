@@ -20,14 +20,14 @@ public final class LongType implements InputDataType<Long>
         }
     }
     
-    public Class<Long> getType()
+    public Class<Long> getInputDataClass()
     {
-        return long.class;
+        return Long.class;
     }
     
     public String toString()
     {
-        return getType().getName().toString();
+        return getInputDataClass().getName().toString();
     }
     
     public static InputDataType<Long> longType()

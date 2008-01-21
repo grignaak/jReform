@@ -20,14 +20,14 @@ public final class DoubleType implements InputDataType<Double>
         }
     }
     
-    public Class<Double> getType()
+    public Class<Double> getInputDataClass()
     {
-        return double.class;
+        return Double.class;
     }
     
     public String toString()
     {
-        return getType().getName().toString();
+        return getInputDataClass().getName().toString();
     }
     
     public static InputDataType<Double> doubleType()

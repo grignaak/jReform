@@ -13,14 +13,14 @@ public final class CharType implements InputDataType<Character>
         return value.length() == 1 ? value.charAt(0) : null;
     }
     
-    public Class<Character> getType()
+    public Class<Character> getInputDataClass()
     {
-        return char.class;
+        return Character.class;
     }
     
     public String toString()
     {
-        return getType().getName().toString();
+        return getInputDataClass().getName().toString();
     }
     
     public static InputDataType<Character> charType()

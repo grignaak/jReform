@@ -20,14 +20,14 @@ public final class IntType implements InputDataType<Integer>
         }
     }
     
-    public Class<Integer> getType()
+    public Class<Integer> getInputDataClass()
     {
-        return int.class;
+        return Integer.class;
     }
     
     public String toString()
     {
-        return getType().getName().toString();
+        return getInputDataClass().getName().toString();
     }
     
     public static InputDataType<Integer> intType()

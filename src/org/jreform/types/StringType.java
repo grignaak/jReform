@@ -13,14 +13,14 @@ public final class StringType implements InputDataType<String>
         return value;
     }
     
-    public Class<String> getType()
+    public Class<String> getInputDataClass()
     {
         return String.class;
     }
     
     public String toString()
     {
-        return getType().getName().toString();
+        return getInputDataClass().getName().toString();
     }
     
     public static InputDataType<String> stringType()
