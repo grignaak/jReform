@@ -69,6 +69,7 @@
             <classes dir="${build.dir}" excludes="**/test/**"/>
             <fileset dir="${examples.dir}">
                 <include name="**/*.jsp"/>
+                <include name="**/*.jar"/>
             </fileset>
         </war>
     </target>
