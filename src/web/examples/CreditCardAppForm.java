@@ -1,6 +1,5 @@
 package web.examples;
 
-import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.emailAddress;
 
 import java.util.Date;
@@ -46,7 +45,7 @@ public class CreditCardAppForm extends HtmlForm
         employer.input(stringType(), "company");
         employer.input(stringType(), "businessPhoneNumber");
         
-        radio(stringType(), "hasAccountWithUs", accept("yes", "no"));
+        radio(booleanType(), "hasAccountWithUs");
 
         Group account = optionalGroup("accountDetails");
         account.select(stringType(), "accountType");
@@ -70,7 +69,7 @@ public class CreditCardAppForm extends HtmlForm
         EmploymentStatus empStatus = getInputValue("employmentStatus");
         Group employerInfo = getGroup("employer");
         
-        if (empStatus == EmploymentStatus.EMPLOYED)
+        if(empStatus == EmploymentStatus.EMPLOYED)
         {
             employerInfo.setRequired(true);
             employerInfo.validate(request);
@@ -78,7 +77,7 @@ public class CreditCardAppForm extends HtmlForm
         
         Group accountDetails = getGroup("accountDetails");
         
-        if ("yes".equals(getInputValue("hasAccountWithUs")))
+        if(getHasAccountWithUs().getValue())
         {
             accountDetails.setRequired(true);
             accountDetails.validate(request);
@@ -150,7 +149,7 @@ public class CreditCardAppForm extends HtmlForm
         return getInput("businessPhoneNumber");
     }
 
-    public Radio<String> getHasAccountWithUs()
+    public Radio<Boolean> getHasAccountWithUs()
     {
         return getRadio("hasAccountWithUs");
     }

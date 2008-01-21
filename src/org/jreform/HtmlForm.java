@@ -3,6 +3,7 @@ package org.jreform;
 import java.util.Date;
 
 import org.jreform.internal.BaseHtmlForm;
+import org.jreform.types.BooleanType;
 import org.jreform.types.CharType;
 import org.jreform.types.DateType;
 import org.jreform.types.DoubleType;
@@ -22,6 +23,11 @@ public class HtmlForm extends BaseHtmlForm
     // --------------------------------------------------------------------
     // ---------------- Types supported out-of-the-box---------------------
     // --------------------------------------------------------------------
+    
+    public static InputDataType<Boolean> booleanType()
+    {
+        return BooleanType.booleanType();
+    }
     
     public static InputDataType<Character> charType()
     {

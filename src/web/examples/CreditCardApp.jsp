@@ -174,9 +174,9 @@
       Do you have an account with us?
     </td>
     <td><input type="radio" name="${form.hasAccountWithUs.inputName}"
-               value="yes" ${form.hasAccountWithUs.state["yes"]}> yes
+               value="true" ${form.hasAccountWithUs.state[true]}> yes
          <input type="radio" name="${form.hasAccountWithUs.inputName}"
-                value="no" ${form.hasAccountWithUs.state["no"]}> no
+                value="false" ${form.hasAccountWithUs.state[false]}> no
     </td>
   </tr>
 

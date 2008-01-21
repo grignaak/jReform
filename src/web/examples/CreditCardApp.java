@@ -30,6 +30,7 @@ public class CreditCardApp extends HttpServlet
                 String firstName = form.getFirstName().getValue();
                 String lastName = form.getLastName().getValue();
                 Date dob = form.getDob().getValue();
+                Boolean isCustomer = form.getHasAccountWithUs().getValue();
                 
                 //
                 // Note that input values can also be accessed directly
