@@ -92,6 +92,7 @@ pre.code {
   border: 1px solid grey;
   font-family: Courier New, Courier, monospace;
   font-size: 12px;
+  overflow-x: auto;
 }
 
 table {
