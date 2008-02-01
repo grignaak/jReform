@@ -67,7 +67,7 @@ class GroupImpl extends AbstractInputCollection implements Group
         return isEmpty;
     }
     
-    public void setRequired(boolean isRequired)
+    public final void setRequired(boolean isRequired)
     {
         this.isRequired = isRequired;
     }

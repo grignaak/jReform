@@ -223,6 +223,13 @@ public class InputGroupTest extends BaseTestCase
             imperial.input(intType(), HEIGHT_FT);
             imperial.input(intType(), HEIGHT_IN);
             imperial.input(intType(), WEIGHT_LB);
+            
+            try
+            {
+                Group duplicate = optionalGroup(IMPERIAL);
+                fail("Error - duplicate group name must throw an exception");
+            }
+            catch(DuplicateNameException ex) {}
         }
         
         protected void additionalValidate()

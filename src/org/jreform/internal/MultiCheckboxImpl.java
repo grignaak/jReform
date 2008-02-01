@@ -24,7 +24,7 @@ class MultiCheckboxImpl<T> extends MultiInputImpl<T> implements MultiCheckbox<T>
     }
     
     /**
-     * Unlike a single value checkbox, multi checkbox cab be required:
+     * Unlike a single value checkbox, multi checkbox can be required:
      * i.e. user must make one or more selections.
      */
     boolean validate(HttpServletRequest req)
