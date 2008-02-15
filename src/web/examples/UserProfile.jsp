@@ -1,4 +1,4 @@
-<jsp:useBean id="form" class="org.jreform.HtmlForm" scope="request" />
+<jsp:useBean id="form" class="web.examples.UserProfileForm" scope="request" />
 
 <html>
 <head>
