@@ -206,5 +206,6 @@
 
 </div>
 <div id="footer"><?php include("inc/footer.php");?></div>
+<?php include("inc/ga.php");?>
 </body>
 </html>

@@ -125,5 +125,6 @@ found <a href="examples.php">here</a>. There is also a section describing main
 
 </div>
 <div id="footer"><?php include("inc/footer.php");?></div>
+<?php include("inc/ga.php");?>
 </body>
 </html>

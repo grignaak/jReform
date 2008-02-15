@@ -204,5 +204,6 @@ that can be displayed to the user if the value does not satisfy the criterion.</
 
 </div>
 <div id="footer"><?php include("inc/footer.php");?></div>
+<?php include("inc/ga.php");?>
 </body>
 </html>
