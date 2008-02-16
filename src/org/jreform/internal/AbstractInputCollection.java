@@ -24,7 +24,7 @@ import org.jreform.UndefinedInputControlException;
 /**
  * @author armandino (at) gmail.com
  */
-abstract class AbstractInputCollection implements InputCollection
+public abstract class AbstractInputCollection implements InputCollection
 {
     private final Map<String, InputControl<?>> inputs;
     private final Set<String> errors;
