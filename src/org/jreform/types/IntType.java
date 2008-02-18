@@ -27,7 +27,7 @@ public final class IntType implements InputDataType<Integer>
     
     public String toString()
     {
-        return getInputDataClass().getName().toString();
+        return getInputDataClass().getName();
     }
     
     public static InputDataType<Integer> intType()

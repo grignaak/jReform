@@ -20,7 +20,7 @@ public final class CharType implements InputDataType<Character>
     
     public String toString()
     {
-        return getInputDataClass().getName().toString();
+        return getInputDataClass().getName();
     }
     
     public static InputDataType<Character> charType()

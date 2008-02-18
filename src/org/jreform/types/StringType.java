@@ -20,7 +20,7 @@ public final class StringType implements InputDataType<String>
     
     public String toString()
     {
-        return getInputDataClass().getName().toString();
+        return getInputDataClass().getName();
     }
     
     public static InputDataType<String> stringType()

@@ -20,7 +20,7 @@ public final class BooleanType implements InputDataType<Boolean>
     
     public String toString()
     {
-        return getInputDataClass().getName().toString();
+        return getInputDataClass().getName();
     }
     
     public static InputDataType<Boolean> booleanType()

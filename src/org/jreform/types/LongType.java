@@ -27,7 +27,7 @@ public final class LongType implements InputDataType<Long>
     
     public String toString()
     {
-        return getInputDataClass().getName().toString();
+        return getInputDataClass().getName();
     }
     
     public static InputDataType<Long> longType()

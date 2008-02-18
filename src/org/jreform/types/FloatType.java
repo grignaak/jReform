@@ -27,7 +27,7 @@ public final class FloatType implements InputDataType<Float>
     
     public String toString()
     {
-        return getInputDataClass().getName().toString();
+        return getInputDataClass().getName();
     }
     
     public static InputDataType<Float> floatType()
