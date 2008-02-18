@@ -82,7 +82,7 @@ public class CheckboxTest extends BaseTestCase
         assertTrue(form.optionalChoices().getState().get("doesntExist") == UNCHECKED);
     }
     
-    private class TestForm extends HtmlForm
+    private static class TestForm extends HtmlForm
     {
         public TestForm()
         {

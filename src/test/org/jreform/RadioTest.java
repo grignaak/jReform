@@ -113,8 +113,9 @@ public class RadioTest extends BaseTestCase
         assertEquals(form.gender().getState().get(String.valueOf(validValue)), CHECKED);
     }
     
-    private class TestForm extends HtmlForm
+    private static class TestForm extends HtmlForm
     {
+        @SuppressWarnings("unchecked")
         public TestForm()
         {
             // required

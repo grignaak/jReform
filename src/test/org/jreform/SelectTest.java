@@ -57,7 +57,7 @@ public class SelectTest extends BaseTestCase
     }
     
     
-    private class TestForm extends HtmlForm
+    private static class TestForm extends HtmlForm
     {
         public TestForm()
         {

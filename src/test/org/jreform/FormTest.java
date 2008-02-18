@@ -92,7 +92,7 @@ public class FormTest extends BaseTestCase
         catch(ClassCastException e) {}
     }
     
-    private class TestForm extends HtmlForm
+    private static class TestForm extends HtmlForm
     {
         public TestForm()
         {

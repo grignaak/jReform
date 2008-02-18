@@ -206,8 +206,9 @@ public class InputGroupTest extends BaseTestCase
         setParameter(WEIGHT_LB, lb);
     }
     
-    private class TestForm extends HtmlForm
+    private static class TestForm extends HtmlForm
     {
+        @SuppressWarnings("unchecked")
         public TestForm()
         {
             Group contact = requiredGroup(CONTACT);

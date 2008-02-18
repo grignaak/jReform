@@ -142,8 +142,9 @@ public class InputTest extends BaseTestCase
         setParameter(OPT_STRING, stringField);
     }
     
-    private class TestForm extends HtmlForm
+    private static class TestForm extends HtmlForm
     {
+        @SuppressWarnings("unchecked")
         public TestForm()
         {
             // required and optional fields with criteria
