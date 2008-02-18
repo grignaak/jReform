@@ -3,7 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="web.examples.*" %>
-<jsp:useBean id="form" class="org.jreform.HtmlForm" scope="request" />
+<jsp:useBean id="form" class="web.examples.CreditCardAppForm" scope="request"/>
 
 <html>
 <head>
