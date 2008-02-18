@@ -12,7 +12,7 @@ public final class ShortType implements InputDataType<Short>
     {
         try
         {
-            return Short.parseShort(value);
+            return Short.valueOf(value);
         }
         catch(NumberFormatException ex)
         {

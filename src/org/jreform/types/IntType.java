@@ -12,7 +12,7 @@ public final class IntType implements InputDataType<Integer>
     {
         try
         {
-            return Integer.parseInt(value);
+            return Integer.valueOf(value);
         }
         catch(NumberFormatException ex)
         {

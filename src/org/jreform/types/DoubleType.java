@@ -12,7 +12,7 @@ public final class DoubleType implements InputDataType<Double>
     {
         try
         {
-            return Double.parseDouble(value);
+            return Double.valueOf(value);
         }
         catch(NumberFormatException ex)
         {

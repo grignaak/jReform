@@ -12,7 +12,7 @@ public final class LongType implements InputDataType<Long>
     {
         try
         {
-            return Long.parseLong(value);
+            return Long.valueOf(value);
         }
         catch(NumberFormatException ex)
         {

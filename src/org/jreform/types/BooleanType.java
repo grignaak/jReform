@@ -10,7 +10,7 @@ public final class BooleanType implements InputDataType<Boolean>
     
     public Boolean parseValue(String value)
     {
-    	return Boolean.parseBoolean(value);
+    	return Boolean.valueOf(value);
     }
     
     public Class<Boolean> getInputDataClass()

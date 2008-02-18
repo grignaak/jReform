@@ -12,7 +12,7 @@ public final class FloatType implements InputDataType<Float>
     {
         try
         {
-            return Float.parseFloat(value);
+            return Float.valueOf(value);
         }
         catch(NumberFormatException ex)
         {
