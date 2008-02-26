@@ -23,7 +23,7 @@ class CheckboxImpl<T> extends InputImpl<T> implements Checkbox<T>
      * A checkbox is always valid (and optional) since its value is
      * <code>null</code> when it's submitted unchecked.
      */
-    boolean validate(HttpServletRequest req)
+    final boolean validate(HttpServletRequest req)
     {
         return super.validate(req);
     }

@@ -1,7 +1,5 @@
 package org.jreform;
 
-import java.util.List;
-
 import org.jreform.internal.InputControlModifier;
 
 /**
@@ -9,9 +7,6 @@ import org.jreform.internal.InputControlModifier;
  */
 public interface InputCollection extends HttpServletRequestValidator
 {
-    public <T> T getInputValue(String name);
-    public <T> List<T> getMultiInputValue(String name);
-    
     public <T> Input<T> getInput(String name);
     public <T> Checkbox<T> getCheckbox(String name);
     public <T> MultiCheckbox<T> getMultiCheckbox(String name);

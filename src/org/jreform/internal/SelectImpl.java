@@ -3,8 +3,6 @@ package org.jreform.internal;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
 import org.jreform.Select;
@@ -28,11 +26,11 @@ class SelectImpl<T> extends InputImpl<T> implements Select<T>
                 SelectableState.UNSELECTED);
     }
     
-    boolean validate(HttpServletRequest req)
+    @Override
+    public void setValueAttribute(String input)
     {
-        boolean isValid = super.validate(req);
+        super.setValueAttribute(input);
         stateMap.put(getValueAttribute(), SelectableState.SELECTED);
-        return isValid;
     }
     
     public Map<String, SelectableState> getState()

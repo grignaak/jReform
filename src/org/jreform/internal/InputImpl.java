@@ -38,9 +38,17 @@ class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         return valueAttribute == null ? "" : valueAttribute;
     }
     
-    public final void setValueAttribute(String input)
+    /**
+     * Sets value attribute trimming leading/trailing whitespace.
+     */
+    public void setValueAttribute(String input)
     {
         valueAttribute = input == null ? null : input.trim();
+    }
+    
+    public final boolean isBlank()
+    {
+        return valueAttribute == null || valueAttribute.equals("");
     }
     
     /**

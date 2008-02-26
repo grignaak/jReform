@@ -30,6 +30,11 @@ public interface InputControl<T> extends MessageOnError
     public boolean isValid();
     
     /**
+     * Returns <code>true</code> if the input has no value.
+     */
+    public boolean isBlank();
+    
+    /**
      * Returns a string representation of this input's value
      * as returned by the {@link #toString()} method.
      */

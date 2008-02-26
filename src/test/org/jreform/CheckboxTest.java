@@ -3,6 +3,7 @@ package test.org.jreform;
 import static org.jreform.CheckableState.CHECKED;
 import static org.jreform.CheckableState.UNCHECKED;
 
+import org.jreform.CheckableState;
 import org.jreform.Checkbox;
 import org.jreform.HtmlForm;
 import org.jreform.MultiCheckbox;
@@ -82,6 +83,16 @@ public class CheckboxTest extends BaseTestCase
         assertTrue(form.optionalChoices().getState().get("doesntExist") == UNCHECKED);
     }
     
+    public void testSetValueAttributeSetsState()
+    {
+        form.subscribe().setValueAttribute("value");
+        assertEquals(CheckableState.CHECKED, form.subscribe().getState());
+        
+        form.choices().setValueAttributes(new String[] {"one", "two"});
+        assertEquals(CheckableState.CHECKED, form.choices().getState().get("one"));
+        assertEquals(CheckableState.CHECKED, form.choices().getState().get("two"));
+    }
+
     private static class TestForm extends HtmlForm
     {
         public TestForm()

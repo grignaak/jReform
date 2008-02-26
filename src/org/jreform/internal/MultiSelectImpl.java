@@ -3,8 +3,6 @@ package org.jreform.internal;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
 import org.jreform.MultiSelect;
@@ -26,16 +24,14 @@ class MultiSelectImpl<T> extends MultiInputImpl<T> implements MultiSelect<T>
                 SelectableState.UNSELECTED);
     }
     
-    boolean validate(HttpServletRequest req)
+    @Override
+    public void setValueAttributes(String[] input)
     {
-        boolean isValid = super.validate(req);
-        
+        super.setValueAttributes(input);
         for(String value : getValueAttributes())
         {
             stateMap.put(value, SelectableState.SELECTED);
         }
-        
-        return isValid;
     }
     
     public Map<String, SelectableState> getState()

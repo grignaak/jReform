@@ -3,8 +3,6 @@ package org.jreform.internal;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.jreform.CheckableState;
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
@@ -23,20 +21,13 @@ class MultiCheckboxImpl<T> extends MultiInputImpl<T> implements MultiCheckbox<T>
                 CheckableState.UNCHECKED);
     }
     
-    /**
-     * Unlike a single value checkbox, multi checkbox can be required:
-     * i.e. user must make one or more selections.
-     */
-    boolean validate(HttpServletRequest req)
+    public void setValueAttributes(String[] valueAttributes)
     {
-        boolean isValid = super.validate(req);
-        
+        super.setValueAttributes(valueAttributes);
         for(String value : getValueAttributes())
         {
             stateMap.put(value, CheckableState.CHECKED);
         }
-        
-        return isValid;
     }
     
     public Map<String, CheckableState> getState()

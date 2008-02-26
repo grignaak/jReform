@@ -44,6 +44,9 @@ public class MultiInputTest extends BaseTestCase
     {
         assertFalse(validateForm());
         
+        assertTrue(form.requiredInt().isBlank());
+        assertTrue(form.requiredString().isBlank());
+        
         assertTrue(form.requiredInt().getValueAttributes().length == 0);
         assertTrue(form.requiredString().getValueAttributes().length == 0);
         
@@ -57,16 +60,22 @@ public class MultiInputTest extends BaseTestCase
     /** Input fails if value can't be converted to input's type */
     public void testFieldFailsIfGivenInvalidType()
     {
-        setRequiredFields(
+        setRequiredRequestParameters(
                 new String[] {"Passing string instead of an int."},
                 new String[] {"some value"});
         
-        setOptionalFields(
+        setOptionalRequestParameters(
                 new String[] {"Passing string instead of an int."},
                 new String[] {"some value"});
         
         
+        assertTrue(form.requiredInt().isBlank());
+        assertTrue(form.requiredString().isBlank());
+
         assertFalse(validateForm());
+        
+        assertFalse(form.requiredInt().isBlank());
+        assertFalse(form.requiredString().isBlank());
         
         assertTrue(form.requiredInt().getValues().isEmpty());
         assertTrue(form.optionalInt().getValues().isEmpty());
@@ -87,11 +96,11 @@ public class MultiInputTest extends BaseTestCase
         String stringTooShort = "x";
         Integer numTooBig = 100;
         
-        setRequiredFields(
+        setRequiredRequestParameters(
                 new String[] {String.valueOf(numTooBig)},
                 new String[] {"some input"});
         
-        setOptionalFields(
+        setOptionalRequestParameters(
                 new String[] {String.valueOf(15)},
                 new String[] {stringTooShort});
         
@@ -114,7 +123,7 @@ public class MultiInputTest extends BaseTestCase
     {
         int number = 15;
         
-        setRequiredFields(
+        setRequiredRequestParameters(
                 new String[] {String.valueOf(number)},
                 new String[] {"some input"});
         
@@ -135,7 +144,7 @@ public class MultiInputTest extends BaseTestCase
     /** Optional input passes without a value */
     public void testOptionalFieldPassesWithoutAValue()
     {
-        setRequiredFields(new String[] {"15"}, new String[] {"some input"});
+        setRequiredRequestParameters(new String[] {"15"}, new String[] {"some input"});
         
         assertTrue(validateForm());
         
@@ -146,13 +155,13 @@ public class MultiInputTest extends BaseTestCase
         assertTrue(form.optionalString().getValueAttributes().length == 0);
     }
     
-    private void setRequiredFields(String[] intField, String[] stringField)
+    private void setRequiredRequestParameters(String[] intField, String[] stringField)
     {
         setParameters(REQ_INT, intField);
         setParameters(REQ_STRING, stringField);
     }
 
-    private void setOptionalFields(String[] intField, String[] stringField)
+    private void setOptionalRequestParameters(String[] intField, String[] stringField)
     {
         setParameters(OPT_INT, intField);
         setParameters(OPT_STRING, stringField);

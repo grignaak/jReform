@@ -5,6 +5,7 @@ import static org.jreform.CheckableState.UNCHECKED;
 import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.acceptString;
 
+import org.jreform.CheckableState;
 import org.jreform.HtmlForm;
 import org.jreform.Radio;
 
@@ -112,6 +113,13 @@ public class RadioTest extends BaseTestCase
         assertEquals(form.subscribe().getState().get(no), CHECKED);
         assertEquals(form.gender().getState().get(String.valueOf(validValue)), CHECKED);
     }
+    
+    public void testSetValueAttributeSetsState()
+    {
+        form.gender().setValueAttribute("X");
+        assertEquals(CheckableState.CHECKED, form.gender().getState().get("X"));
+    }
+
     
     private static class TestForm extends HtmlForm
     {

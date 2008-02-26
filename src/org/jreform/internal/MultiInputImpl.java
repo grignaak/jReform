@@ -47,9 +47,22 @@ class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
         return valueAttributes == null ? EMPTY_ARRAY : valueAttributes;
     }
     
-    public final void setValueAttributes(String[] input)
+    public void setValueAttributes(String[] input)
     {
         this.valueAttributes = input;
+    }
+    
+    public final boolean isBlank()
+    {
+        if(valueAttributes != null)
+        {
+            for(String valueAttribute : valueAttributes)
+            {
+                if(valueAttribute != null && !valueAttribute.equals(""))
+                    return false;
+            }
+        }
+        return true;
     }
     
     public String getStringValue()

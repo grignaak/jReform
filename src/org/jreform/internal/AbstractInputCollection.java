@@ -3,7 +3,6 @@ package org.jreform.internal;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,7 +14,6 @@ import org.jreform.InputCollection;
 import org.jreform.InputControl;
 import org.jreform.InputDataType;
 import org.jreform.MultiCheckbox;
-import org.jreform.MultiInput;
 import org.jreform.MultiSelect;
 import org.jreform.Radio;
 import org.jreform.Select;
@@ -102,31 +100,6 @@ public abstract class AbstractInputCollection implements InputCollection
     // ------------------InputCollection methods ----------------------
     // ----------------------------------------------------------------
     //
-    
-    
-    /**
-     * Returns the value of the specified input.
-     * @param name of the input.
-     */
-    @SuppressWarnings("unchecked")
-    public final <T> T getInputValue(String name)
-    {
-        Input<?> input = (Input<?>)getInputs().get(name);
-        Class<?> dataClass = input.getType().getInputDataClass();
-        return (T)dataClass.cast(input.getValue());
-    }
-    
-    /**
-     * Returns the list of values of the specified multi input.
-     * @param name of the input.
-     */
-    @SuppressWarnings("unchecked")
-    public final <T> List<T> getMultiInputValue(String name)
-    {
-        MultiInput<?> input = (MultiInput<?>)getInputs().get(name);
-        return List.class.cast(input.getValues());
-    }
-    
     
     //
     // Getters

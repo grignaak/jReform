@@ -3,8 +3,6 @@ package org.jreform.internal;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.jreform.CheckableState;
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
@@ -26,13 +24,10 @@ class RadioImpl<T> extends InputImpl<T> implements Radio<T>
                 CheckableState.UNCHECKED);
     }
     
-    boolean validate(HttpServletRequest req)
+    public void setValueAttribute(String valueAttribute)
     {
-        boolean isValid = super.validate(req);
-        
+        super.setValueAttribute(valueAttribute);
         stateMap.put(getValueAttribute(), CheckableState.CHECKED);
-        
-        return isValid;
     }
     
     public Map<String, CheckableState> getState()

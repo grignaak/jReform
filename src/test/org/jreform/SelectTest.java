@@ -6,6 +6,7 @@ import static org.jreform.SelectableState.UNSELECTED;
 import org.jreform.HtmlForm;
 import org.jreform.MultiSelect;
 import org.jreform.Select;
+import org.jreform.SelectableState;
 
 public class SelectTest extends BaseTestCase
 {
@@ -56,6 +57,16 @@ public class SelectTest extends BaseTestCase
         assertTrue(form.hotels().getValues().size() == 2);
     }
     
+    
+    public void testSetValueAttributeSetsState()
+    {
+        form.country().setValueAttribute("country");
+        assertEquals(SelectableState.SELECTED, form.country().getState().get("country"));
+        
+        form.hotels().setValueAttributes(new String[] {"one", "two"});
+        assertEquals(SelectableState.SELECTED, form.hotels().getState().get("one"));
+        assertEquals(SelectableState.SELECTED, form.hotels().getState().get("two"));
+    }
     
     private static class TestForm extends HtmlForm
     {

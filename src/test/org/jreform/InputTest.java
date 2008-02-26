@@ -46,6 +46,9 @@ public class InputTest extends BaseTestCase
         assertEquals(form.requiredInt().getValueAttribute(), "");
         assertEquals(form.requiredString().getValueAttribute(), "");
         
+        assertTrue(form.requiredInt().isBlank());
+        assertTrue(form.requiredString().isBlank());
+        
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.requiredString().isValid());
         
@@ -56,10 +59,17 @@ public class InputTest extends BaseTestCase
     /** Input fails if value can't be converted to input's type */
     public void testFieldFailsIfGivenInvalidType()
     {
-        setRequiredFields("Passing string instead of an int.", "some value");
-        setOptionalFields("Passing string instead of an int.", "some value");
+        setRequiredRequestParameters("Passing string instead of an int.", "some value");
+        setOptionalRequestParameters("Passing string instead of an int.", "some value");
+        
+        // values blank prior to validate method
+        assertTrue(form.requiredInt().isBlank());
+        assertTrue(form.requiredString().isBlank());
         
         assertFalse(validateForm());
+        
+        assertFalse(form.requiredInt().isBlank());
+        assertFalse(form.requiredString().isBlank());
         
         assertNull(form.requiredInt().getValue());
         assertNull(form.optionalInt().getValue());
@@ -80,8 +90,8 @@ public class InputTest extends BaseTestCase
         String stringTooShort = "x";
         Integer numTooBig = 100;
         
-        setRequiredFields(String.valueOf(numTooBig), "some input");
-        setOptionalFields(String.valueOf(15), stringTooShort);
+        setRequiredRequestParameters(String.valueOf(numTooBig), "some input");
+        setOptionalRequestParameters(String.valueOf(15), stringTooShort);
         
         assertFalse("Criteria not satisfied", validateForm());
         
@@ -102,7 +112,7 @@ public class InputTest extends BaseTestCase
     {
         int number = 15;
         
-        setRequiredFields(String.valueOf(number), "some input");
+        setRequiredRequestParameters(String.valueOf(number), "some input");
         
         assertTrue(number >= MIN && number <= MAX);
         assertTrue(validateForm());
@@ -119,7 +129,7 @@ public class InputTest extends BaseTestCase
     /** Optional input passes without a value */
     public void testOptionalFieldPassesWithoutAValue()
     {
-        setRequiredFields("15", "some input");
+        setRequiredRequestParameters("15", "some input");
         
         assertTrue(validateForm());
         
@@ -130,13 +140,13 @@ public class InputTest extends BaseTestCase
         assertEquals(form.optionalString().getValueAttribute(), "");
     }
     
-    private void setRequiredFields(String intField, String stringField)
+    private void setRequiredRequestParameters(String intField, String stringField)
     {
         setParameter(REQ_INT, intField);
         setParameter(REQ_STRING, stringField);
     }
 
-    private void setOptionalFields(String intField, String stringField)
+    private void setOptionalRequestParameters(String intField, String stringField)
     {
         setParameter(OPT_INT, intField);
         setParameter(OPT_STRING, stringField);
