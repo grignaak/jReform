@@ -22,6 +22,11 @@ public class CreditCardAppForm extends HtmlForm
 
     private HttpServletRequest request;
 
+    public CreditCardAppForm()
+    {
+        // default no-arg contructor
+    }
+    
     @SuppressWarnings("unchecked")
     public CreditCardAppForm(HttpServletRequest request)
     {
@@ -66,7 +71,7 @@ public class CreditCardAppForm extends HtmlForm
     @Override
     protected void additionalValidate()
     {
-        EmploymentStatus empStatus = getInputValue("employmentStatus");
+        EmploymentStatus empStatus = getEmploymentStatus().getValue();
         Group employerInfo = getGroup("employer");
         
         if(empStatus == EmploymentStatus.EMPLOYED)
@@ -77,7 +82,7 @@ public class CreditCardAppForm extends HtmlForm
         
         Group accountDetails = getGroup("accountDetails");
         
-        if(getHasAccountWithUs().getValue())
+        if(getHasAccountWithUs().getValue() == Boolean.TRUE)
         {
             accountDetails.setRequired(true);
             accountDetails.validate(request);

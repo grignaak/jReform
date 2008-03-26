@@ -31,15 +31,9 @@ public class CreditCardApp extends HttpServlet
                 String lastName = form.getLastName().getValue();
                 Date dob = form.getDob().getValue();
                 Boolean isCustomer = form.getHasAccountWithUs().getValue();
-                
-                //
-                // Note that input values can also be accessed directly
-                // using the form.getInputValue("xxx") method.
-                //
-                
-                String email = form.getInputValue("email");
-                EmploymentStatus status = form.getInputValue("employmentStatus");
-                Integer monthlyIncome = form.getInputValue("monthlyIncome");
+                String email = form.getEmail().getValue();
+                EmploymentStatus status = form.getEmploymentStatus().getValue();
+                Integer monthlyIncome = form.getMonthlyIncome().getValue();
                 
                 // etc...
             }
