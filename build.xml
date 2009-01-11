@@ -2,7 +2,7 @@
 
 <project name="jreform" basedir="." default="build">
     <property name="name" value="jreform"/>
-    <property name="version" value="1.2"/>
+    <property name="version" value="1.2.1"/>
     <property file="build.properties"/>
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="bin"/>
