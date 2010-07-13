@@ -227,6 +227,7 @@ public class InputGroupTest extends BaseTestCase
             
             try
             {
+                @SuppressWarnings("unused")
                 Group duplicate = optionalGroup(IMPERIAL);
                 fail("Error - duplicate group name must throw an exception");
             }

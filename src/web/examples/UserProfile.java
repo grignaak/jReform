@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet for accessing/updating the user profile page.
  */
+@SuppressWarnings("serial")
 public class UserProfile extends HttpServlet
 {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)

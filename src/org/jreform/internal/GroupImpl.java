@@ -113,7 +113,7 @@ public class GroupImpl extends AbstractInputCollection implements Group
         {
             InputControl<?> input = getInputs().get(iter.next());
             
-            if(input instanceof Input)
+            if(input instanceof Input<?>)
             {
                 String value = req.getParameter(input.getInputName());
                 

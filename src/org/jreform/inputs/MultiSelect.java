@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jreform.Criterion;
-import org.jreform.Input;
 import org.jreform.InputDataType;
 import org.jreform.MultiInput;
 import org.jreform.internal.DefaultValueMap;

@@ -14,14 +14,9 @@ import org.jreform.InputControl;
 import org.jreform.InputDataType;
 import org.jreform.UndefinedInputControlException;
 import org.jreform.inputs.Checkbox;
-import org.jreform.inputs.Checkbox;
-import org.jreform.inputs.MultiCheckbox;
 import org.jreform.inputs.MultiCheckbox;
 import org.jreform.inputs.MultiSelect;
-import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Radio;
-import org.jreform.inputs.Radio;
-import org.jreform.inputs.Select;
 import org.jreform.inputs.Select;
 
 /**
