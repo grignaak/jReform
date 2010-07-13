@@ -1,12 +1,12 @@
 package test.org.jreform;
 
-import static org.jreform.SelectableState.SELECTED;
-import static org.jreform.SelectableState.UNSELECTED;
+import static org.jreform.inputs.SelectableState.SELECTED;
+import static org.jreform.inputs.SelectableState.UNSELECTED;
 
-import org.jreform.HtmlForm;
-import org.jreform.MultiSelect;
-import org.jreform.Select;
-import org.jreform.SelectableState;
+import org.jreform.HtmlFormSupport;
+import org.jreform.inputs.MultiSelect;
+import org.jreform.inputs.Select;
+import org.jreform.inputs.SelectableState;
 
 public class SelectTest extends BaseTestCase
 {
@@ -20,7 +20,7 @@ public class SelectTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlForm getForm()
+    protected HtmlFormSupport getForm()
     {
         return form;
     }
@@ -68,7 +68,7 @@ public class SelectTest extends BaseTestCase
         assertEquals(SelectableState.SELECTED, form.hotels().getState().get("two"));
     }
     
-    private static class TestForm extends HtmlForm
+    private static class TestForm extends HtmlFormSupport
     {
         public TestForm()
         {

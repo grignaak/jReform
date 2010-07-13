@@ -6,18 +6,23 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.jreform.Checkbox;
 import org.jreform.Criterion;
 import org.jreform.DuplicateNameException;
 import org.jreform.Input;
 import org.jreform.InputCollection;
 import org.jreform.InputControl;
 import org.jreform.InputDataType;
-import org.jreform.MultiCheckbox;
-import org.jreform.MultiSelect;
-import org.jreform.Radio;
-import org.jreform.Select;
 import org.jreform.UndefinedInputControlException;
+import org.jreform.inputs.Checkbox;
+import org.jreform.inputs.Checkbox;
+import org.jreform.inputs.MultiCheckbox;
+import org.jreform.inputs.MultiCheckbox;
+import org.jreform.inputs.MultiSelect;
+import org.jreform.inputs.MultiSelect;
+import org.jreform.inputs.Radio;
+import org.jreform.inputs.Radio;
+import org.jreform.inputs.Select;
+import org.jreform.inputs.Select;
 
 /**
  * @author armandino (at) gmail.com
@@ -155,31 +160,31 @@ public abstract class AbstractInputCollection implements InputCollection
     public final <T> InputControlModifier<T> checkbox(
             InputDataType<T> type, String name, Criterion<T>...criteria)
     {
-        return create(new CheckboxImpl<T>(type, name, criteria));
+        return create(new Checkbox<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier<T> multiCheckbox(
             InputDataType<T> type, String name, Criterion<T>...criteria)
     {
-        return create(new MultiCheckboxImpl<T>(type, name, criteria));
+        return create(new MultiCheckbox<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier<T> radio(
             InputDataType<T> type, String name, Criterion<T>...criteria)
     {
-        return create(new RadioImpl<T>(type, name, criteria));
+        return create(new Radio<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier<T> select(
             InputDataType<T> type, String name, Criterion<T>...criteria)
     {
-        return create(new SelectImpl<T>(type, name, criteria));
+        return create(new Select<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier<T> multiSelect(
             InputDataType<T> type, String name, Criterion<T>...criteria)
     {
-        return create(new MultiSelectImpl<T>(type, name, criteria));
+        return create(new MultiSelect<T>(type, name, criteria));
     }
 
     private <T> InputControlModifier<T> create(AbstractInputControl<T> input)

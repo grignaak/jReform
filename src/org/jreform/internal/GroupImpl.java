@@ -22,9 +22,9 @@ import org.jreform.InputControl;
  *
  * @author armandino (at) gmail.com
  */
-class GroupImpl extends AbstractInputCollection implements Group
+public class GroupImpl extends AbstractInputCollection implements Group
 {
-    private AbstractForm parent;
+    private HtmlForm parent;
     private String name;
     private boolean isRequired;
     private boolean isEmpty = true;
@@ -35,7 +35,7 @@ class GroupImpl extends AbstractInputCollection implements Group
      * @param name of the group.
      * @param isRequired if this group should be treated as valid when empty.
      */
-    GroupImpl(AbstractForm parent, String name, boolean isRequired)
+    public GroupImpl(HtmlForm parent, String name, boolean isRequired)
     {
         this.parent = parent;
         this.name = name;

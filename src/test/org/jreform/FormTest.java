@@ -1,6 +1,6 @@
 package test.org.jreform;
 
-import org.jreform.HtmlForm;
+import org.jreform.HtmlFormSupport;
 import org.jreform.UndefinedInputControlException;
 
 public class FormTest extends BaseTestCase
@@ -16,7 +16,7 @@ public class FormTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlForm getForm()
+    protected HtmlFormSupport getForm()
     {
         return form;
     }
@@ -30,7 +30,7 @@ public class FormTest extends BaseTestCase
         } catch(UndefinedInputControlException e) {}
     }
     
-    private static class TestForm extends HtmlForm
+    private static class TestForm extends HtmlFormSupport
     {
         public TestForm()
         {

@@ -1,18 +1,19 @@
-package org.jreform.internal;
+package org.jreform.inputs;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jreform.CheckableState;
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
-import org.jreform.MultiCheckbox;
+import org.jreform.MultiInput;
+import org.jreform.internal.DefaultValueMap;
+import org.jreform.internal.MultiInputImpl;
 
-class MultiCheckboxImpl<T> extends MultiInputImpl<T> implements MultiCheckbox<T>
+public class MultiCheckbox<T> extends MultiInputImpl<T> implements MultiInput<T>
 {
     private Map<String, CheckableState> stateMap;
     
-    MultiCheckboxImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public MultiCheckbox(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         

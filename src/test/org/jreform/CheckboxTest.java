@@ -1,12 +1,12 @@
 package test.org.jreform;
 
-import static org.jreform.CheckableState.CHECKED;
-import static org.jreform.CheckableState.UNCHECKED;
+import static org.jreform.inputs.CheckableState.CHECKED;
+import static org.jreform.inputs.CheckableState.UNCHECKED;
 
-import org.jreform.CheckableState;
-import org.jreform.Checkbox;
-import org.jreform.HtmlForm;
-import org.jreform.MultiCheckbox;
+import org.jreform.HtmlFormSupport;
+import org.jreform.inputs.CheckableState;
+import org.jreform.inputs.Checkbox;
+import org.jreform.inputs.MultiCheckbox;
 
 public class CheckboxTest extends BaseTestCase
 {
@@ -21,7 +21,7 @@ public class CheckboxTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlForm getForm()
+    protected HtmlFormSupport getForm()
     {
         return form;
     }
@@ -93,7 +93,7 @@ public class CheckboxTest extends BaseTestCase
         assertEquals(CheckableState.CHECKED, form.choices().getState().get("two"));
     }
 
-    private static class TestForm extends HtmlForm
+    private static class TestForm extends HtmlFormSupport
     {
         public TestForm()
         {

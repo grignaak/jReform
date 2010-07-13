@@ -5,7 +5,7 @@ import static org.jreform.types.StringType.stringType;
 
 import org.jreform.DuplicateNameException;
 import org.jreform.Group;
-import org.jreform.HtmlForm;
+import org.jreform.HtmlFormSupport;
 import org.jreform.Input;
 
 public class InputGroupTest extends BaseTestCase
@@ -33,7 +33,7 @@ public class InputGroupTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlForm getForm()
+    protected HtmlFormSupport getForm()
     {
         return form;
     }
@@ -206,7 +206,7 @@ public class InputGroupTest extends BaseTestCase
         setParameter(WEIGHT_LB, lb);
     }
     
-    private static class TestForm extends HtmlForm
+    private static class TestForm extends HtmlFormSupport
     {
         @SuppressWarnings("unchecked")
         public TestForm()

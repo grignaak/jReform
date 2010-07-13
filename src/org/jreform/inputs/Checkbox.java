@@ -1,18 +1,18 @@
-package org.jreform.internal;
+package org.jreform.inputs;
 
-import static org.jreform.CheckableState.CHECKED;
-import static org.jreform.CheckableState.UNCHECKED;
+import static org.jreform.inputs.CheckableState.CHECKED;
+import static org.jreform.inputs.CheckableState.UNCHECKED;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jreform.CheckableState;
-import org.jreform.Checkbox;
 import org.jreform.Criterion;
+import org.jreform.Input;
 import org.jreform.InputDataType;
+import org.jreform.internal.InputImpl;
 
-class CheckboxImpl<T> extends InputImpl<T> implements Checkbox<T>
+public class Checkbox<T> extends InputImpl<T> implements Input<T>
 {
-    CheckboxImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public Checkbox(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         
@@ -23,7 +23,7 @@ class CheckboxImpl<T> extends InputImpl<T> implements Checkbox<T>
      * A checkbox is always valid (and optional) since its value is
      * <code>null</code> when it's submitted unchecked.
      */
-    final boolean validate(HttpServletRequest req)
+    protected final boolean validate(HttpServletRequest req)
     {
         return super.validate(req);
     }

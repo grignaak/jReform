@@ -5,13 +5,13 @@ import static org.jreform.criteria.Criteria.length;
 import static org.jreform.criteria.Criteria.range;
 import static org.jreform.criteria.Criteria.regex;
 
-import org.jreform.HtmlForm;
+import org.jreform.HtmlFormSupport;
 import org.jreform.Input;
 
 /**
  * User profile form.
  */
-public class UserProfileForm extends HtmlForm
+public class UserProfileForm extends HtmlFormSupport
 {
 	// Accepted format: 123-456-7890
     private static final String PHONE_FORMAT = "^\\d{3}-\\d{3}-\\d{4}$";

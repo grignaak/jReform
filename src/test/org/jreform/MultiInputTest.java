@@ -3,9 +3,9 @@ package test.org.jreform;
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
-import org.jreform.HtmlForm;
-import org.jreform.MultiCheckbox;
-import org.jreform.MultiSelect;
+import org.jreform.HtmlFormSupport;
+import org.jreform.inputs.MultiCheckbox;
+import org.jreform.inputs.MultiSelect;
 
 //
 // test required and optional fields:
@@ -34,7 +34,7 @@ public class MultiInputTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlForm getForm()
+    protected HtmlFormSupport getForm()
     {
         return form;
     }
@@ -167,7 +167,7 @@ public class MultiInputTest extends BaseTestCase
         setParameters(OPT_STRING, stringField);
     }
     
-    private static class TestForm extends HtmlForm
+    private static class TestForm extends HtmlFormSupport
     {
         @SuppressWarnings("unchecked")
         public TestForm()

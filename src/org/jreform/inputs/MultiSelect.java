@@ -1,21 +1,23 @@
-package org.jreform.internal;
+package org.jreform.inputs;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jreform.Criterion;
+import org.jreform.Input;
 import org.jreform.InputDataType;
-import org.jreform.MultiSelect;
-import org.jreform.SelectableState;
+import org.jreform.MultiInput;
+import org.jreform.internal.DefaultValueMap;
+import org.jreform.internal.MultiInputImpl;
 
 /**
  * @author armandino (at) gmail.com
  */
-class MultiSelectImpl<T> extends MultiInputImpl<T> implements MultiSelect<T>
+public class MultiSelect<T> extends MultiInputImpl<T> implements MultiInput<T>
 {
     private Map<String, SelectableState> stateMap;
     
-    MultiSelectImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public MultiSelect(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         

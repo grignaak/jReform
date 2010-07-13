@@ -1,5 +1,10 @@
 package org.jreform;
 
+import org.jreform.inputs.Checkbox;
+import org.jreform.inputs.MultiCheckbox;
+import org.jreform.inputs.MultiSelect;
+import org.jreform.inputs.Radio;
+import org.jreform.inputs.Select;
 import org.jreform.internal.InputControlModifier;
 
 /**
@@ -20,5 +25,4 @@ public interface InputCollection extends HttpServletRequestValidator
     public <T> InputControlModifier<T> radio(InputDataType<T> type, String name, Criterion<T>...criteria);
     public <T> InputControlModifier<T> select(InputDataType<T> type, String name, Criterion<T>...criteria);
     public <T> InputControlModifier<T> multiSelect(InputDataType<T> type, String name, Criterion<T>...criteria);
-    
 }

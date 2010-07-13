@@ -1,4 +1,4 @@
-package org.jreform;
+package org.jreform.inputs;
 
 /**
  * Represents the state of a checkable input: checked / unchecked.

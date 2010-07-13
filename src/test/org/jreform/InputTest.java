@@ -3,7 +3,7 @@ package test.org.jreform;
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
-import org.jreform.HtmlForm;
+import org.jreform.HtmlFormSupport;
 import org.jreform.Input;
 
 //
@@ -33,7 +33,7 @@ public class InputTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlForm getForm()
+    protected HtmlFormSupport getForm()
     {
         return form;
     }
@@ -152,7 +152,7 @@ public class InputTest extends BaseTestCase
         setParameter(OPT_STRING, stringField);
     }
     
-    private static class TestForm extends HtmlForm
+    private static class TestForm extends HtmlFormSupport
     {
         @SuppressWarnings("unchecked")
         public TestForm()

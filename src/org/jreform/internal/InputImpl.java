@@ -9,12 +9,12 @@ import org.jreform.InputDataType;
 /**
  * @author armandino (at) gmail.com
  */
-class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
+public class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
 {
     private T value;
     private String valueAttribute;
     
-    InputImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    protected InputImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
     }
@@ -61,7 +61,7 @@ class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         return value == null ? "" : value.toString();
     }
     
-    boolean validate(HttpServletRequest req)
+    protected boolean validate(HttpServletRequest req)
     {
         String value = req.getParameter(getInputName());
         setValueAttribute(value);

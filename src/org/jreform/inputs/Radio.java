@@ -1,21 +1,22 @@
-package org.jreform.internal;
+package org.jreform.inputs;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jreform.CheckableState;
 import org.jreform.Criterion;
+import org.jreform.Input;
 import org.jreform.InputDataType;
-import org.jreform.Radio;
+import org.jreform.internal.DefaultValueMap;
+import org.jreform.internal.InputImpl;
 
 /**
  * @author armandino (at) gmail.com
  */
-class RadioImpl<T> extends InputImpl<T> implements Radio<T>
+public class Radio<T> extends InputImpl<T> implements Input<T>
 {
     private Map<String, CheckableState> stateMap;
     
-    RadioImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public Radio(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
         

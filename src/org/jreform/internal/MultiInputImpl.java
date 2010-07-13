@@ -13,14 +13,14 @@ import org.jreform.MultiInput;
 /**
  * @author armandino (at) gmail.com
  */
-class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
+public class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
     private static final String[] EMPTY_ARRAY = {};
     
     private List<T> values;
     private String[] valueAttributes;
     
-    MultiInputImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    protected MultiInputImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
     }

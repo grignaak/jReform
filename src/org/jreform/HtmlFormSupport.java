@@ -2,7 +2,8 @@ package org.jreform;
 
 import java.util.Date;
 
-import org.jreform.internal.AbstractForm;
+import org.jreform.internal.GroupImpl;
+import org.jreform.internal.HtmlForm;
 import org.jreform.types.BooleanType;
 import org.jreform.types.CharType;
 import org.jreform.types.DateType;
@@ -18,7 +19,7 @@ import org.jreform.types.StringType;
  * 
  * @author armandino (at) gmail.com
  */
-public class HtmlForm extends AbstractForm
+public class HtmlFormSupport extends HtmlForm
 {
     // --------------------------------------------------------------------
     // ---------------- Types supported out-of-the-box---------------------
@@ -67,6 +68,23 @@ public class HtmlForm extends AbstractForm
     public static InputDataType<Date> dateType(String dateFormatPattern)
     {
         return DateType.dateType(dateFormatPattern);
+    }
+
+    protected final Group requiredGroup(String name)
+    {
+        return addNewGroup(name, true);
+    }
+
+    protected final Group optionalGroup(String name)
+    {
+        return addNewGroup(name, false);
+    }
+
+    private Group addNewGroup(String name, boolean isRequired)
+    {
+        Group group = new GroupImpl(this, name, isRequired);
+        addGroup(group);
+        return group;
     }
     
 }

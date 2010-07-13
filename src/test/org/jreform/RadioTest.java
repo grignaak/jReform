@@ -1,13 +1,13 @@
 package test.org.jreform;
 
-import static org.jreform.CheckableState.CHECKED;
-import static org.jreform.CheckableState.UNCHECKED;
 import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.acceptString;
+import static org.jreform.inputs.CheckableState.CHECKED;
+import static org.jreform.inputs.CheckableState.UNCHECKED;
 
-import org.jreform.CheckableState;
-import org.jreform.HtmlForm;
-import org.jreform.Radio;
+import org.jreform.HtmlFormSupport;
+import org.jreform.inputs.CheckableState;
+import org.jreform.inputs.Radio;
 
 public class RadioTest extends BaseTestCase
 {
@@ -24,7 +24,7 @@ public class RadioTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlForm getForm()
+    protected HtmlFormSupport getForm()
     {
         return form;
     }
@@ -121,7 +121,7 @@ public class RadioTest extends BaseTestCase
     }
 
     
-    private static class TestForm extends HtmlForm
+    private static class TestForm extends HtmlFormSupport
     {
         @SuppressWarnings("unchecked")
         public TestForm()

@@ -9,12 +9,12 @@ import java.util.Set;
  * 
  * @author armandino (at) gmail.com
  */
-class DefaultValueMap<K, V> implements Map<K, V>
+public class DefaultValueMap<K, V> implements Map<K, V>
 {
     private Map<K, V> map;
     private V defaultValue;
     
-    DefaultValueMap(Map<K, V> map, V defaultValue)
+    public DefaultValueMap(Map<K, V> map, V defaultValue)
     {
         this.map = map;
         this.defaultValue = defaultValue;

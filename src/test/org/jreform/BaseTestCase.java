@@ -2,7 +2,7 @@ package test.org.jreform;
 
 import junit.framework.TestCase;
 
-import org.jreform.internal.AbstractForm;
+import org.jreform.internal.HtmlForm;
 
 import test.util.HttpServletRequestStub;
 
@@ -16,7 +16,7 @@ abstract class BaseTestCase extends TestCase
         init();
     }
     
-    protected abstract AbstractForm getForm();
+    protected abstract HtmlForm getForm();
     protected void init() {}
     protected void destroy() {}
     
