@@ -17,11 +17,11 @@ import org.jreform.Group;
  * 
  * @author armandino (at) gmail.com
  */
-class AbstractForm extends AbstractInputCollection implements Form
+public class AbstractForm extends AbstractInputCollection implements Form
 {
     private final Map<String,Group> groups;
     
-    AbstractForm()
+    public AbstractForm()
     {
         groups = new HashMap<String,Group>();
     }
@@ -84,6 +84,23 @@ class AbstractForm extends AbstractInputCollection implements Form
             if(!input.isGroupInput() && !input.validate(req))
                 getErrors().add(input.getInputName());
         }
+    }
+
+    protected final Group requiredGroup(String name)
+    {
+        return addNewGroup(name, true);
+    }
+
+    protected final Group optionalGroup(String name)
+    {
+        return addNewGroup(name, false);
+    }
+
+    private Group addNewGroup(String name, boolean isRequired)
+    {
+        Group group = new GroupImpl(this, name, isRequired);
+        addGroup(group);
+        return group;
     }
     
 }

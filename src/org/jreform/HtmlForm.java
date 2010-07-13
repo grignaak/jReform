@@ -2,7 +2,7 @@ package org.jreform;
 
 import java.util.Date;
 
-import org.jreform.internal.BaseHtmlForm;
+import org.jreform.internal.AbstractForm;
 import org.jreform.types.BooleanType;
 import org.jreform.types.CharType;
 import org.jreform.types.DateType;
@@ -18,7 +18,7 @@ import org.jreform.types.StringType;
  * 
  * @author armandino (at) gmail.com
  */
-public class HtmlForm extends BaseHtmlForm
+public class HtmlForm extends AbstractForm
 {
     // --------------------------------------------------------------------
     // ---------------- Types supported out-of-the-box---------------------
