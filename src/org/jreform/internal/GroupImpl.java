@@ -39,14 +39,6 @@ public class GroupImpl extends AbstractInputCollection implements Group
         this.isRequired = isRequired;
     }
     
-    /**
-     * Adds the input to this input group and its parent form.
-     */
-    public final <T> void add(InputControl<T> input)
-    {
-        super.add(input);
-    }
-    
     public final String getName()
     {
         return name;
