@@ -19,7 +19,6 @@ abstract class AbstractInputControl<T> implements InputControl<T>
     private String messageOnError;
     private boolean isRequired;
     private boolean isValid;
-    private boolean isGroupInput;
     private Criterion<T>[] criteria;
     
     /**
@@ -37,7 +36,6 @@ abstract class AbstractInputControl<T> implements InputControl<T>
         this.criteria = criteria;
         this.isRequired = true;
         this.isValid = true;
-        this.isGroupInput = false;
     }
     
     /**
@@ -84,19 +82,6 @@ abstract class AbstractInputControl<T> implements InputControl<T>
     final void setValid(boolean isValid)
     {
         this.isValid = isValid;
-    }
-    
-    /**
-     * Returns <code>true</code> if this input belongs to a group.
-     */
-    final boolean isGroupInput()
-    {
-        return isGroupInput;
-    }
-    
-    final void setGroupInput(boolean isGroupInput)
-    {
-        this.isGroupInput = isGroupInput;
     }
     
     protected final Criterion<T>[] getCriteria()

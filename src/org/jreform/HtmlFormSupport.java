@@ -82,7 +82,7 @@ public class HtmlFormSupport extends HtmlForm
 
     private Group addNewGroup(String name, boolean isRequired)
     {
-        Group group = new GroupImpl(this, name, isRequired);
+        Group group = new GroupImpl(name, isRequired);
         addGroup(group);
         return group;
     }

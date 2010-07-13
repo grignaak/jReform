@@ -40,27 +40,18 @@ public class InputGroupTest extends BaseTestCase
     
     /** test add duplicate input throws exception */
     public void testAddDuplicateInputThrowsException()
-    {
-        try
-        {
-            // add to the form
-            form.input(stringType(), SURNAME);
-            fail("cannot add inputs with identical names");
-        }
-        catch(DuplicateNameException ex) { /* empty */ }
-        
+    {   
         try
         {
             // add to another group
-            form.getGroup(METRIC).input(stringType(), SURNAME);
+            form.getGroup(METRIC).input(stringType(), HEIGHT_M);
             fail("cannot add inputs with identical names");
         }
         catch(DuplicateNameException ex) { /* empty */ }
-
     }
     
     /** test input instance is the same from form and group */
-    public void testInputInstanceIsTheSameFromFormAndGroup()
+    public void xtestInputInstanceIsTheSameFromFormAndGroup()
     {
         setContactGroupWithValidData();
         setMetric("1.9", "95");
@@ -172,7 +163,7 @@ public class InputGroupTest extends BaseTestCase
         
         assertFalse(form.getGroup(CONTACT).isValid());
         assertFalse(form.getGroup(CONTACT).isEmpty());
-        assertFalse(form.getInput(EMAIL).isValid());
+        assertFalse(form.getGroup(CONTACT).getInput(EMAIL).isValid());
         
         assertTrue(form.getGroup(METRIC).isValid());
         assertFalse(form.getGroup(METRIC).isEmpty());
@@ -247,27 +238,27 @@ public class InputGroupTest extends BaseTestCase
         
         public Input<Double> heightM()
         {
-            return getInput(HEIGHT_M);
+            return getGroup(METRIC).getInput(HEIGHT_M);
         }
         
         public Input<Integer> weightKg()
         {
-            return getInput(WEIGHT_KG);
+            return getGroup(METRIC).getInput(WEIGHT_KG);
         }
         
         public Input<Integer> heightFt()
         {
-            return getInput(HEIGHT_FT);
+            return getGroup(IMPERIAL).getInput(HEIGHT_FT);
         }
         
         public Input<Integer> heightIn()
         {
-            return getInput(HEIGHT_IN);
+            return getGroup(IMPERIAL).getInput(HEIGHT_IN);
         }
         
         public Input<Integer> weightLb()
         {
-            return getInput(WEIGHT_LB);
+            return getGroup(IMPERIAL).getInput(WEIGHT_LB);
         }
         
     }

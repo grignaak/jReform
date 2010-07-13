@@ -80,8 +80,7 @@ public class HtmlForm extends AbstractInputCollection implements Form
         {
             input = (AbstractInputControl<?>)getInputs().get(iter.next());
             
-            // an input that belongs to a group is validated by its parent group
-            if(!input.isGroupInput() && !input.validate(req))
+            if(!input.validate(req))
                 getErrors().add(input.getInputName());
         }
     }
