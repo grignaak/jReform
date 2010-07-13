@@ -1,4 +1,4 @@
-package test.org.jreform.types;
+package org.jreform.types;
 
 import static org.jreform.types.BooleanType.booleanType;
 import junit.framework.TestCase;

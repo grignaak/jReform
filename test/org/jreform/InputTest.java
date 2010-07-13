@@ -1,4 +1,4 @@
-package test.org.jreform;
+package org.jreform;
 
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;

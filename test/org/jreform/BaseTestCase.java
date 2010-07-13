@@ -1,10 +1,10 @@
-package test.org.jreform;
+package org.jreform;
 
 import junit.framework.TestCase;
 
 import org.jreform.internal.HtmlForm;
+import org.jreform.util.HttpServletRequestStub;
 
-import test.util.HttpServletRequestStub;
 
 abstract class BaseTestCase extends TestCase
 {

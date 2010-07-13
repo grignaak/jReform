@@ -1,4 +1,4 @@
-package test.org.jreform;
+package org.jreform;
 
 import static org.jreform.criteria.Criteria.emailAddress;
 import static org.jreform.types.StringType.stringType;

@@ -1,4 +1,4 @@
-package test.org.jreform;
+package org.jreform;
 
 import org.jreform.HtmlFormSupport;
 import org.jreform.UndefinedInputControlException;

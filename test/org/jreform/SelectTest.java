@@ -1,4 +1,4 @@
-package test.org.jreform;
+package org.jreform;
 
 import static org.jreform.inputs.SelectableState.SELECTED;
 import static org.jreform.inputs.SelectableState.UNSELECTED;

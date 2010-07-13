@@ -1,4 +1,4 @@
-package test.org.jreform.criteria;
+package org.jreform.criteria;
 
 import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.acceptString;
