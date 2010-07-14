@@ -206,5 +206,14 @@ public abstract class AbstractInputCollection implements InputCollection
         
         return sb.toString();
     }
+
+    protected void validateInputs()
+    {
+        for (InputControl<?> input : getInputs().values())
+        {
+            if (!input.validate())
+                getErrors().add(input.getInputName());
+        }
+    }
     
 }

@@ -28,7 +28,7 @@ public class UserProfile extends HttpServlet
         if(req.getParameter("submit") != null)
         {
             // Validate form data
-            if(form.validate(req))
+            if(form.validateRequest(req))
             {
                 String fullName = form.getFullName().getValue();
                 String phone = form.getPhone().getValue();

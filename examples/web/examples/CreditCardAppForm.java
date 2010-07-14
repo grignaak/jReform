@@ -77,7 +77,7 @@ public class CreditCardAppForm extends HtmlFormSupport
         if(empStatus == EmploymentStatus.EMPLOYED)
         {
             employerInfo.setRequired(true);
-            employerInfo.validate(request);
+            employerInfo.validateRequest(request);
         }
         
         Group accountDetails = getGroup("accountDetails");
@@ -85,7 +85,7 @@ public class CreditCardAppForm extends HtmlFormSupport
         if(getHasAccountWithUs().getValue() == Boolean.TRUE)
         {
             accountDetails.setRequired(true);
-            accountDetails.validate(request);
+            accountDetails.validateRequest(request);
         }
     }
     

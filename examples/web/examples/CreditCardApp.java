@@ -25,7 +25,7 @@ public class CreditCardApp extends HttpServlet
         
         if(req.getParameter("submit") != null)
         {
-            if(form.validate(req))
+            if(form.validateRequest(req))
             {
                 // Grab values from the form
                 String firstName = form.getFirstName().getValue();

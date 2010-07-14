@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.jreform.DuplicateNameException;
 import org.jreform.Form;
 import org.jreform.Group;
+import org.jreform.InputControl;
 
 /**
  * A form that contains a set of its own inputs, errors and input groups.
@@ -48,40 +49,44 @@ public class HtmlForm extends AbstractInputCollection implements Form
         return groups.get(name);
     }
     
-    public final boolean validate(HttpServletRequest req)
+    public void processRequest(HttpServletRequest req)
     {
-        validateInputs(req);
-        
-        Iterator<String> groupIter = groups.keySet().iterator();
-        Group group;
-        
-        // validate input groups
-        while(groupIter.hasNext())
+        for (Group g : groups.values())
         {
-            group = groups.get(groupIter.next());
-            
-            if(!group.validate(req))
-                getErrors().addAll(group.getErrors());
+            g.processRequest(req);
         }
         
+        Iterator<InputControl<?>> iter = getInputs().values().iterator();
+        AbstractInputControl<?> input;
+        while (iter.hasNext())
+        {
+            input = (AbstractInputControl<?>)iter.next();
+            input.processRequest(req);
+        }
+    }
+    
+    public final boolean validateRequest(HttpServletRequest req)
+    {
+        processRequest(req);
+        return validate();
+    }
+
+    public boolean validate()
+    {
+        validateInputs();
+        validateGroups();
         additionalValidate();
         
         setValid(getErrors().isEmpty());
-        
         return isValid();
     }
-    
-    final void validateInputs(HttpServletRequest req)
+
+    private void validateGroups()
     {
-        Iterator<String> iter = getInputs().keySet().iterator();
-        AbstractInputControl<?> input;
-        
-        while(iter.hasNext())
+        for (Group group : groups.values())
         {
-            input = (AbstractInputControl<?>)getInputs().get(iter.next());
-            
-            if(!input.validate(req))
-                getErrors().add(input.getInputName());
+            if (!group.validate())
+                getErrors().addAll(group.getErrors());
         }
     }
     

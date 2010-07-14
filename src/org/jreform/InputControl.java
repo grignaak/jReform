@@ -1,5 +1,7 @@
 package org.jreform;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * Defines an input control in an html form.
@@ -39,5 +41,8 @@ public interface InputControl<T> extends MessageOnError
      * as returned by the {@link #toString()} method.
      */
     public String getStringValue();
+    
 
+    public void processRequest(HttpServletRequest req);
+    public boolean validate();
 }

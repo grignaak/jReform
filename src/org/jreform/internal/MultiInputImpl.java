@@ -70,11 +70,16 @@ public class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiI
         return values.toString();
     }
     
+    @Deprecated
     boolean validate(HttpServletRequest req)
     {
-        String[] values = req.getParameterValues(getInputName());
-        setValueAttributes(values);
+        processRequest(req);
+        return validate();
 
+    }
+
+    public boolean validate()
+    {
         MultiInputValidator<T> validator = new MultiInputValidator<T>(this);
         ValidationResult<List<T>> result = validator.validate(valueAttributes);
         
@@ -83,7 +88,12 @@ public class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiI
         setOnError(result.getErrorMessage());
         
         return isValid();
+    }
 
+    public void processRequest(HttpServletRequest req)
+    {
+        String[] values = req.getParameterValues(getInputName());
+        setValueAttributes(values);
     }
     
     public final String toString()

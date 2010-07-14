@@ -59,13 +59,18 @@ public class GroupImpl extends AbstractInputCollection implements Group
         this.isRequired = isRequired;
     }
     
-    public final boolean validate(HttpServletRequest req)
+    @Deprecated
+    public final boolean validateRequest(HttpServletRequest req)
     {
-        isEmpty = !containsInputData(req);
-        
+        processRequest(req);
+        return validate();
+    }
+
+    public boolean validate()
+    {
         if(isRequired || !isEmpty)
         {
-            validateInputs(req);
+            validateInputs();
         }
         
         setValid(getErrors().isEmpty());
@@ -73,17 +78,17 @@ public class GroupImpl extends AbstractInputCollection implements Group
         return isValid();
     }
     
-    final void validateInputs(HttpServletRequest req)
+    public void processRequest(HttpServletRequest req)
     {
+        isEmpty = !containsInputData(req);
         Iterator<String> iter = getInputs().keySet().iterator();
         AbstractInputControl<?> input;
         
-        while(iter.hasNext())
+        while (iter.hasNext())
         {
             input = (AbstractInputControl<?>)getInputs().get(iter.next());
             
-            if(!input.validate(req))
-                getErrors().add(input.getInputName());
+            input.processRequest(req);
         }
     }
     

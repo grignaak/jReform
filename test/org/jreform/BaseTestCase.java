@@ -2,7 +2,7 @@ package org.jreform;
 
 import junit.framework.TestCase;
 
-import org.jreform.internal.HtmlForm;
+import org.jreform.internal.AbstractInputCollection;
 import org.jreform.util.HttpServletRequestStub;
 
 
@@ -16,13 +16,13 @@ abstract class BaseTestCase extends TestCase
         init();
     }
     
-    protected abstract HtmlForm getForm();
+    protected abstract AbstractInputCollection getForm();
     protected void init() {}
     protected void destroy() {}
     
     protected boolean validateForm()
     {
-        return getForm().validate(req) && getForm().isValid();
+        return getForm().validateRequest(req) && getForm().isValid();
     }
     
     protected void setParameter(String key, String value)

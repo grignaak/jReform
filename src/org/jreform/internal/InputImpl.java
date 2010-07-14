@@ -61,11 +61,15 @@ public class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         return value == null ? "" : value.toString();
     }
     
+    @Deprecated
     protected boolean validate(HttpServletRequest req)
     {
-        String value = req.getParameter(getInputName());
-        setValueAttribute(value);
-        
+        processRequest(req);
+        return validate();
+    }
+
+    public boolean validate()
+    {
         ValueAttributeValidator<T> validator = new ValueAttributeValidator<T>(this);
         ValidationResult<T> result = validator.validate(getValueAttribute());
         
@@ -74,6 +78,12 @@ public class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         setOnError(result.getErrorMessage());
         
         return isValid();
+    }
+
+    public void processRequest(HttpServletRequest req)
+    {
+        String value = req.getParameter(getInputName());
+        setValueAttribute(value);
     }
     
     public final String toString()

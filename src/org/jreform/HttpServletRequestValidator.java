@@ -10,9 +10,34 @@ import javax.servlet.http.HttpServletRequest;
 public interface HttpServletRequestValidator
 {
     /**
-     * Validates the passed in {@link HttpServletRequest}.
+     * Fills in the input using the passed in {@link HttpServletRequest} and then validates the form.
+     * 
+     * <p>This is exactly equivelent to
+     * <pre>
+     * this.processRequest(req);
+     * return this.validate();
+     * </pre>
+     * </p>
+     * 
+     * @see #processRequest(HttpServletRequest)
+     * @see #validate()
      */
-    public boolean validate(HttpServletRequest req);
+    public boolean validateRequest(HttpServletRequest req);
+    
+    /**
+     * Fills in the input using the passed in {@link HttpServletRequest}. 
+     * 
+     * @see #validateRequest(HttpServletRequest)
+     */
+    public void processRequest(HttpServletRequest req);
+    
+    /**
+     * Validate the form.
+     * <p>Returns true iff {@link #isValid()} returns true</p>
+     * 
+     * @see #validateRequest(HttpServletRequest)
+     */
+    public boolean validate();
     
     /**
      * Returns <code>true</code> if the object being validated is valid.
