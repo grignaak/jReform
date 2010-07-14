@@ -1,5 +1,6 @@
 package org.jreform.inputs;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
-import org.jreform.impl.MultiInputValidator;
 import org.jreform.impl.ValidationResult;
+import org.jreform.impl.ValueAttributeValidator;
 
 /**
  * @author armandino (at) gmail.com
@@ -82,18 +83,56 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         return validate();
 
     }
-
+    
     public boolean validate()
     {
-        MultiInputValidator<T> validator = new MultiInputValidator<T>(this);
-        ValidationResult<List<T>> result = validator.validate(valueAttributes);
+        boolean isValid = false;
+
+        if (!valueAttributes.isEmpty())
+        {
+            isValid = isValidInput(valueAttributes);
+        }
+        else
+        {
+            if (!isRequired())
+            {
+                isValid = true;
+            }
+            else
+            {
+                setOnError("Invalid or missing value");
+            }
+        }
+
+        setValid(isValid);
+        return isValid;
+    }
+    
+    private boolean isValidInput(List<String> valueAttributes)
+    {
+        boolean allValid = true;
+        List<T> parsedValues = new ArrayList<T>(valueAttributes.size());
+        ValueAttributeValidator<T> validator = new ValueAttributeValidator<T>(this);
         
-        List<T> defaultValues = Collections.emptyList();
-        setValues(result.getParsedValue().getValueOrDefault(defaultValues));
-        setValid(result.isValid());
-        setOnError(result.getErrorMessage());
+        // parse in all values even if they don't satisfy the criteria
+        for(String valueAttribute : valueAttributes)
+        {
+            ValidationResult<T> result = validator.validate(valueAttribute);
+            
+            if(result.getParsedValue().isSo())
+                parsedValues.add(result.getParsedValue().getValue());
+            
+            if(!result.isValid())
+            {
+                allValid = false;
+                setOnError(result.getErrorMessage());
+                break;
+            }
+        }
         
-        return isValid();
+        values = parsedValues;
+        
+        return allValid;
     }
 
     public void processRequest(HttpServletRequest req)

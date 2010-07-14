@@ -96,14 +96,15 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
         if(parsedValue.isNotSo())
             return false;
         
+        // TODO add the ability to add all the errors to the input
         Criterion<T>[] criteria = getCriteria();
         for(Criterion<T> criterion : criteria)
         {
-            if(!criterion.isSatisfied(parsedValue.getValue()))
-            {
-                setOnError(criterion.getOnError());
-                return false;
-            }
+            if (criterion.isSatisfied(parsedValue.getValue()))
+                continue;
+            
+            setOnError(criterion.getOnError());
+            return false;
         }
         
         return true;
