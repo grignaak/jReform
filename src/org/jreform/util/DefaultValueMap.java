@@ -1,4 +1,4 @@
-package org.jreform.internal;
+package org.jreform.util;
 
 import java.util.Collection;
 import java.util.Map;

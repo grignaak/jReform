@@ -1,20 +1,22 @@
-package org.jreform.internal;
+package org.jreform.inputs;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.Criterion;
-import org.jreform.Input;
 import org.jreform.InputDataType;
+import org.jreform.impl.AbstractInputControl;
+import org.jreform.impl.ValidationResult;
+import org.jreform.impl.ValueAttributeValidator;
 
 /**
  * @author armandino (at) gmail.com
  */
-public class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
+public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
 {
     private T value;
     private String valueAttribute;
     
-    protected InputImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public BasicInput(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
     }
@@ -61,7 +63,7 @@ public class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         return value == null ? "" : value.toString();
     }
     
-    protected boolean validateRequest(HttpServletRequest req)
+    public boolean validateRequest(HttpServletRequest req)
     {
         processRequest(req);
         return validate();

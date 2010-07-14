@@ -1,13 +1,13 @@
-package org.jreform.internal;
+package org.jreform.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jreform.DuplicateNameException;
 import org.jreform.Form;
 import org.jreform.Group;
+import org.jreform.exceptions.DuplicateNameException;
 
 /**
  * A form that contains a set of its own inputs, errors and input groups.
@@ -16,11 +16,11 @@ import org.jreform.Group;
  * 
  * @author armandino (at) gmail.com
  */
-public class HtmlForm extends AbstractInputCollection implements Form
+public class DefaultForm extends AbstractInputCollection implements Form
 {
     private final Map<String,Group> groups;
     
-    public HtmlForm()
+    public DefaultForm()
     {
         groups = new HashMap<String,Group>();
     }

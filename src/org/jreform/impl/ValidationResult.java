@@ -1,11 +1,11 @@
-package org.jreform.internal;
+package org.jreform.impl;
 
 /**
  * The result of a validation operation by a {@link ValueAttributeValidator}.
  * 
  * @author armandino (at) gmail.com
  */
-class ValidationResult<T>
+public class ValidationResult<T>
 {
     private T parsedValue;
     private boolean isValid;
@@ -18,17 +18,17 @@ class ValidationResult<T>
         this.errorMessage = errorMessage;
     }
     
-    T getParsedValue()
+    public T getParsedValue()
     {
         return parsedValue;
     }
     
-    boolean isValid()
+    public boolean isValid()
     {
         return isValid;
     }
     
-    String getErrorMessage()
+    public String getErrorMessage()
     {
         return errorMessage;
     }

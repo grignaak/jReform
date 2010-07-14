@@ -2,7 +2,7 @@ package org.jreform;
 
 import junit.framework.TestCase;
 
-import org.jreform.internal.AbstractInputCollection;
+import org.jreform.impl.AbstractInputCollection;
 import org.jreform.util.HttpServletRequestStub;
 
 

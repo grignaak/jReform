@@ -1,4 +1,4 @@
-package org.jreform.internal;
+package org.jreform.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ import org.jreform.InputControl;
  *
  * @author armandino (at) gmail.com
  */
-public class GroupImpl extends AbstractInputCollection implements Group
+public class DefaultGroup extends AbstractInputCollection implements Group
 {
     private String name;
     private boolean isRequired;
@@ -30,7 +30,7 @@ public class GroupImpl extends AbstractInputCollection implements Group
      * @param name of the group.
      * @param isRequired if this group should be treated as valid when empty.
      */
-    public GroupImpl(String name, boolean isRequired)
+    public DefaultGroup(String name, boolean isRequired)
     {
         this.name = name;
         this.isRequired = isRequired;

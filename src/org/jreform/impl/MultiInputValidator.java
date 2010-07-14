@@ -1,16 +1,16 @@
-package org.jreform.internal;
+package org.jreform.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jreform.MultiInput;
+import org.jreform.inputs.MultiInput;
 
 /**
  * Validates a multi-value input.
  * 
  * @author armandino (at) gmail.com
  */
-class MultiInputValidator<T>
+public class MultiInputValidator<T>
 {
     private AbstractInputControl<T> input;
     private List<T> values;
@@ -18,12 +18,13 @@ class MultiInputValidator<T>
     private String errorMessage;
     
     @SuppressWarnings("unchecked")
-    MultiInputValidator(MultiInput<T> input)
+    public MultiInputValidator(MultiInput<T> input)
     {
+        // FIXME is this needed?
         this.input = (AbstractInputControl<T>)input;
     }
     
-    ValidationResult<List<T>> validate(String[] valueAttributes)
+    public ValidationResult<List<T>> validate(String[] valueAttributes)
     {
         isValid = false;
         

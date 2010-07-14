@@ -3,7 +3,7 @@ package org.jreform;
 import static org.jreform.inputs.CheckableState.CHECKED;
 import static org.jreform.inputs.CheckableState.UNCHECKED;
 
-import org.jreform.HtmlFormSupport;
+import org.jreform.impl.HtmlFormSupport;
 import org.jreform.inputs.CheckableState;
 import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.MultiCheckbox;

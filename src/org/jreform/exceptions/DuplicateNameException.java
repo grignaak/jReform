@@ -1,4 +1,4 @@
-package org.jreform;
+package org.jreform.exceptions;
 
 /**
  * Thrown when a group or an input with duplicate name is added to a form.

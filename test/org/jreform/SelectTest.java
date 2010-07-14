@@ -3,7 +3,7 @@ package org.jreform;
 import static org.jreform.inputs.SelectableState.SELECTED;
 import static org.jreform.inputs.SelectableState.UNSELECTED;
 
-import org.jreform.HtmlFormSupport;
+import org.jreform.impl.HtmlFormSupport;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Select;
 import org.jreform.inputs.SelectableState;

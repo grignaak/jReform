@@ -1,9 +1,9 @@
-package org.jreform;
+package org.jreform.impl;
 
 import java.util.Date;
 
-import org.jreform.internal.GroupImpl;
-import org.jreform.internal.HtmlForm;
+import org.jreform.Group;
+import org.jreform.InputDataType;
 import org.jreform.types.BooleanType;
 import org.jreform.types.CharType;
 import org.jreform.types.DateType;
@@ -19,7 +19,7 @@ import org.jreform.types.StringType;
  * 
  * @author armandino (at) gmail.com
  */
-public class HtmlFormSupport extends HtmlForm
+public class HtmlFormSupport extends DefaultForm
 {
     // --------------------------------------------------------------------
     // ---------------- Types supported out-of-the-box---------------------
@@ -82,7 +82,7 @@ public class HtmlFormSupport extends HtmlForm
 
     private Group addNewGroup(String name, boolean isRequired)
     {
-        Group group = new GroupImpl(name, isRequired);
+        Group group = new DefaultGroup(name, isRequired);
         addGroup(group);
         return group;
     }

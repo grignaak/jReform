@@ -1,4 +1,4 @@
-package org.jreform.internal;
+package org.jreform.inputs;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,19 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
-import org.jreform.MultiInput;
+import org.jreform.impl.AbstractInputControl;
+import org.jreform.impl.MultiInputValidator;
+import org.jreform.impl.ValidationResult;
 
 /**
  * @author armandino (at) gmail.com
  */
-public class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiInput<T>
+public class BasicMultiInput<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
     private static final String[] EMPTY_ARRAY = {};
     
     private List<T> values;
     private String[] valueAttributes;
     
-    protected MultiInputImpl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    protected BasicMultiInput(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
     }
@@ -71,7 +73,7 @@ public class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiI
     }
     
     @Deprecated
-    boolean validateRequest(HttpServletRequest req)
+    public boolean validateRequest(HttpServletRequest req)
     {
         processRequest(req);
         return validate();

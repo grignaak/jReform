@@ -3,7 +3,7 @@ package org.jreform;
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
-import org.jreform.HtmlFormSupport;
+import org.jreform.impl.HtmlFormSupport;
 import org.jreform.inputs.MultiCheckbox;
 import org.jreform.inputs.MultiSelect;
 

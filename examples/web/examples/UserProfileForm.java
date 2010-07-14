@@ -5,8 +5,8 @@ import static org.jreform.criteria.Criteria.length;
 import static org.jreform.criteria.Criteria.range;
 import static org.jreform.criteria.Criteria.regex;
 
-import org.jreform.HtmlFormSupport;
-import org.jreform.Input;
+import org.jreform.impl.HtmlFormSupport;
+import org.jreform.inputs.Input;
 
 /**
  * User profile form.

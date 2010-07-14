@@ -3,10 +3,10 @@ package org.jreform;
 import static org.jreform.criteria.Criteria.emailAddress;
 import static org.jreform.types.StringType.stringType;
 
-import org.jreform.DuplicateNameException;
 import org.jreform.Group;
-import org.jreform.HtmlFormSupport;
-import org.jreform.Input;
+import org.jreform.exceptions.DuplicateNameException;
+import org.jreform.impl.HtmlFormSupport;
+import org.jreform.inputs.Input;
 
 public class InputGroupTest extends BaseTestCase
 {

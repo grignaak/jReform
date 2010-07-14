@@ -1,7 +1,7 @@
 package org.jreform;
 
-import org.jreform.HtmlFormSupport;
-import org.jreform.UndefinedInputControlException;
+import org.jreform.exceptions.UndefinedInputControlException;
+import org.jreform.impl.HtmlFormSupport;
 
 public class FormTest extends BaseTestCase
 {

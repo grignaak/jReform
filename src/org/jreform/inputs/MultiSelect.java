@@ -5,14 +5,12 @@ import java.util.Map;
 
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
-import org.jreform.MultiInput;
-import org.jreform.internal.DefaultValueMap;
-import org.jreform.internal.MultiInputImpl;
+import org.jreform.util.DefaultValueMap;
 
 /**
  * @author armandino (at) gmail.com
  */
-public class MultiSelect<T> extends MultiInputImpl<T> implements MultiInput<T>
+public class MultiSelect<T> extends BasicMultiInput<T> implements MultiInput<T>
 {
     private Map<String, SelectableState> stateMap;
     

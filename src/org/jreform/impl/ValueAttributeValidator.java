@@ -1,4 +1,4 @@
-package org.jreform.internal;
+package org.jreform.impl;
 
 import org.jreform.Criterion;
 
@@ -7,17 +7,17 @@ import org.jreform.Criterion;
  * 
  * @author armandino (at) gmail.com
  */
-class ValueAttributeValidator<T>
+public class ValueAttributeValidator<T>
 {
     private AbstractInputControl<T> input;
     private String errorMessage;
     
-    ValueAttributeValidator(AbstractInputControl<T> input)
+    public ValueAttributeValidator(AbstractInputControl<T> input)
     {
         this.input = input;
     }
     
-    ValidationResult<T> validate(String valueAttribute)
+    public ValidationResult<T> validate(String valueAttribute)
     {
         boolean isValid = false;
         T parsedValue = null;

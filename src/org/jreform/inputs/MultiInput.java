@@ -1,6 +1,8 @@
-package org.jreform;
+package org.jreform.inputs;
 
 import java.util.List;
+
+import org.jreform.InputControl;
 
 /**
  * An input that can have multiple values.

@@ -1,4 +1,6 @@
-package org.jreform;
+package org.jreform.inputs;
+
+import org.jreform.InputControl;
 
 /**
  * An input that has only a single value.

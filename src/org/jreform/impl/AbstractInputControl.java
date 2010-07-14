@@ -1,4 +1,4 @@
-package org.jreform.internal;
+package org.jreform.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +12,7 @@ import org.jreform.InputDataType;
  * 
  * @author armandino (at) gmail.com
  */
-abstract class AbstractInputControl<T> implements InputControl<T>
+public abstract class AbstractInputControl<T> implements InputControl<T>
 {
     private InputDataType<T> type;
     private String name;
@@ -29,7 +29,7 @@ abstract class AbstractInputControl<T> implements InputControl<T>
      * @param isRequired is this a required or optional input field.
      * @param criteria this input's data must satisfy.
      */
-    AbstractInputControl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    protected AbstractInputControl(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         this.type = type;
         this.name = name;
@@ -41,7 +41,7 @@ abstract class AbstractInputControl<T> implements InputControl<T>
     /**
      * Validates this input's <tt>value</tt> attribute(s). 
      */
-    abstract boolean validateRequest(HttpServletRequest req);
+    public abstract boolean validateRequest(HttpServletRequest req);
     
     public final InputDataType<T> getType()
     {
@@ -79,7 +79,7 @@ abstract class AbstractInputControl<T> implements InputControl<T>
         return isValid;
     }
     
-    final void setValid(boolean isValid)
+    protected final void setValid(boolean isValid)
     {
         this.isValid = isValid;
     }

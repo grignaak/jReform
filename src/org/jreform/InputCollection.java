@@ -1,11 +1,12 @@
 package org.jreform;
 
+import org.jreform.impl.InputControlModifier;
 import org.jreform.inputs.Checkbox;
+import org.jreform.inputs.Input;
 import org.jreform.inputs.MultiCheckbox;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Radio;
 import org.jreform.inputs.Select;
-import org.jreform.internal.InputControlModifier;
 
 /**
  * @author armandino (at) gmail.com

@@ -1,4 +1,4 @@
-package org.jreform.internal;
+package org.jreform.impl;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,13 +9,14 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.Criterion;
-import org.jreform.DuplicateNameException;
-import org.jreform.Input;
 import org.jreform.InputCollection;
 import org.jreform.InputControl;
 import org.jreform.InputDataType;
-import org.jreform.UndefinedInputControlException;
+import org.jreform.exceptions.DuplicateNameException;
+import org.jreform.exceptions.UndefinedInputControlException;
+import org.jreform.inputs.BasicInput;
 import org.jreform.inputs.Checkbox;
+import org.jreform.inputs.Input;
 import org.jreform.inputs.MultiCheckbox;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Radio;
@@ -146,7 +147,7 @@ public abstract class AbstractInputCollection implements InputCollection
     public final <T> InputControlModifier<T> input(
             InputDataType<T> type, String name, Criterion<T>...criteria)
     {
-        return create(new InputImpl<T>(type, name, criteria));
+        return create(new BasicInput<T>(type, name, criteria));
     }
     
     public final <T> InputControlModifier<T> checkbox(

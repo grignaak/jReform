@@ -7,8 +7,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.Group;
-import org.jreform.HtmlFormSupport;
-import org.jreform.Input;
+import org.jreform.impl.HtmlFormSupport;
+import org.jreform.inputs.Input;
 import org.jreform.inputs.Radio;
 import org.jreform.inputs.Select;
 

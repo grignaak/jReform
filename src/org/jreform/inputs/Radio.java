@@ -4,15 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jreform.Criterion;
-import org.jreform.Input;
 import org.jreform.InputDataType;
-import org.jreform.internal.DefaultValueMap;
-import org.jreform.internal.InputImpl;
+import org.jreform.util.DefaultValueMap;
 
 /**
  * @author armandino (at) gmail.com
  */
-public class Radio<T> extends InputImpl<T> implements Input<T>
+public class Radio<T> extends BasicInput<T> implements Input<T>
 {
     private Map<String, CheckableState> stateMap;
     
