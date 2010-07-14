@@ -25,11 +25,11 @@ public class MultiInputValidator<T>
         this.input = (AbstractInputControl<T>)input;
     }
     
-    public ValidationResult<List<T>> validate(String[] valueAttributes)
+    public ValidationResult<List<T>> validate(List<String> valueAttributes)
     {
         isValid = false;
         
-        if(valueAttributes != null && valueAttributes.length > 0)
+        if(!valueAttributes.isEmpty())
         {
             isValid = isValidInput(valueAttributes);
         }
@@ -48,10 +48,10 @@ public class MultiInputValidator<T>
         return new ValidationResult<List<T>>(Maybe.soUnlessNull(values), isValid, errorMessage);
     }
     
-    private boolean isValidInput(String[] valueAttributes)
+    private boolean isValidInput(List<String> valueAttributes)
     {
         boolean allValid = true;
-        List<T> parsedValues = new ArrayList<T>(valueAttributes.length);
+        List<T> parsedValues = new ArrayList<T>(valueAttributes.size());
         ValueAttributeValidator<T> validator = new ValueAttributeValidator<T>(input);
         
         // parse in all values even if they don't satisfy the criteria

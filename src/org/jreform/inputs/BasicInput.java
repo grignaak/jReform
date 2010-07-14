@@ -63,8 +63,8 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     {
         if (maybeValue.isNotSo())
             return "";
+        
         return maybeValue.getValue().toString();
-        //return value == null ? "" : value.toString();
     }
     
     public boolean validateRequest(HttpServletRequest req)
@@ -75,20 +75,19 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
 
     public boolean validate()
     {
-        if(!valueAttribute.isEmpty())
+        if (valueAttribute.isEmpty())
         {
-            maybeValue= getType().parseValue(valueAttribute);
-            setValid(allCriteriaSatisfied(maybeValue));
+            setValid(!isRequired());
+            setOnError("Missing value");
         }
         else
         {
-            // blank input is valid if it's not required
-            setValid(!isRequired());
+            maybeValue= getType().parseValue(valueAttribute);
+            setValid(allCriteriaSatisfied(maybeValue));
+            
+            if(!isValid() && getOnError() == null)
+                setOnError("Invalid value");
         }
-        
-        if(!isValid() && super.getOnError() == null)
-            setOnError("Invalid or missing value");
-        
         return isValid();
     }
     

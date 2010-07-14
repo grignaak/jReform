@@ -2,6 +2,7 @@ package org.jreform.inputs;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +18,8 @@ import org.jreform.impl.ValidationResult;
  */
 public class BasicMultiInput<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
-    private static final String[] EMPTY_ARRAY = {};
-    
-    private List<T> values;
-    // TODO make this a list
-    private String[] valueAttributes;
+    private List<T> values = Collections.emptyList();
+    private List<String> valueAttributes = Collections.emptyList();
     
     protected BasicMultiInput(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
@@ -31,10 +29,9 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     /**
      * Returns a list of parsed values or an empty list if none.
      */
-    @SuppressWarnings("unchecked")
     public final List<T> getValues()
     {
-        return values == null ? Collections.EMPTY_LIST : values;
+        return values;
     }
     
     public final void setValues(List<T> value)
@@ -47,23 +44,28 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
      */
     public final String[] getValueAttributes()
     {
-        return valueAttributes == null ? EMPTY_ARRAY : valueAttributes;
+        return valueAttributes.toArray(new String[0]);
     }
     
     public void setValueAttributes(String[] input)
     {
-        this.valueAttributes = input;
+        this.valueAttributes = input == null ?
+                Collections.<String>emptyList()
+                : Arrays.asList(input);
+        Iterator<String> i = valueAttributes.iterator();
+        while (i.hasNext())
+        {
+            if (i.next() == null)
+                i.remove();
+        }
     }
     
     public final boolean isBlank()
     {
-        if(valueAttributes != null)
+        for(String valueAttribute : valueAttributes)
         {
-            for(String valueAttribute : valueAttributes)
-            {
-                if(valueAttribute != null && !valueAttribute.equals(""))
-                    return false;
-            }
+            if(valueAttribute != null && !valueAttribute.equals(""))
+                return false;
         }
         return true;
     }
@@ -102,7 +104,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     public final String toString()
     {
-        return getValueAttributes() == null ? "" : Arrays.toString(getValueAttributes());
+        return Arrays.toString(getValueAttributes());
     }
     
 }

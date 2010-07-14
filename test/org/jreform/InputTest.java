@@ -52,8 +52,8 @@ public class InputTest extends BaseTestCase
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.requiredString().isValid());
         
-        assertTrue(form.requiredInt().getOnError().startsWith("Invalid or missing value"));
-        assertTrue(form.requiredString().getOnError().startsWith("Invalid or missing value"));
+        assertTrue(form.requiredInt().getOnError().startsWith("Missing value"));
+        assertTrue(form.requiredString().getOnError().startsWith("Missing value"));
     }
     
     /** Input fails if value can't be converted to input's type */
@@ -80,8 +80,8 @@ public class InputTest extends BaseTestCase
         assertNotNull(form.requiredInt().getOnError());
         assertNotNull(form.optionalInt().getOnError());
         
-        assertTrue(form.requiredInt().getOnError().startsWith("Invalid or missing value"));
-        assertTrue(form.optionalInt().getOnError().startsWith("Invalid or missing value"));
+        assertTrue(form.requiredInt().getOnError().startsWith("Invalid value"));
+        assertTrue(form.optionalInt().getOnError().startsWith("Invalid value"));
     }
     
     /** Field fails if criteria are not satisfied */
