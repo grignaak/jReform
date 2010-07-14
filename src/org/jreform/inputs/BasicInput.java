@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
-import org.jreform.impl.ValidationResult;
-import org.jreform.impl.ValueAttributeValidator;
 import org.jreform.util.Maybe;
 
 /**
@@ -77,14 +75,39 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
 
     public boolean validate()
     {
-        ValueAttributeValidator<T> validator = new ValueAttributeValidator<T>(this);
-        ValidationResult<T> result = validator.validate(getValueAttribute());
+        if(!valueAttribute.isEmpty())
+        {
+            maybeValue= getType().parseValue(valueAttribute);
+            setValid(allCriteriaSatisfied(maybeValue));
+        }
+        else
+        {
+            // blank input is valid if it's not required
+            setValid(!isRequired());
+        }
         
-        maybeValue = result.getParsedValue();
-        setValid(result.isValid());
-        setOnError(result.getErrorMessage());
+        if(!isValid() && super.getOnError() == null)
+            setOnError("Invalid or missing value");
         
         return isValid();
+    }
+    
+    private boolean allCriteriaSatisfied(Maybe<T> parsedValue)
+    {
+        if(parsedValue.isNotSo())
+            return false;
+        
+        Criterion<T>[] criteria = getCriteria();
+        for(Criterion<T> criterion : criteria)
+        {
+            if(!criterion.isSatisfied(parsedValue.getValue()))
+            {
+                setOnError(criterion.getOnError());
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     public void processRequest(HttpServletRequest req)
