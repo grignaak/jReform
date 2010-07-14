@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.jreform.Criterion;
 import org.jreform.DuplicateNameException;
 import org.jreform.Input;
@@ -213,6 +215,14 @@ public abstract class AbstractInputCollection implements InputCollection
         {
             if (!input.validate())
                 getErrors().add(input.getInputName());
+        }
+    }
+
+    public void processRequest(HttpServletRequest req)
+    {
+        for (InputControl<?> input : getInputs().values())
+        {
+            input.processRequest(req);
         }
     }
     

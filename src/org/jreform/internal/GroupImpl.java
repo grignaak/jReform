@@ -69,9 +69,7 @@ public class GroupImpl extends AbstractInputCollection implements Group
     public boolean validate()
     {
         if(isRequired || !isEmpty)
-        {
             validateInputs();
-        }
         
         setValid(getErrors().isEmpty());
         
@@ -80,18 +78,10 @@ public class GroupImpl extends AbstractInputCollection implements Group
     
     public void processRequest(HttpServletRequest req)
     {
+        super.processRequest(req);
         isEmpty = !containsInputData(req);
-        Iterator<String> iter = getInputs().keySet().iterator();
-        AbstractInputControl<?> input;
-        
-        while (iter.hasNext())
-        {
-            input = (AbstractInputControl<?>)getInputs().get(iter.next());
-            
-            input.processRequest(req);
-        }
     }
-    
+
     /*
      * Returns true if the request contains any data that belong
      * to this group's inputs. 

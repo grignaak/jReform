@@ -1,7 +1,6 @@
 package org.jreform.internal;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.jreform.DuplicateNameException;
 import org.jreform.Form;
 import org.jreform.Group;
-import org.jreform.InputControl;
 
 /**
  * A form that contains a set of its own inputs, errors and input groups.
@@ -51,17 +49,11 @@ public class HtmlForm extends AbstractInputCollection implements Form
     
     public void processRequest(HttpServletRequest req)
     {
+        super.processRequest(req);
+        
         for (Group g : groups.values())
         {
             g.processRequest(req);
-        }
-        
-        Iterator<InputControl<?>> iter = getInputs().values().iterator();
-        AbstractInputControl<?> input;
-        while (iter.hasNext())
-        {
-            input = (AbstractInputControl<?>)iter.next();
-            input.processRequest(req);
         }
     }
     
