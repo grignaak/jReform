@@ -1,6 +1,7 @@
 package org.jreform.types;
 
 import org.jreform.InputDataType;
+import org.jreform.util.Maybe;
 
 public final class CharType implements InputDataType<Character>
 {
@@ -8,9 +9,12 @@ public final class CharType implements InputDataType<Character>
     
     private CharType() {}
     
-    public Character parseValue(String value)
+    public Maybe<Character> parseValue(String value)
     {
-        return value.length() == 1 ? value.charAt(0) : null;
+        if (value.length() != 1)
+            return Maybe.not();
+        
+        return Maybe.soUnlessNull(value.charAt(0));
     }
     
     public Class<Character> getInputDataClass()

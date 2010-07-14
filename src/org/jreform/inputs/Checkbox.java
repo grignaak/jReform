@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
 
-public class Checkbox<T> extends BasicInput<T> implements Input<T>
+public class Checkbox<T> extends BasicInput<T>
 {
     public Checkbox(InputDataType<T> type, String name, Criterion<T>...criteria)
     {

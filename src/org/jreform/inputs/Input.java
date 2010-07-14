@@ -17,6 +17,7 @@ public interface Input<T> extends InputControl<T>
     /**
      * Sets this input's value.
      */
+    @Deprecated
     public void setValue(T value);
     
     /**

@@ -1,6 +1,7 @@
 package org.jreform.types;
 
 import org.jreform.InputDataType;
+import org.jreform.util.Maybe;
 
 public final class BooleanType implements InputDataType<Boolean>
 {
@@ -8,9 +9,9 @@ public final class BooleanType implements InputDataType<Boolean>
     
     private BooleanType() {}
     
-    public Boolean parseValue(String value)
+    public Maybe<Boolean> parseValue(String value)
     {
-    	return Boolean.valueOf(value);
+        return Maybe.soUnlessNull(Boolean.valueOf(value));
     }
     
     public Class<Boolean> getInputDataClass()

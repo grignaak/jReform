@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jreform.inputs.MultiInput;
+import org.jreform.util.Maybe;
 
 /**
  * Validates a multi-value input.
@@ -44,7 +45,7 @@ public class MultiInputValidator<T>
             }
         }
         
-        return new ValidationResult<List<T>>(values, isValid, errorMessage);
+        return new ValidationResult<List<T>>(Maybe.soUnlessNull(values), isValid, errorMessage);
     }
     
     private boolean isValidInput(String[] valueAttributes)
@@ -58,8 +59,8 @@ public class MultiInputValidator<T>
         {
             ValidationResult<T> result = validator.validate(valueAttribute);
             
-            if(result.getParsedValue() != null)
-                parsedValues.add(result.getParsedValue());
+            if(result.getParsedValue().isSo())
+                parsedValues.add(result.getParsedValue().getValue());
             
             if(!result.isValid())
             {

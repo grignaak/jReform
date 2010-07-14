@@ -1,6 +1,7 @@
 package web.examples;
 
 import org.jreform.InputDataType;
+import org.jreform.util.Maybe;
 
 /**
  * This class is an example of a custom InputDataType.
@@ -14,15 +15,16 @@ public class EmploymentStatusDataType implements InputDataType<EmploymentStatus>
         return EmploymentStatus.class;
     }
     
-    public EmploymentStatus parseValue(String value)
+    public Maybe<EmploymentStatus> parseValue(String value)
     {
         try
         {
-            return EmploymentStatus.getByID(Integer.parseInt(value));
+            EmploymentStatus status = EmploymentStatus.getByID(Integer.parseInt(value));
+            return Maybe.soUnlessNull(status);
         }
         catch(Exception ex)
         {
-            return null;
+            return Maybe.not();
         }
     }
     

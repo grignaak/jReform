@@ -20,6 +20,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     private static final String[] EMPTY_ARRAY = {};
     
     private List<T> values;
+    // TODO make this a list
     private String[] valueAttributes;
     
     protected BasicMultiInput(InputDataType<T> type, String name, Criterion<T>...criteria)
@@ -85,7 +86,8 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         MultiInputValidator<T> validator = new MultiInputValidator<T>(this);
         ValidationResult<List<T>> result = validator.validate(valueAttributes);
         
-        setValues(result.getParsedValue());
+        List<T> defaultValues = Collections.emptyList();
+        setValues(result.getParsedValue().getValueOrDefault(defaultValues));
         setValid(result.isValid());
         setOnError(result.getErrorMessage());
         

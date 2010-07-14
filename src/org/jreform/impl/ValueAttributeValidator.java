@@ -1,6 +1,7 @@
 package org.jreform.impl;
 
 import org.jreform.Criterion;
+import org.jreform.util.Maybe;
 
 /**
  * Validator for the <tt>value</tt> attribute of an input.
@@ -20,12 +21,12 @@ public class ValueAttributeValidator<T>
     public ValidationResult<T> validate(String valueAttribute)
     {
         boolean isValid = false;
-        T parsedValue = null;
+        Maybe<T> maybeParsedValue = Maybe.not();
         
-        if(valueAttribute != null && !"".equals(valueAttribute))
+        if(!valueAttribute.isEmpty())
         {
-            parsedValue = input.getType().parseValue(valueAttribute);
-            isValid = allCriteriaSatisfied(parsedValue);
+            maybeParsedValue= input.getType().parseValue(valueAttribute);
+            isValid = allCriteriaSatisfied(maybeParsedValue);
         }
         else
         {
@@ -36,18 +37,18 @@ public class ValueAttributeValidator<T>
         if(!isValid && errorMessage == null)
             errorMessage = "Invalid or missing value";
         
-        return new ValidationResult<T>(parsedValue, isValid, errorMessage);
+        return new ValidationResult<T>(maybeParsedValue, isValid, errorMessage);
     }
     
-    private boolean allCriteriaSatisfied(T parsedValue)
+    private boolean allCriteriaSatisfied(Maybe<T> parsedValue)
     {
-        if(parsedValue == null)
+        if(parsedValue.isNotSo())
             return false;
         
         Criterion<T>[] criteria = input.getCriteria();
         for(Criterion<T> criterion : criteria)
         {
-            if(!criterion.isSatisfied(parsedValue))
+            if(!criterion.isSatisfied(parsedValue.getValue()))
             {
                 errorMessage = criterion.getOnError();
                 return false;

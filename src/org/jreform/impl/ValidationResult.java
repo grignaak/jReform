@@ -1,5 +1,7 @@
 package org.jreform.impl;
 
+import org.jreform.util.Maybe;
+
 /**
  * The result of a validation operation by a {@link ValueAttributeValidator}.
  * 
@@ -7,18 +9,18 @@ package org.jreform.impl;
  */
 public class ValidationResult<T>
 {
-    private T parsedValue;
+    private Maybe<T> parsedValue;
     private boolean isValid;
     private String errorMessage;
     
-    ValidationResult(T parsedValue, boolean isValid, String errorMessage)
+    ValidationResult(Maybe<T> parsedValue, boolean isValid, String errorMessage)
     {
         this.parsedValue = parsedValue;
         this.isValid = isValid;
         this.errorMessage = errorMessage;
     }
     
-    public T getParsedValue()
+    public Maybe<T> getParsedValue()
     {
         return parsedValue;
     }

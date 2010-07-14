@@ -1,6 +1,7 @@
 package org.jreform.types;
 
 import org.jreform.InputDataType;
+import org.jreform.util.Maybe;
 
 public final class DoubleType implements InputDataType<Double>
 {
@@ -8,15 +9,15 @@ public final class DoubleType implements InputDataType<Double>
     
     private DoubleType() {}
     
-    public Double parseValue(String value)
+    public Maybe<Double> parseValue(String value)
     {
         try
         {
-            return Double.valueOf(value);
+            return Maybe.soUnlessNull(Double.valueOf(value));
         }
         catch(NumberFormatException ex)
         {
-            return null;
+            return Maybe.not();
         }
     }
     

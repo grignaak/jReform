@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.jreform.InputDataType;
+import org.jreform.util.Maybe;
 
 public final class DateType implements InputDataType<Date>
 {
@@ -17,15 +18,15 @@ public final class DateType implements InputDataType<Date>
         dateFormat.setLenient(false);
     }
     
-    public Date parseValue(String value)
+    public Maybe<Date> parseValue(String value)
     {
         try
         {
-            return dateFormat.parse(value);
+            return Maybe.soUnlessNull(dateFormat.parse(value));
         }
         catch(ParseException ex)
         {
-            return null;
+            return Maybe.not();
         }
     }
     

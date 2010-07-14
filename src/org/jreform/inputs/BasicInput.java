@@ -7,14 +7,15 @@ import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
 import org.jreform.impl.ValidationResult;
 import org.jreform.impl.ValueAttributeValidator;
+import org.jreform.util.Maybe;
 
 /**
  * @author armandino (at) gmail.com
  */
 public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
 {
-    private T value;
-    private String valueAttribute;
+    private Maybe<T> maybeValue = Maybe.not();
+    private String valueAttribute = "";
     
     public BasicInput(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
@@ -23,12 +24,14 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     
     public final T getValue()
     {
-        return value;
+        // TODO make this throw
+        return maybeValue.getValueOrDefault(null);
     }
     
+    @Deprecated
     public final void setValue(T value)
     {
-        this.value = value;
+        this.maybeValue = Maybe.soUnlessNull(value);
     }
     
     /**
@@ -37,7 +40,7 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
      */
     public final String getValueAttribute()
     {
-        return valueAttribute == null ? "" : valueAttribute;
+        return valueAttribute;
     }
     
     /**
@@ -45,12 +48,12 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
      */
     public void setValueAttribute(String input)
     {
-        valueAttribute = input == null ? null : input.trim();
+        valueAttribute = input == null ? "" : input.trim();
     }
     
     public final boolean isBlank()
     {
-        return valueAttribute == null || valueAttribute.equals("");
+        return valueAttribute.isEmpty();
     }
     
     /**
@@ -60,7 +63,10 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
      */
     public final String getStringValue()
     {
-        return value == null ? "" : value.toString();
+        if (maybeValue.isNotSo())
+            return "";
+        return maybeValue.getValue().toString();
+        //return value == null ? "" : value.toString();
     }
     
     public boolean validateRequest(HttpServletRequest req)
@@ -74,7 +80,7 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
         ValueAttributeValidator<T> validator = new ValueAttributeValidator<T>(this);
         ValidationResult<T> result = validator.validate(getValueAttribute());
         
-        setValue(result.getParsedValue());
+        maybeValue = result.getParsedValue();
         setValid(result.isValid());
         setOnError(result.getErrorMessage());
         
@@ -89,7 +95,7 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     
     public final String toString()
     {
-        return getValueAttribute() == null ? "" : getValueAttribute();
+        return getValueAttribute();
     }
     
 }
