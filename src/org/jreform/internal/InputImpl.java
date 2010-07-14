@@ -61,8 +61,7 @@ public class InputImpl<T> extends AbstractInputControl<T> implements Input<T>
         return value == null ? "" : value.toString();
     }
     
-    @Deprecated
-    protected boolean validate(HttpServletRequest req)
+    protected boolean validateRequest(HttpServletRequest req)
     {
         processRequest(req);
         return validate();

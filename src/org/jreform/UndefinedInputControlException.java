@@ -9,6 +9,6 @@ public class UndefinedInputControlException extends RuntimeException
 
     public UndefinedInputControlException(String s)
     {
-        super(s);
+        super("Undefined input control:" + s);
     }
 }

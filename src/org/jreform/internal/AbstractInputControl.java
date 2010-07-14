@@ -41,7 +41,7 @@ abstract class AbstractInputControl<T> implements InputControl<T>
     /**
      * Validates this input's <tt>value</tt> attribute(s). 
      */
-    abstract boolean validate(HttpServletRequest req);
+    abstract boolean validateRequest(HttpServletRequest req);
     
     public final InputDataType<T> getType()
     {

@@ -1,11 +1,8 @@
 package org.jreform.internal;
 
-import java.util.Iterator;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.Group;
-import org.jreform.Input;
 import org.jreform.InputControl;
 
 
@@ -59,7 +56,6 @@ public class GroupImpl extends AbstractInputCollection implements Group
         this.isRequired = isRequired;
     }
     
-    @Deprecated
     public final boolean validateRequest(HttpServletRequest req)
     {
         processRequest(req);
@@ -79,39 +75,18 @@ public class GroupImpl extends AbstractInputCollection implements Group
     public void processRequest(HttpServletRequest req)
     {
         super.processRequest(req);
-        isEmpty = !containsInputData(req);
+        isEmpty = !containsInputData();
     }
 
-    /*
-     * Returns true if the request contains any data that belong
-     * to this group's inputs. 
-     */
-    private boolean containsInputData(HttpServletRequest req)
+    private boolean containsInputData()
     {
-        boolean foundInputData = false;
-        Iterator<String> iter = getInputs().keySet().iterator();
-        
-        while(iter.hasNext() && !foundInputData)
+        for (InputControl<?> input : getInputs())
         {
-            InputControl<?> input = getInputs().get(iter.next());
-            
-            if(input instanceof Input<?>)
-            {
-                String value = req.getParameter(input.getInputName());
-                
-                if(value != null && !value.trim().equals(""))
-                    foundInputData = true;
-            }
-            else
-            {
-                String[] values = req.getParameterValues(input.getInputName());
-                
-                if(values != null && values.length > 0)
-                    foundInputData = true;
-            }
+            if (!input.isBlank())
+                return true;
         }
         
-        return foundInputData;
+        return false;
     }
     
 }

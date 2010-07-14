@@ -26,16 +26,9 @@ import org.jreform.inputs.Select;
  */
 public abstract class AbstractInputCollection implements InputCollection
 {
-    private final Map<String, InputControl<?>> inputs;
-    private final Set<String> errors;
+    private final Map<String, InputControl<?>> inputs = new HashMap<String, InputControl<?>>();
+    private final Set<String> errors = new HashSet<String>();
     private boolean isValid;
-    
-    AbstractInputCollection()
-    {
-        inputs = new HashMap<String, InputControl<?>>();
-        errors = new HashSet<String>();
-        isValid = false;
-    }
     
     /**
      * Adds the specified input to the collection.
@@ -48,21 +41,17 @@ public abstract class AbstractInputCollection implements InputCollection
         String name = input.getInputName();
         
         if(inputs.containsKey(name))
-            throw new DuplicateNameException(
-                "Duplicate input name within the same form: " + name);
+            throw new DuplicateNameException(name);
         
         inputs.put(name, input);
     }
     
     final InputControl<?> getInputControl(String name)
     {
-        InputControl<?> input = inputs.get(name);
+        if (!inputs.containsKey(name))
+            throw new UndefinedInputControlException(name);
         
-        if(input == null)
-            throw new UndefinedInputControlException(
-                    "Undefined input control: " + name);
-        
-        return input;
+        return inputs.get(name);
     }
     
     public final Set<String> getErrors()
@@ -80,9 +69,15 @@ public abstract class AbstractInputCollection implements InputCollection
         return isValid;
     }
 
-    final Map<String,InputControl<?>> getInputs()
+    @Deprecated
+    final Map<String,InputControl<?>> getInputsWithNames()
     {
         return inputs;
+    }
+    
+    protected Iterable<InputControl<?>> getInputs()
+    {
+        return inputs.values();
     }
     
     final void setValid(boolean isValid)
@@ -211,7 +206,7 @@ public abstract class AbstractInputCollection implements InputCollection
 
     protected void validateInputs()
     {
-        for (InputControl<?> input : getInputs().values())
+        for (InputControl<?> input : getInputsWithNames().values())
         {
             if (!input.validate())
                 getErrors().add(input.getInputName());
@@ -220,7 +215,7 @@ public abstract class AbstractInputCollection implements InputCollection
 
     public void processRequest(HttpServletRequest req)
     {
-        for (InputControl<?> input : getInputs().values())
+        for (InputControl<?> input : getInputsWithNames().values())
         {
             input.processRequest(req);
         }

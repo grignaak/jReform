@@ -9,9 +9,9 @@ public class DuplicateNameException extends RuntimeException
 {
     private static final long serialVersionUID = 1L;
 
-    public DuplicateNameException(String msg)
+    public DuplicateNameException(String name)
     {
-        super(msg);
+        super("Duplicate input name within the same form: " + name);
     }
     
 }

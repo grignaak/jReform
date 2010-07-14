@@ -18,11 +18,17 @@ public interface InputCollection extends HttpServletRequestValidator
     public <T> Radio<T> getRadio(String name);
     public <T> Select<T> getSelect(String name);
     public <T> MultiSelect<T> getMultiSelect(String name);
-    
+   
+    @Deprecated
     public <T> InputControlModifier<T> input(InputDataType<T> type, String name, Criterion<T>...criteria);
+    @Deprecated
     public <T> InputControlModifier<T> checkbox(InputDataType<T> type, String name, Criterion<T>...criteria);
+    @Deprecated
     public <T> InputControlModifier<T> multiCheckbox(InputDataType<T> type, String name, Criterion<T>...criteria);
+    @Deprecated
     public <T> InputControlModifier<T> radio(InputDataType<T> type, String name, Criterion<T>...criteria);
+    @Deprecated
     public <T> InputControlModifier<T> select(InputDataType<T> type, String name, Criterion<T>...criteria);
+    @Deprecated
     public <T> InputControlModifier<T> multiSelect(InputDataType<T> type, String name, Criterion<T>...criteria);
 }

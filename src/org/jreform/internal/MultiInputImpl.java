@@ -71,7 +71,7 @@ public class MultiInputImpl<T> extends AbstractInputControl<T> implements MultiI
     }
     
     @Deprecated
-    boolean validate(HttpServletRequest req)
+    boolean validateRequest(HttpServletRequest req)
     {
         processRequest(req);
         return validate();
