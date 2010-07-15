@@ -1,6 +1,5 @@
 package org.jreform.inputs;
 
-import org.jreform.Criterion;
 import org.jreform.InputDataType;
 
 /**
@@ -10,8 +9,8 @@ import org.jreform.InputDataType;
 // TODO add acceptable values
 public class Radio<T> extends BasicInput<T>
 {
-    public Radio(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public Radio(InputDataType<T> type, String name)
     {
-        super(type, name, criteria);
+        super(type, name);
     }
 }

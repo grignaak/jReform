@@ -1,6 +1,7 @@
 package org.jreform.impl;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +23,7 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
     private String messageOnError;
     private boolean isRequired;
     private boolean isValid;
-    private Criterion<T>[] criteria;
+    private List<Criterion<T>> criteria = new ArrayList<Criterion<T>>();
     
     /**
      * Constructor.
@@ -32,11 +33,10 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
      * @param isRequired is this a required or optional input field.
      * @param criteria this input's data must satisfy.
      */
-    protected AbstractInputControl(InputDataType<T> type, String name, Criterion<T>...criteria)
+    protected AbstractInputControl(InputDataType<T> type, String name)
     {
         this.type = type;
         this.name = name;
-        this.criteria = criteria;
         this.isRequired = true;
         this.isValid = true;
     }
@@ -69,9 +69,7 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
     
     public final void addCriterion(Criterion<T> criterion)
     {
-        // TODO make this a list
-        criteria = Arrays.copyOf(criteria, criteria.length + 1);
-        criteria[criteria.length - 1] = criterion;
+        criteria.add(criterion);
     }
     
     public final boolean isRequired()
@@ -79,7 +77,7 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         return isRequired;
     }
     
-    protected final void setRequired(boolean isRequired)
+    public final void setRequired(boolean isRequired)
     {
         this.isRequired = isRequired;
     }
@@ -92,11 +90,6 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
     protected final void setValid(boolean isValid)
     {
         this.isValid = isValid;
-    }
-    
-    protected final Criterion<T>[] getCriteria()
-    {
-        return criteria;
     }
 
     protected boolean allCriteriaSatisfied(Maybe<T> parsedValue)

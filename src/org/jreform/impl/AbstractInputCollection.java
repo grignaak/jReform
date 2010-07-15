@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.InputCollection;
 import org.jreform.InputControl;
+import org.jreform.InputControlModifier;
 import org.jreform.InputDataType;
 import org.jreform.exceptions.DuplicateNameException;
 import org.jreform.exceptions.UndefinedInputControlException;

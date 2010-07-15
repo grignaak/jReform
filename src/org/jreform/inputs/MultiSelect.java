@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jreform.Criterion;
 import org.jreform.InputDataType;
 
 /**
@@ -12,9 +11,9 @@ import org.jreform.InputDataType;
  */
 public class MultiSelect<T> extends BasicMultiInput<T>
 {   
-    public MultiSelect(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public MultiSelect(InputDataType<T> type, String name)
     {
-        super(type, name, criteria);
+        super(type, name);
     }
     
     public Set<String> getSelectedKeys()

@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jreform.Criterion;
 import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
 import org.jreform.util.Maybe;
@@ -21,9 +20,9 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     private Maybe<List<T>> values = Maybe.not();
     private List<String> valueAttributes = Collections.emptyList();
     
-    protected BasicMultiInput(InputDataType<T> type, String name, Criterion<T>...criteria)
+    protected BasicMultiInput(InputDataType<T> type, String name)
     {
-        super(type, name, criteria);
+        super(type, name);
     }
     
     /**

@@ -4,14 +4,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jreform.Criterion;
 import org.jreform.InputDataType;
 
 public class MultiCheckbox<T> extends BasicMultiInput<T>
 {  
-    public MultiCheckbox(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public MultiCheckbox(InputDataType<T> type, String name)
     {
-        super(type, name, criteria);   
+        super(type, name);   
     }
     
     // TODO better replaced by isChecked(key)

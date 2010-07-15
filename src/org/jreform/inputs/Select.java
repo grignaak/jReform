@@ -1,6 +1,5 @@
 package org.jreform.inputs;
 
-import org.jreform.Criterion;
 import org.jreform.InputDataType;
 
 /**
@@ -9,8 +8,8 @@ import org.jreform.InputDataType;
 // TODO does this offer any functionality over BasicInput? I trow not!
 public class Select<T> extends BasicInput<T>
 {   
-    public Select(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public Select(InputDataType<T> type, String name)
     {
-        super(type, name, criteria);
+        super(type, name);
     }
 }

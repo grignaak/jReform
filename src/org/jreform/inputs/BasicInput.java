@@ -2,7 +2,6 @@ package org.jreform.inputs;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jreform.Criterion;
 import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
 import org.jreform.util.Maybe;
@@ -15,9 +14,9 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     private Maybe<T> maybeValue = Maybe.not();
     private String valueAttribute = "";
     
-    public BasicInput(InputDataType<T> type, String name, Criterion<T>...criteria)
+    public BasicInput(InputDataType<T> type, String name)
     {
-        super(type, name, criteria);
+        super(type, name);
     }
     
     public final T getValue()

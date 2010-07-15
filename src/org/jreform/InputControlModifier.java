@@ -1,6 +1,6 @@
-package org.jreform.impl;
+package org.jreform;
 
-import org.jreform.Criterion;
+import org.jreform.impl.AbstractInputControl;
 
 /**
  * @author armandino (at) gmail.com
