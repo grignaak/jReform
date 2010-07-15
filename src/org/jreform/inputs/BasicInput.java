@@ -4,14 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
-import org.jreform.util.Maybe;
+import org.jreform.util.ParsedValue;
 
 /**
  * @author armandino (at) gmail.com
  */
 public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
 {
-    private Maybe<T> maybeValue = Maybe.not();
+    private ParsedValue<T> maybeValue = ParsedValue.error("Empty value");
     private String valueAttribute = "";
     
     public BasicInput(InputDataType<T> type, String name)
@@ -28,7 +28,7 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     @Deprecated
     public final void setValue(T value)
     {
-        this.maybeValue = Maybe.soUnlessNull(value);
+        this.maybeValue = ParsedValue.setUnlessNull(value);
     }
     
     /**
@@ -61,7 +61,7 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
      */
     public final String getStringValue()
     {
-        if (maybeValue.isNotSo())
+        if (maybeValue.isNotParsed())
             return "";
         
         return maybeValue.getValue().toString();

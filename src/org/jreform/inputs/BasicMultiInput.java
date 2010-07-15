@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
-import org.jreform.util.Maybe;
+import org.jreform.util.ParsedValue;
 
 /**
  * @author armandino (at) gmail.com
  */
 public class BasicMultiInput<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
-    private Maybe<List<T>> values = Maybe.not();
+    private ParsedValue<List<T>> values = ParsedValue.error("Empty value");
     private List<String> valueAttributes = Collections.emptyList();
     
     protected BasicMultiInput(InputDataType<T> type, String name)
@@ -35,7 +35,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     public final void setValues(List<T> value)
     {
-        this.values = Maybe.soUnlessNull(value);
+        this.values = ParsedValue.setUnlessNull(value);
     }
     
     /**
@@ -102,7 +102,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     private boolean isValidInput()
     {
-        if (values.isNotSo())
+        if (values.isNotParsed())
         {
             setOnError("Invalid or missing value");
             return false; 
@@ -110,7 +110,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         
         for (T value : values.getValue())
         {
-            if (!allCriteriaSatisfied(Maybe.soUnlessNull(value)))
+            if (!allCriteriaSatisfied(ParsedValue.setUnlessNull(value)))
                 return false;
         }
         
@@ -123,20 +123,20 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         setValueAttributes(parameterValues);
     }
 
-    private Maybe<List<T>> parseValues()
+    private ParsedValue<List<T>> parseValues()
     {
         List<T> parsedValues = new ArrayList<T>();
         for (String attributeValue : getValueAttributes())
         {
-            Maybe<T> parsedValue = getType().parseValue(attributeValue);
+            ParsedValue<T> parsedValue = getType().parseValue(attributeValue);
             
-            if (parsedValue.isNotSo())
-                return Maybe.not();
+            if (parsedValue.isNotParsed())
+                return ParsedValue.error(parsedValue.getError());
             
             parsedValues.add(parsedValue.getValue());
         }
         
-        return Maybe.soUnlessNull(parsedValues);
+        return ParsedValue.setUnlessNull(parsedValues);
     }
     
     public final String toString()

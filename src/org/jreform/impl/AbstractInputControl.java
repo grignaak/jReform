@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.jreform.Criterion;
 import org.jreform.InputControl;
 import org.jreform.InputDataType;
-import org.jreform.util.Maybe;
+import org.jreform.util.ParsedValue;
 
 /**
  * Base class for single- and multi-value input controls.
@@ -92,9 +92,9 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         this.isValid = isValid;
     }
 
-    protected boolean allCriteriaSatisfied(Maybe<T> parsedValue)
+    protected boolean allCriteriaSatisfied(ParsedValue<T> parsedValue)
     {
-        if(parsedValue.isNotSo())
+        if(parsedValue.isNotParsed())
             return false;
         
         // TODO add the ability to add all the errors to the input

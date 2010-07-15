@@ -1,7 +1,7 @@
 package org.jreform.types;
 
 import org.jreform.InputDataType;
-import org.jreform.util.Maybe;
+import org.jreform.util.ParsedValue;
 
 public final class StringType implements InputDataType<String>
 {
@@ -9,9 +9,9 @@ public final class StringType implements InputDataType<String>
     
     private StringType() {}
     
-    public Maybe<String> parseValue(String value)
+    public ParsedValue<String> parseValue(String value)
     {
-        return Maybe.soUnlessNull(value);
+        return ParsedValue.setUnlessNull(value);
     }
     
     public Class<String> getInputDataClass()

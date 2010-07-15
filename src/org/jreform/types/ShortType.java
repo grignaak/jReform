@@ -1,7 +1,7 @@
 package org.jreform.types;
 
 import org.jreform.InputDataType;
-import org.jreform.util.Maybe;
+import org.jreform.util.ParsedValue;
 
 public final class ShortType implements InputDataType<Short>
 {
@@ -9,11 +9,11 @@ public final class ShortType implements InputDataType<Short>
     
     private ShortType() {}
     
-    public Maybe<Short> parseValue(String value)
+    public ParsedValue<Short> parseValue(String value)
     {
         try
         {
-            return Maybe.soUnlessNull(Short.valueOf(value));
+            return ParsedValue.setUnlessNull(Short.valueOf(value));
         }
         catch(NumberFormatException ex)
         {

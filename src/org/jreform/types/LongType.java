@@ -1,7 +1,7 @@
 package org.jreform.types;
 
 import org.jreform.InputDataType;
-import org.jreform.util.Maybe;
+import org.jreform.util.ParsedValue;
 
 public final class LongType implements InputDataType<Long>
 {
@@ -9,15 +9,15 @@ public final class LongType implements InputDataType<Long>
     
     private LongType() {}
     
-    public Maybe<Long> parseValue(String value)
+    public ParsedValue<Long> parseValue(String value)
     {
         try
         {
-            return Maybe.soUnlessNull(Long.valueOf(value));
+            return ParsedValue.setUnlessNull(Long.valueOf(value));
         }
-        catch(NumberFormatException ex)
+        catch (NumberFormatException ex)
         {
-            return Maybe.not();
+            return ParsedValue.error(ex.getMessage());
         }
     }
     

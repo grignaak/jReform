@@ -1,7 +1,7 @@
 package org.jreform.types;
 
 import org.jreform.InputDataType;
-import org.jreform.util.Maybe;
+import org.jreform.util.ParsedValue;
 
 public final class IntType implements InputDataType<Integer>
 {
@@ -9,15 +9,15 @@ public final class IntType implements InputDataType<Integer>
     
     private IntType() {}
     
-    public Maybe<Integer> parseValue(String value)
+    public ParsedValue<Integer> parseValue(String value)
     {
         try
         {
-            return Maybe.soUnlessNull(Integer.valueOf(value));
+            return ParsedValue.setUnlessNull(Integer.valueOf(value));
         }
-        catch(NumberFormatException ex)
+        catch (NumberFormatException ex)
         {
-            return Maybe.not();
+            return ParsedValue.error(ex.getMessage());
         }
     }
     

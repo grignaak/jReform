@@ -1,7 +1,7 @@
 package org.jreform.types;
 
 import org.jreform.InputDataType;
-import org.jreform.util.Maybe;
+import org.jreform.util.ParsedValue;
 
 public final class FloatType implements InputDataType<Float>
 {
@@ -9,15 +9,15 @@ public final class FloatType implements InputDataType<Float>
     
     private FloatType() {}
     
-    public Maybe<Float> parseValue(String value)
+    public ParsedValue<Float> parseValue(String value)
     {
         try
         {
-            return Maybe.soUnlessNull(Float.valueOf(value));
+            return ParsedValue.setUnlessNull(Float.valueOf(value));
         }
-        catch(NumberFormatException ex)
+        catch (NumberFormatException ex)
         {
-            return Maybe.not();
+            return ParsedValue.error(ex.getMessage());
         }
     }
     
