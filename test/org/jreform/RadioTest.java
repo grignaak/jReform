@@ -3,9 +3,9 @@ package org.jreform;
 import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.acceptString;
 
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Radio;
+import org.jreform.types.Types;
 
 public class RadioTest extends BaseTestCase
 {
@@ -115,7 +115,7 @@ public class RadioTest extends BaseTestCase
     }
 
     
-    private static class TestForm extends DefaultForm
+    private static class TestForm extends GenericForm
     {
         @SuppressWarnings("unchecked")
         public TestForm()

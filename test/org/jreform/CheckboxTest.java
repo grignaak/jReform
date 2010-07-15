@@ -1,9 +1,9 @@
 package org.jreform;
 
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.MultiCheckbox;
+import org.jreform.types.Types;
 
 public class CheckboxTest extends BaseTestCase
 {
@@ -92,7 +92,7 @@ public class CheckboxTest extends BaseTestCase
         assertTrue(form.choices().getCheckedKeys().contains("two"));
     }
 
-    private static class TestForm extends DefaultForm
+    private static class TestForm extends GenericForm
     {
         public TestForm()
         {

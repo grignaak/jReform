@@ -1,17 +1,8 @@
-package org.jreform.impl;
+package org.jreform.types;
 
 import java.util.Date;
 
 import org.jreform.InputDataType;
-import org.jreform.types.BooleanType;
-import org.jreform.types.CharType;
-import org.jreform.types.DateType;
-import org.jreform.types.DoubleType;
-import org.jreform.types.FloatType;
-import org.jreform.types.IntType;
-import org.jreform.types.LongType;
-import org.jreform.types.ShortType;
-import org.jreform.types.StringType;
 
 public class Types
 {

@@ -5,14 +5,14 @@ import static org.jreform.criteria.Criteria.length;
 import static org.jreform.criteria.Criteria.range;
 import static org.jreform.criteria.Criteria.regex;
 
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
+import org.jreform.types.Types;
 
 /**
  * User profile form.
  */
-public class UserProfileForm extends DefaultForm
+public class UserProfileForm extends GenericForm
 {
 	// Accepted format: 123-456-7890
     private static final String PHONE_FORMAT = "^\\d{3}-\\d{3}-\\d{4}$";

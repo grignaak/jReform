@@ -1,9 +1,9 @@
 package org.jreform;
 
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Select;
+import org.jreform.types.Types;
 
 public class SelectTest extends BaseTestCase
 {
@@ -65,7 +65,7 @@ public class SelectTest extends BaseTestCase
         assertTrue(form.hotels().getSelectedKeys().contains("two"));
     }
     
-    private static class TestForm extends DefaultForm
+    private static class TestForm extends GenericForm
     {
         public TestForm()
         {

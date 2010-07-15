@@ -3,10 +3,10 @@ package org.jreform;
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
 import org.jreform.inputs.MultiCheckbox;
 import org.jreform.inputs.MultiSelect;
+import org.jreform.types.Types;
 
 //
 // test required and optional fields:
@@ -35,7 +35,7 @@ public class MultiInputTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected DefaultForm getForm()
+    protected GenericForm getForm()
     {
         return form;
     }
@@ -169,7 +169,7 @@ public class MultiInputTest extends BaseTestCase
         setParameters(OPT_STRING, stringField);
     }
     
-    private static class TestForm extends DefaultForm
+    private static class TestForm extends GenericForm
     {
         @SuppressWarnings("unchecked")
         public TestForm()

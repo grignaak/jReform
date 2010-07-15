@@ -4,9 +4,9 @@ import static org.jreform.criteria.Criteria.emailAddress;
 import static org.jreform.types.StringType.stringType;
 
 import org.jreform.exceptions.DuplicateNameException;
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
+import org.jreform.types.Types;
 
 public class InputGroupTest extends BaseTestCase
 {
@@ -33,7 +33,7 @@ public class InputGroupTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected DefaultForm getForm()
+    protected GenericForm getForm()
     {
         return form;
     }
@@ -197,7 +197,7 @@ public class InputGroupTest extends BaseTestCase
         setParameter(WEIGHT_LB, lb);
     }
     
-    private static class TestForm extends DefaultForm
+    private static class TestForm extends GenericForm
     {
         @SuppressWarnings("unchecked")
         public TestForm()

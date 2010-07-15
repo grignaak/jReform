@@ -1,8 +1,8 @@
 package org.jreform;
 
 import org.jreform.exceptions.UndefinedInputControlException;
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
+import org.jreform.types.Types;
 
 public class FormTest extends BaseTestCase
 {
@@ -31,7 +31,7 @@ public class FormTest extends BaseTestCase
         } catch(UndefinedInputControlException e) {}
     }
     
-    private static class TestForm extends DefaultForm
+    private static class TestForm extends GenericForm
     {
         public TestForm()
         {

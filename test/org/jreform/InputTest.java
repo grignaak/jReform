@@ -3,9 +3,9 @@ package org.jreform;
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
+import org.jreform.types.Types;
 
 //
 // test required and optional fields:
@@ -34,7 +34,7 @@ public class InputTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected DefaultForm getForm()
+    protected GenericForm getForm()
     {
         return form;
     }
@@ -152,7 +152,7 @@ public class InputTest extends BaseTestCase
         setParameter(OPT_STRING, stringField);
     }
     
-    private static class TestForm extends DefaultForm
+    private static class TestForm extends GenericForm
     {
         @SuppressWarnings("unchecked")
         public TestForm()

@@ -16,11 +16,11 @@ import org.jreform.exceptions.DuplicateNameException;
  * 
  * @author armandino (at) gmail.com
  */
-public class DefaultForm extends AbstractInputCollection implements Form
+public class GenericForm extends AbstractInputCollection implements Form
 {
     private final Map<String,Group> groups;
     
-    public DefaultForm()
+    public GenericForm()
     {
         groups = new HashMap<String,Group>();
     }
@@ -94,7 +94,7 @@ public class DefaultForm extends AbstractInputCollection implements Form
 
     private Group addNewGroup(String name, boolean isRequired)
     {
-        Group group = new DefaultGroup(name, isRequired);
+        Group group = new GenericGroup(name, isRequired);
         addGroup(group);
         return group;
     }

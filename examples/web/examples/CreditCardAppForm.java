@@ -7,16 +7,16 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.Group;
-import org.jreform.impl.DefaultForm;
-import org.jreform.impl.Types;
+import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
 import org.jreform.inputs.Radio;
 import org.jreform.inputs.Select;
+import org.jreform.types.Types;
 
 /**
  * A credit card application form.
  */
-public class CreditCardAppForm extends DefaultForm
+public class CreditCardAppForm extends GenericForm
 {
     private static final EmploymentStatusDataType employmentType =
         new EmploymentStatusDataType();
