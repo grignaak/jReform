@@ -81,5 +81,22 @@ public class DefaultForm extends AbstractInputCollection implements Form
                 getErrors().addAll(group.getErrors());
         }
     }
+
+    protected final Group requiredGroup(String name)
+    {
+        return addNewGroup(name, true);
+    }
+
+    protected final Group optionalGroup(String name)
+    {
+        return addNewGroup(name, false);
+    }
+
+    private Group addNewGroup(String name, boolean isRequired)
+    {
+        Group group = new DefaultGroup(name, isRequired);
+        addGroup(group);
+        return group;
+    }
     
 }

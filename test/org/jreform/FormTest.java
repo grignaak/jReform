@@ -1,7 +1,8 @@
 package org.jreform;
 
 import org.jreform.exceptions.UndefinedInputControlException;
-import org.jreform.impl.HtmlFormSupport;
+import org.jreform.impl.DefaultForm;
+import org.jreform.impl.Types;
 
 public class FormTest extends BaseTestCase
 {
@@ -16,7 +17,7 @@ public class FormTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlFormSupport getForm()
+    protected Form getForm()
     {
         return form;
     }
@@ -30,13 +31,13 @@ public class FormTest extends BaseTestCase
         } catch(UndefinedInputControlException e) {}
     }
     
-    private static class TestForm extends HtmlFormSupport
+    private static class TestForm extends DefaultForm
     {
         public TestForm()
         {
-            input(stringType(), STRING_INPUT).optional();
-            input(intType(), INT_INPUT).optional();
-            multiCheckbox(intType(), INT_MULTI_INPUT).optional();
+            input(Types.stringType(), STRING_INPUT).optional();
+            input(Types.intType(), INT_INPUT).optional();
+            multiCheckbox(Types.intType(), INT_MULTI_INPUT).optional();
         }
     }
 

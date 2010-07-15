@@ -2,7 +2,6 @@ package org.jreform;
 
 import junit.framework.TestCase;
 
-import org.jreform.impl.AbstractInputCollection;
 import org.jreform.util.HttpServletRequestStub;
 
 
@@ -16,7 +15,7 @@ abstract class BaseTestCase extends TestCase
         init();
     }
     
-    protected abstract AbstractInputCollection getForm();
+    protected abstract Form getForm();
     protected void init() {}
     protected void destroy() {}
     

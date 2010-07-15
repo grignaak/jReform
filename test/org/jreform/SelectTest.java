@@ -1,6 +1,7 @@
 package org.jreform;
 
-import org.jreform.impl.HtmlFormSupport;
+import org.jreform.impl.DefaultForm;
+import org.jreform.impl.Types;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Select;
 
@@ -16,7 +17,7 @@ public class SelectTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlFormSupport getForm()
+    protected Form getForm()
     {
         return form;
     }
@@ -64,15 +65,15 @@ public class SelectTest extends BaseTestCase
         assertTrue(form.hotels().getSelectedKeys().contains("two"));
     }
     
-    private static class TestForm extends HtmlFormSupport
+    private static class TestForm extends DefaultForm
     {
         public TestForm()
         {
             // required
-            select(stringType(), COUNTRY);
+            select(Types.stringType(), COUNTRY);
             
             // optional multi select
-            multiSelect(stringType(), HOTELS).optional();
+            multiSelect(Types.stringType(), HOTELS).optional();
         }
         
         public Select<String> country()

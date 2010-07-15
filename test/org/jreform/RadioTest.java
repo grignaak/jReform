@@ -3,7 +3,8 @@ package org.jreform;
 import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.acceptString;
 
-import org.jreform.impl.HtmlFormSupport;
+import org.jreform.impl.DefaultForm;
+import org.jreform.impl.Types;
 import org.jreform.inputs.Radio;
 
 public class RadioTest extends BaseTestCase
@@ -21,7 +22,7 @@ public class RadioTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlFormSupport getForm()
+    protected Form getForm()
     {
         return form;
     }
@@ -114,17 +115,17 @@ public class RadioTest extends BaseTestCase
     }
 
     
-    private static class TestForm extends HtmlFormSupport
+    private static class TestForm extends DefaultForm
     {
         @SuppressWarnings("unchecked")
         public TestForm()
         {
             // required
-            radio(stringType(), SUBSCRIBE, acceptString("yes", "no").ignoreCase())
+            radio(Types.stringType(), SUBSCRIBE, acceptString("yes", "no").ignoreCase())
                     .onError(SUBSCRIBE_ERROR_MSG);
             
             // optional
-            radio(charType(), GENDER, accept('M', 'F')).optional()
+            radio(Types.charType(), GENDER, accept('M', 'F')).optional()
                     .onError(GENDER_ERROR_MSG);
         }
         

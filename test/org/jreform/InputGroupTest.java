@@ -3,9 +3,9 @@ package org.jreform;
 import static org.jreform.criteria.Criteria.emailAddress;
 import static org.jreform.types.StringType.stringType;
 
-import org.jreform.Group;
 import org.jreform.exceptions.DuplicateNameException;
-import org.jreform.impl.HtmlFormSupport;
+import org.jreform.impl.DefaultForm;
+import org.jreform.impl.Types;
 import org.jreform.inputs.Input;
 
 public class InputGroupTest extends BaseTestCase
@@ -33,7 +33,7 @@ public class InputGroupTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlFormSupport getForm()
+    protected DefaultForm getForm()
     {
         return form;
     }
@@ -197,24 +197,24 @@ public class InputGroupTest extends BaseTestCase
         setParameter(WEIGHT_LB, lb);
     }
     
-    private static class TestForm extends HtmlFormSupport
+    private static class TestForm extends DefaultForm
     {
         @SuppressWarnings("unchecked")
         public TestForm()
         {
             Group contact = requiredGroup(CONTACT);
-            contact.input(stringType(), SURNAME);
-            contact.input(stringType(), PHONE);
-            contact.input(stringType(), EMAIL, emailAddress()).optional();
+            contact.input(Types.stringType(), SURNAME);
+            contact.input(Types.stringType(), PHONE);
+            contact.input(Types.stringType(), EMAIL, emailAddress()).optional();
             
             Group metric = optionalGroup(METRIC);
-            metric.input(doubleType(), HEIGHT_M);
-            metric.input(intType(), WEIGHT_KG);
+            metric.input(Types.doubleType(), HEIGHT_M);
+            metric.input(Types.intType(), WEIGHT_KG);
             
             Group imperial = optionalGroup(IMPERIAL);
-            imperial.input(intType(), HEIGHT_FT);
-            imperial.input(intType(), HEIGHT_IN);
-            imperial.input(intType(), WEIGHT_LB);
+            imperial.input(Types.intType(), HEIGHT_FT);
+            imperial.input(Types.intType(), HEIGHT_IN);
+            imperial.input(Types.intType(), WEIGHT_LB);
             
             try
             {

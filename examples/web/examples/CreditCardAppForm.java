@@ -7,7 +7,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.Group;
-import org.jreform.impl.HtmlFormSupport;
+import org.jreform.impl.DefaultForm;
+import org.jreform.impl.Types;
 import org.jreform.inputs.Input;
 import org.jreform.inputs.Radio;
 import org.jreform.inputs.Select;
@@ -15,7 +16,7 @@ import org.jreform.inputs.Select;
 /**
  * A credit card application form.
  */
-public class CreditCardAppForm extends HtmlFormSupport
+public class CreditCardAppForm extends DefaultForm
 {
     private static final EmploymentStatusDataType employmentType =
         new EmploymentStatusDataType();
@@ -32,33 +33,33 @@ public class CreditCardAppForm extends HtmlFormSupport
     {
         this.request = request;
         
-        radio(stringType(), "title");
-        input(stringType(), "firstName");
-        input(stringType(), "lastName");
-        input(dateType("dd-MM-yyyy"), "dob");
+        radio(Types.stringType(), "title");
+        input(Types.stringType(), "firstName");
+        input(Types.stringType(), "lastName");
+        input(Types.dateType("dd-MM-yyyy"), "dob");
         
-        input(stringType(), "address");
-        input(stringType(), "city");
-        radio(stringType(), "ownOrRent");
-        input(stringType(), "email", emailAddress());
-        input(stringType(), "phoneNumber");
+        input(Types.stringType(), "address");
+        input(Types.stringType(), "city");
+        radio(Types.stringType(), "ownOrRent");
+        input(Types.stringType(), "email", emailAddress());
+        input(Types.stringType(), "phoneNumber");
 
         // uses a custom InputDataType
         select(employmentType, "employmentStatus");
         
         Group employer = optionalGroup("employer");
-        employer.input(stringType(), "company");
-        employer.input(stringType(), "businessPhoneNumber");
+        employer.input(Types.stringType(), "company");
+        employer.input(Types.stringType(), "businessPhoneNumber");
         
-        radio(booleanType(), "hasAccountWithUs");
+        radio(Types.booleanType(), "hasAccountWithUs");
 
         Group account = optionalGroup("accountDetails");
-        account.select(stringType(), "accountType");
-        account.input(intType(), "accountNumber");
-        account.input(intType(), "branchNumber");
+        account.select(Types.stringType(), "accountType");
+        account.input(Types.intType(), "accountNumber");
+        account.input(Types.intType(), "branchNumber");
 
-        input(intType(), "monthlyIncome");
-        input(intType(), "monthlyExpenses");
+        input(Types.intType(), "monthlyIncome");
+        input(Types.intType(), "monthlyExpenses");
 
     }
 

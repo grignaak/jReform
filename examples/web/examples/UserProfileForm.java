@@ -5,13 +5,14 @@ import static org.jreform.criteria.Criteria.length;
 import static org.jreform.criteria.Criteria.range;
 import static org.jreform.criteria.Criteria.regex;
 
-import org.jreform.impl.HtmlFormSupport;
+import org.jreform.impl.DefaultForm;
+import org.jreform.impl.Types;
 import org.jreform.inputs.Input;
 
 /**
  * User profile form.
  */
-public class UserProfileForm extends HtmlFormSupport
+public class UserProfileForm extends DefaultForm
 {
 	// Accepted format: 123-456-7890
     private static final String PHONE_FORMAT = "^\\d{3}-\\d{3}-\\d{4}$";
@@ -20,16 +21,16 @@ public class UserProfileForm extends HtmlFormSupport
     public UserProfileForm()
     {
         // A text input that must be between 5 and 32 characters long
-        input(stringType(), "fullName", length(5, 32));
+        input(Types.stringType(), "fullName", length(5, 32));
         
         // An integer field with a value between 18 and 99 inclusive
-        input(intType(), "age", range(18, 99));
+        input(Types.intType(), "age", range(18, 99));
         
         // A character field that accepts 'M' or 'F' only
-        input(charType(), "gender", accept('M', 'F'));
+        input(Types.charType(), "gender", accept('M', 'F'));
         
         // Optional phnoe number field that must match the specified regex
-        input(stringType(), "phone", regex(PHONE_FORMAT)).optional();
+        input(Types.stringType(), "phone", regex(PHONE_FORMAT)).optional();
     }
     
     /*

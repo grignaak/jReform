@@ -1,6 +1,7 @@
 package org.jreform;
 
-import org.jreform.impl.HtmlFormSupport;
+import org.jreform.impl.DefaultForm;
+import org.jreform.impl.Types;
 import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.MultiCheckbox;
 
@@ -17,7 +18,7 @@ public class CheckboxTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlFormSupport getForm()
+    protected Form getForm()
     {
         return form;
     }
@@ -91,18 +92,18 @@ public class CheckboxTest extends BaseTestCase
         assertTrue(form.choices().getCheckedKeys().contains("two"));
     }
 
-    private static class TestForm extends HtmlFormSupport
+    private static class TestForm extends DefaultForm
     {
         public TestForm()
         {
             // always optional
-            checkbox(stringType(), SUBSCRIBE);
+            checkbox(Types.stringType(), SUBSCRIBE);
             
             // required multi checkbox
-            multiCheckbox(stringType(), CHOICES);
+            multiCheckbox(Types.stringType(), CHOICES);
             
             // optional multi checkbox
-            multiCheckbox(intType(), OPT_CHOICES).optional();
+            multiCheckbox(Types.intType(), OPT_CHOICES).optional();
         }
         
         public Checkbox<String> subscribe()

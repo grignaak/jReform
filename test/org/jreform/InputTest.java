@@ -3,7 +3,8 @@ package org.jreform;
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
-import org.jreform.impl.HtmlFormSupport;
+import org.jreform.impl.DefaultForm;
+import org.jreform.impl.Types;
 import org.jreform.inputs.Input;
 
 //
@@ -33,7 +34,7 @@ public class InputTest extends BaseTestCase
         form = new TestForm();
     }
     
-    protected HtmlFormSupport getForm()
+    protected DefaultForm getForm()
     {
         return form;
     }
@@ -151,18 +152,18 @@ public class InputTest extends BaseTestCase
         setParameter(OPT_STRING, stringField);
     }
     
-    private static class TestForm extends HtmlFormSupport
+    private static class TestForm extends DefaultForm
     {
         @SuppressWarnings("unchecked")
         public TestForm()
         {
             // required and optional fields with criteria
-            input(intType(), REQ_INT, range(MIN, MAX));
-            input(stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
+            input(Types.intType(), REQ_INT, range(MIN, MAX));
+            input(Types.stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
             
             // required and optional fields without criteria
-            input(stringType(), REQ_STRING);
-            input(intType(), OPT_INT).optional();
+            input(Types.stringType(), REQ_STRING);
+            input(Types.intType(), OPT_INT).optional();
         }
         
         public Input<Integer> requiredInt()
