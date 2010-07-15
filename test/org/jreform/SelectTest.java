@@ -1,12 +1,8 @@
 package org.jreform;
 
-import static org.jreform.inputs.SelectableState.SELECTED;
-import static org.jreform.inputs.SelectableState.UNSELECTED;
-
 import org.jreform.impl.HtmlFormSupport;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Select;
-import org.jreform.inputs.SelectableState;
 
 public class SelectTest extends BaseTestCase
 {
@@ -45,10 +41,10 @@ public class SelectTest extends BaseTestCase
         
         // TODO test that this parses things properly
         assertEquals(england, form.country().getValue());
-        assertEquals(form.hotels().getState().get(claridges), SELECTED);
-        assertEquals(form.hotels().getState().get(fawlty), SELECTED);
+        assertTrue(form.hotels().getSelectedKeys().contains(claridges));
+        assertTrue(form.hotels().getSelectedKeys().contains(fawlty));
         
-        assertEquals(form.hotels().getState().get("unknown"), UNSELECTED);
+        assertFalse(form.hotels().getSelectedKeys().contains("unknown"));
         
         assertEquals(form.country().getValue(), england);
         assertEquals(form.hotels().getValues().get(0), claridges);
@@ -64,8 +60,8 @@ public class SelectTest extends BaseTestCase
         assertEquals("country", form.country().getValue());
         
         form.hotels().setValueAttributes(new String[] {"one", "two"});
-        assertEquals(SelectableState.SELECTED, form.hotels().getState().get("one"));
-        assertEquals(SelectableState.SELECTED, form.hotels().getState().get("two"));
+        assertTrue(form.hotels().getSelectedKeys().contains("one"));
+        assertTrue(form.hotels().getSelectedKeys().contains("two"));
     }
     
     private static class TestForm extends HtmlFormSupport

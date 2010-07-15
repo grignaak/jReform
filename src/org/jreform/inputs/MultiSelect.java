@@ -1,41 +1,25 @@
 package org.jreform.inputs;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
-import org.jreform.util.DefaultValueMap;
 
 /**
  * @author armandino (at) gmail.com
  */
 public class MultiSelect<T> extends BasicMultiInput<T>
-{
-    private Map<String, SelectableState> stateMap;
-    
+{   
     public MultiSelect(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
-        
-        stateMap = new DefaultValueMap<String, SelectableState>(
-                new HashMap<String, SelectableState>(),
-                SelectableState.UNSELECTED);
     }
     
-    @Override
-    public void setValueAttributes(String[] input)
+    public Set<String> getSelectedKeys()
     {
-        super.setValueAttributes(input);
-        for(String value : getValueAttributes())
-        {
-            stateMap.put(value, SelectableState.SELECTED);
-        }
-    }
-    
-    public Map<String, SelectableState> getState()
-    {
-        return stateMap;
+        return new HashSet<String>(Arrays.asList(getValueAttributes()));
     }
     
 }

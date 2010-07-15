@@ -1,15 +1,11 @@
 package org.jreform.inputs;
 
-import static org.jreform.inputs.CheckableState.CHECKED;
-import static org.jreform.inputs.CheckableState.UNCHECKED;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
 
 public class Checkbox<T> extends BasicInput<T>
 {
+    // TODO map the valueAttributes to two different values
     public Checkbox(InputDataType<T> type, String name, Criterion<T>...criteria)
     {
         super(type, name, criteria);
@@ -17,18 +13,8 @@ public class Checkbox<T> extends BasicInput<T>
         setRequired(false); // single checkbox always optional
     }
     
-    /**
-     * A checkbox is always valid (and optional) since its value is
-     * <code>null</code> when it's submitted unchecked.
-     */
-    public final boolean validateRequest(HttpServletRequest req)
+    public boolean isSelected()
     {
-        return super.validateRequest(req);
+        return !getValueAttribute().isEmpty();
     }
-    
-    public CheckableState getState()
-    {
-        return "".equals(getValueAttribute()) ? UNCHECKED : CHECKED;
-    }
-    
 }

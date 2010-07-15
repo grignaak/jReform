@@ -2,11 +2,8 @@ package org.jreform;
 
 import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.acceptString;
-import static org.jreform.inputs.CheckableState.CHECKED;
-import static org.jreform.inputs.CheckableState.UNCHECKED;
 
 import org.jreform.impl.HtmlFormSupport;
-import org.jreform.inputs.CheckableState;
 import org.jreform.inputs.Radio;
 
 public class RadioTest extends BaseTestCase
@@ -39,9 +36,6 @@ public class RadioTest extends BaseTestCase
         
         assertTrue(form.subscribe().getValueAttribute().equals(""));
         
-        assertEquals(form.subscribe().getState().get("yes"), UNCHECKED);
-        assertEquals(form.subscribe().getState().get("no"), UNCHECKED);
-        
         assertEquals(form.subscribe().getOnError(), SUBSCRIBE_ERROR_MSG);
     }
     
@@ -70,7 +64,7 @@ public class RadioTest extends BaseTestCase
         assertTrue(form.subscribe().getOnError().equals(""));
         
         assertEquals(form.subscribe().getValue(), yes);
-        assertEquals(form.subscribe().getState().get(yes), CHECKED);
+        assertEquals(yes, form.subscribe().getValue());
     }
     
     /** validation fails if optional radio button has invalid value */
@@ -109,14 +103,14 @@ public class RadioTest extends BaseTestCase
         
         assertEquals(form.gender().getValue(), validValue);
         
-        assertEquals(form.subscribe().getState().get(no), CHECKED);
-        assertEquals(form.gender().getState().get(String.valueOf(validValue)), CHECKED);
+        assertEquals(no, form.subscribe().getValue());
+        assertEquals(validValue, form.gender().getValue());
     }
     
     public void testSetValueAttributeSetsState()
     {
         form.gender().setValueAttribute("X");
-        assertEquals(CheckableState.CHECKED, form.gender().getState().get("X"));
+        assertEquals('X', form.gender().getValue());
     }
 
     

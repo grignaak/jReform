@@ -1,10 +1,6 @@
 package org.jreform;
 
-import static org.jreform.inputs.CheckableState.CHECKED;
-import static org.jreform.inputs.CheckableState.UNCHECKED;
-
 import org.jreform.impl.HtmlFormSupport;
-import org.jreform.inputs.CheckableState;
 import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.MultiCheckbox;
 
@@ -42,10 +38,11 @@ public class CheckboxTest extends BaseTestCase
         
         assertTrue(form.subscribe().getValueAttribute().equals(""));
         
-        assertTrue(form.subscribe().getState() == UNCHECKED);
+        // TODO check parsing?
+        assertFalse(form.subscribe().isSelected());
         
-        assertTrue(form.choices().getState().get(choiceOne) == CHECKED);
-        assertTrue(form.choices().getState().get(choiceTwo) == CHECKED);
+        assertTrue(form.choices().getCheckedKeys().contains(choiceOne));
+        assertTrue(form.choices().getCheckedKeys().contains(choiceTwo));
         
         assertTrue(form.choices().getValues().size() == 2);
         
@@ -78,19 +75,20 @@ public class CheckboxTest extends BaseTestCase
         
         assertTrue(validateForm());
         
-        assertTrue(form.optionalChoices().getState().get(optChoiceOne.toString()) == CHECKED);
-        assertTrue(form.optionalChoices().getState().get(optChoiceTwo.toString()) == CHECKED);
-        assertTrue(form.optionalChoices().getState().get("doesntExist") == UNCHECKED);
+        
+        assertTrue(form.optionalChoices().getCheckedKeys().contains(optChoiceTwo.toString()));
+        assertTrue(form.optionalChoices().getCheckedKeys().contains(optChoiceOne.toString()));
+        assertFalse(form.optionalChoices().getCheckedKeys().contains("doesntExist"));
     }
     
     public void testSetValueAttributeSetsState()
     {
         form.subscribe().setValueAttribute("value");
-        assertEquals(CheckableState.CHECKED, form.subscribe().getState());
+        assertTrue(form.subscribe().isSelected());
         
         form.choices().setValueAttributes(new String[] {"one", "two"});
-        assertEquals(CheckableState.CHECKED, form.choices().getState().get("one"));
-        assertEquals(CheckableState.CHECKED, form.choices().getState().get("two"));
+        assertTrue(form.choices().getCheckedKeys().contains("one"));
+        assertTrue(form.choices().getCheckedKeys().contains("two"));
     }
 
     private static class TestForm extends HtmlFormSupport
