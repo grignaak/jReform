@@ -136,7 +136,6 @@ public class InputTest extends BaseTestCase
         assertNull(form.optionalInt().getValue());
         assertEquals(form.optionalInt().getValueAttribute(), "");
         
-        assertNull(form.optionalString().getValue());
         assertEquals(form.optionalString().getValueAttribute(), "");
     }
     

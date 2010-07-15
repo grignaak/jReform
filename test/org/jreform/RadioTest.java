@@ -37,7 +37,6 @@ public class RadioTest extends BaseTestCase
         assertTrue(form.subscribe().isRequired());
         assertFalse(form.subscribe().isValid());
         
-        assertNull(form.subscribe().getValue());
         assertTrue(form.subscribe().getValueAttribute().equals(""));
         
         assertEquals(form.subscribe().getState().get("yes"), UNCHECKED);

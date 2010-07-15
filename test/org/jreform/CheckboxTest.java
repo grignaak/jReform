@@ -40,7 +40,6 @@ public class CheckboxTest extends BaseTestCase
         assertFalse("Can't be required", form.subscribe().isRequired());
         assertTrue("Always valid", form.subscribe().isValid());
         
-        assertNull(form.subscribe().getValue());
         assertTrue(form.subscribe().getValueAttribute().equals(""));
         
         assertTrue(form.subscribe().getState() == UNCHECKED);

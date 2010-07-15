@@ -82,7 +82,6 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
         }
         else
         {
-            maybeValue= getType().parseValue(valueAttribute);
             setValid(allCriteriaSatisfied(maybeValue));
             
             if(!isValid() && getOnError() == null)
@@ -95,6 +94,7 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     {
         String value = req.getParameter(getInputName());
         setValueAttribute(value);
+        maybeValue = getType().parseValue(valueAttribute);
     }
     
     public final String toString()
