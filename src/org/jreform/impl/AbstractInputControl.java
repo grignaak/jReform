@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.jreform.Criterion;
 import org.jreform.InputControl;
 import org.jreform.InputDataType;
+import org.jreform.util.Maybe;
 
 /**
  * Base class for single- and multi-value input controls.
@@ -87,6 +88,25 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
     protected final Criterion<T>[] getCriteria()
     {
         return criteria;
+    }
+
+    protected boolean allCriteriaSatisfied(Maybe<T> parsedValue)
+    {
+        if(parsedValue.isNotSo())
+            return false;
+        
+        // TODO add the ability to add all the errors to the input
+        Criterion<T>[] criteria = getCriteria();
+        for(Criterion<T> criterion : criteria)
+        {
+            if (criterion.isSatisfied(parsedValue.getValue()))
+                continue;
+            
+            setOnError(criterion.getOnError());
+            return false;
+        }
+        
+        return true;
     }
     
 }

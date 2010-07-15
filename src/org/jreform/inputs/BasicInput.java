@@ -91,25 +91,6 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
         return isValid();
     }
     
-    private boolean allCriteriaSatisfied(Maybe<T> parsedValue)
-    {
-        if(parsedValue.isNotSo())
-            return false;
-        
-        // TODO add the ability to add all the errors to the input
-        Criterion<T>[] criteria = getCriteria();
-        for(Criterion<T> criterion : criteria)
-        {
-            if (criterion.isSatisfied(parsedValue.getValue()))
-                continue;
-            
-            setOnError(criterion.getOnError());
-            return false;
-        }
-        
-        return true;
-    }
-
     public void processRequest(HttpServletRequest req)
     {
         String value = req.getParameter(getInputName());
