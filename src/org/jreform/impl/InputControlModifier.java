@@ -1,5 +1,7 @@
 package org.jreform.impl;
 
+import org.jreform.Criterion;
+
 /**
  * @author armandino (at) gmail.com
  */
@@ -22,5 +24,11 @@ public class InputControlModifier<T>
     {
         input.setOnError(message);
         return this;
+    }
+    
+    public InputControlModifier<T> criterion(Criterion<T> criterion)
+    {
+        input.addCriterion(criterion);
+        return this;   
     }
 }

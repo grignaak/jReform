@@ -154,12 +154,11 @@ public class InputTest extends BaseTestCase
     
     private static class TestForm extends GenericForm
     {
-        @SuppressWarnings("unchecked")
         public TestForm()
         {
             // required and optional fields with criteria
-            input(Types.intType(), REQ_INT, range(MIN, MAX));
-            input(Types.stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
+            input(Types.intType(), REQ_INT).criterion(range(MIN, MAX));
+            input(Types.stringType(), OPT_STRING).criterion(minLength(MIN_LENGTH)).optional();
             
             // required and optional fields without criteria
             input(Types.stringType(), REQ_STRING);

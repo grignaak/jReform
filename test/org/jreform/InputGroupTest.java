@@ -199,13 +199,14 @@ public class InputGroupTest extends BaseTestCase
     
     private static class TestForm extends GenericForm
     {
-        @SuppressWarnings("unchecked")
         public TestForm()
         {
             Group contact = requiredGroup(CONTACT);
             contact.input(Types.stringType(), SURNAME);
             contact.input(Types.stringType(), PHONE);
-            contact.input(Types.stringType(), EMAIL, emailAddress()).optional();
+            contact.input(Types.stringType(), EMAIL)
+                .criterion(emailAddress())
+                .optional();
             
             Group metric = optionalGroup(METRIC);
             metric.input(Types.doubleType(), HEIGHT_M);

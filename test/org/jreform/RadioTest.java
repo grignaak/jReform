@@ -117,16 +117,17 @@ public class RadioTest extends BaseTestCase
     
     private static class TestForm extends GenericForm
     {
-        @SuppressWarnings("unchecked")
         public TestForm()
         {
             // required
-            radio(Types.stringType(), SUBSCRIBE, acceptString("yes", "no").ignoreCase())
-                    .onError(SUBSCRIBE_ERROR_MSG);
+            radio(Types.stringType(), SUBSCRIBE)
+                .criterion(acceptString("yes", "no").ignoreCase())
+                .onError(SUBSCRIBE_ERROR_MSG);
             
             // optional
-            radio(Types.charType(), GENDER, accept('M', 'F')).optional()
-                    .onError(GENDER_ERROR_MSG);
+            radio(Types.charType(), GENDER)
+                .criterion(accept('M', 'F')).optional()
+                .onError(GENDER_ERROR_MSG);
         }
         
         public Radio<String> subscribe()

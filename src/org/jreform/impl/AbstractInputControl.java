@@ -1,5 +1,7 @@
 package org.jreform.impl;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.Criterion;
@@ -65,6 +67,13 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
             messageOnError = message;
     }
     
+    public final void addCriterion(Criterion<T> criterion)
+    {
+        // TODO make this a list
+        criteria = Arrays.copyOf(criteria, criteria.length + 1);
+        criteria[criteria.length - 1] = criterion;
+    }
+    
     public final boolean isRequired()
     {
         return isRequired;
@@ -107,5 +116,4 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         
         return true;
     }
-    
 }

@@ -171,12 +171,11 @@ public class MultiInputTest extends BaseTestCase
     
     private static class TestForm extends GenericForm
     {
-        @SuppressWarnings("unchecked")
         public TestForm()
         {
             // required and optional fields with criteria
-            multiSelect(Types.intType(), REQ_INT, range(MIN, MAX));
-            multiCheckbox(Types.stringType(), OPT_STRING, minLength(MIN_LENGTH)).optional();
+            multiSelect(Types.intType(), REQ_INT).criterion(range(MIN, MAX));
+            multiCheckbox(Types.stringType(), OPT_STRING).criterion(minLength(MIN_LENGTH)).optional();
             
             // required and optional fields without criteria
             multiCheckbox(Types.stringType(), REQ_STRING);

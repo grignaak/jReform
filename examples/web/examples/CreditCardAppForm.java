@@ -28,7 +28,6 @@ public class CreditCardAppForm extends GenericForm
         // default no-arg contructor
     }
     
-    @SuppressWarnings("unchecked")
     public CreditCardAppForm(HttpServletRequest request)
     {
         this.request = request;
@@ -41,7 +40,7 @@ public class CreditCardAppForm extends GenericForm
         input(Types.stringType(), "address");
         input(Types.stringType(), "city");
         radio(Types.stringType(), "ownOrRent");
-        input(Types.stringType(), "email", emailAddress());
+        input(Types.stringType(), "email").criterion(emailAddress());
         input(Types.stringType(), "phoneNumber");
 
         // uses a custom InputDataType

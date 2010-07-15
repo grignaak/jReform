@@ -17,20 +17,19 @@ public class UserProfileForm extends GenericForm
 	// Accepted format: 123-456-7890
     private static final String PHONE_FORMAT = "^\\d{3}-\\d{3}-\\d{4}$";
     
-    @SuppressWarnings("unchecked")
     public UserProfileForm()
     {
         // A text input that must be between 5 and 32 characters long
-        input(Types.stringType(), "fullName", length(5, 32));
+        input(Types.stringType(), "fullName").criterion(length(5, 32));
         
         // An integer field with a value between 18 and 99 inclusive
-        input(Types.intType(), "age", range(18, 99));
+        input(Types.intType(), "age").criterion(range(18, 99));
         
         // A character field that accepts 'M' or 'F' only
-        input(Types.charType(), "gender", accept('M', 'F'));
+        input(Types.charType(), "gender").criterion(accept('M', 'F'));
         
         // Optional phnoe number field that must match the specified regex
-        input(Types.stringType(), "phone", regex(PHONE_FORMAT)).optional();
+        input(Types.stringType(), "phone").criterion(regex(PHONE_FORMAT)).optional();
     }
     
     /*
