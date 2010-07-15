@@ -53,12 +53,15 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         this.valueAttributes = input == null ?
                 Collections.<String>emptyList()
                 : Arrays.asList(input);
+        
         Iterator<String> i = valueAttributes.iterator();
         while (i.hasNext())
         {
             if (i.next() == null)
                 i.remove();
         }
+        
+        values = parseValues();
     }
     
     public final boolean isBlank()
@@ -119,8 +122,6 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     {
         String[] values = req.getParameterValues(getInputName());
         setValueAttributes(values);
-        
-        this.values = parseValues();
     }
 
     private Maybe<List<T>> parseValues()

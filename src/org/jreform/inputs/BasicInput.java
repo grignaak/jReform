@@ -47,6 +47,7 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     public void setValueAttribute(String input)
     {
         valueAttribute = input == null ? "" : input.trim();
+        maybeValue = getType().parseValue(valueAttribute);
     }
     
     public final boolean isBlank()
@@ -94,7 +95,6 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     {
         String value = req.getParameter(getInputName());
         setValueAttribute(value);
-        maybeValue = getType().parseValue(valueAttribute);
     }
     
     public final String toString()
