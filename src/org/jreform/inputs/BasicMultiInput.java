@@ -13,13 +13,14 @@ import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
 import org.jreform.impl.ValidationResult;
 import org.jreform.impl.ValueAttributeValidator;
+import org.jreform.util.Maybe;
 
 /**
  * @author armandino (at) gmail.com
  */
 public class BasicMultiInput<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
-    private List<T> values = Collections.emptyList();
+    private Maybe<List<T>> values = Maybe.not();
     private List<String> valueAttributes = Collections.emptyList();
     
     protected BasicMultiInput(InputDataType<T> type, String name, Criterion<T>...criteria)
@@ -32,12 +33,12 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
      */
     public final List<T> getValues()
     {
-        return values;
+        return values.getValue();
     }
     
     public final void setValues(List<T> value)
     {
-        this.values = value;
+        this.values = Maybe.soUnlessNull(value);
     }
     
     /**
@@ -45,6 +46,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
      */
     public final String[] getValueAttributes()
     {
+        // TODO make this return the list
         return valueAttributes.toArray(new String[0]);
     }
     
@@ -73,7 +75,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     public String getStringValue()
     {
-        return values.toString();
+        return values.getValue().toString();
     }
     
     @Deprecated
@@ -111,16 +113,12 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     private boolean isValidInput(List<String> valueAttributes)
     {
         boolean allValid = true;
-        List<T> parsedValues = new ArrayList<T>(valueAttributes.size());
         ValueAttributeValidator<T> validator = new ValueAttributeValidator<T>(this);
         
         // parse in all values even if they don't satisfy the criteria
         for(String valueAttribute : valueAttributes)
         {
             ValidationResult<T> result = validator.validate(valueAttribute);
-            
-            if(result.getParsedValue().isSo())
-                parsedValues.add(result.getParsedValue().getValue());
             
             if(!result.isValid())
             {
@@ -129,9 +127,6 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
                 break;
             }
         }
-        
-        values = parsedValues;
-        
         return allValid;
     }
 
@@ -139,6 +134,24 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     {
         String[] values = req.getParameterValues(getInputName());
         setValueAttributes(values);
+        
+        this.values = parseValues();
+    }
+
+    private Maybe<List<T>> parseValues()
+    {
+        List<T> parsedValues = new ArrayList<T>();
+        for (String attributeValue : getValueAttributes())
+        {
+            Maybe<T> parsedValue = getType().parseValue(attributeValue);
+            
+            if (parsedValue.isNotSo())
+                return Maybe.not();
+            
+            parsedValues.add(parsedValue.getValue());
+        }
+        
+        return Maybe.soUnlessNull(parsedValues);
     }
     
     public final String toString()

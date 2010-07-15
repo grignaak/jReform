@@ -61,6 +61,7 @@ public class CheckboxTest extends BaseTestCase
         assertTrue(form.choices().isRequired());
         assertFalse(form.choices().isValid());
         
+        // TODO have this throw
         assertTrue(form.choices().getValues().isEmpty());
         assertTrue(form.choices().getValueAttributes().length == 0);
     }
