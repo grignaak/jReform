@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.jreform.Criterion;
 import org.jreform.InputDataType;
 import org.jreform.impl.AbstractInputControl;
-import org.jreform.impl.ValidationResult;
-import org.jreform.impl.ValueAttributeValidator;
 import org.jreform.util.Maybe;
 
 /**
@@ -67,7 +65,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     {
         for(String valueAttribute : valueAttributes)
         {
-            if(valueAttribute != null && !valueAttribute.equals(""))
+            if(!valueAttribute.isEmpty())
                 return false;
         }
         return true;
@@ -88,46 +86,33 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     public boolean validate()
     {
-        boolean isValid = false;
-
+        boolean isValid = false;  
         if (!valueAttributes.isEmpty())
-        {
-            isValid = isValidInput(valueAttributes);
-        }
+            isValid = isValidInput();
+        else if (!isRequired())
+            isValid = true;
         else
-        {
-            if (!isRequired())
-            {
-                isValid = true;
-            }
-            else
-            {
-                setOnError("Invalid or missing value");
-            }
-        }
+            setOnError("Invalid or missing value");
 
         setValid(isValid);
         return isValid;
     }
     
-    private boolean isValidInput(List<String> valueAttributes)
+    private boolean isValidInput()
     {
-        boolean allValid = true;
-        ValueAttributeValidator<T> validator = new ValueAttributeValidator<T>(this);
-        
-        // parse in all values even if they don't satisfy the criteria
-        for(String valueAttribute : valueAttributes)
+        if (values.isNotSo())
         {
-            ValidationResult<T> result = validator.validate(valueAttribute);
-            
-            if(!result.isValid())
-            {
-                allValid = false;
-                setOnError(result.getErrorMessage());
-                break;
-            }
+            setOnError("Invalid or missing value");
+            return false; 
         }
-        return allValid;
+        
+        for (T value : values.getValue())
+        {
+            if (!allCriteriaSatisfied(Maybe.soUnlessNull(value)))
+                return false;
+        }
+        
+        return true;
     }
 
     public void processRequest(HttpServletRequest req)
