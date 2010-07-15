@@ -43,11 +43,11 @@ public class SelectTest extends BaseTestCase
         assertFalse(form.hotels().isRequired());
         assertTrue(form.hotels().isValid());
         
-        assertEquals(form.country().getState().get(england), SELECTED);
+        // TODO test that this parses things properly
+        assertEquals(england, form.country().getValue());
         assertEquals(form.hotels().getState().get(claridges), SELECTED);
         assertEquals(form.hotels().getState().get(fawlty), SELECTED);
         
-        assertEquals(form.country().getState().get("unknown"), UNSELECTED);
         assertEquals(form.hotels().getState().get("unknown"), UNSELECTED);
         
         assertEquals(form.country().getValue(), england);
@@ -61,7 +61,7 @@ public class SelectTest extends BaseTestCase
     public void testSetValueAttributeSetsState()
     {
         form.country().setValueAttribute("country");
-        assertEquals(SelectableState.SELECTED, form.country().getState().get("country"));
+        assertEquals("country", form.country().getValue());
         
         form.hotels().setValueAttributes(new String[] {"one", "two"});
         assertEquals(SelectableState.SELECTED, form.hotels().getState().get("one"));
