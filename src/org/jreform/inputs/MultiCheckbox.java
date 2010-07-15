@@ -7,7 +7,7 @@ import org.jreform.Criterion;
 import org.jreform.InputDataType;
 import org.jreform.util.DefaultValueMap;
 
-public class MultiCheckbox<T> extends BasicMultiInput<T> implements MultiInput<T>
+public class MultiCheckbox<T> extends BasicMultiInput<T>
 {
     private Map<String, CheckableState> stateMap;
     

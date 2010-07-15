@@ -10,7 +10,7 @@ import org.jreform.util.DefaultValueMap;
 /**
  * @author armandino (at) gmail.com
  */
-public class Radio<T> extends BasicInput<T> implements Input<T>
+public class Radio<T> extends BasicInput<T>
 {
     private Map<String, CheckableState> stateMap;
     

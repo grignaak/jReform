@@ -120,8 +120,8 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
 
     public void processRequest(HttpServletRequest req)
     {
-        String[] values = req.getParameterValues(getInputName());
-        setValueAttributes(values);
+        String[] parameterValues = req.getParameterValues(getInputName());
+        setValueAttributes(parameterValues);
     }
 
     private Maybe<List<T>> parseValues()

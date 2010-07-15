@@ -96,7 +96,6 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
             return false;
         
         // TODO add the ability to add all the errors to the input
-        Criterion<T>[] criteria = getCriteria();
         for(Criterion<T> criterion : criteria)
         {
             if (criterion.isSatisfied(parsedValue.getValue()))

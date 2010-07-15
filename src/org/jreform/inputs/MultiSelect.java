@@ -10,7 +10,7 @@ import org.jreform.util.DefaultValueMap;
 /**
  * @author armandino (at) gmail.com
  */
-public class MultiSelect<T> extends BasicMultiInput<T> implements MultiInput<T>
+public class MultiSelect<T> extends BasicMultiInput<T>
 {
     private Map<String, SelectableState> stateMap;
     
