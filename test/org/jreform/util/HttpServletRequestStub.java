@@ -150,6 +150,7 @@ public class HttpServletRequestStub implements HttpServletRequest
         return false;
     }
 
+    @Deprecated
     public boolean isRequestedSessionIdFromUrl()
     {
         return false;
@@ -240,6 +241,7 @@ public class HttpServletRequestStub implements HttpServletRequest
         return null;
     }
 
+    @Deprecated
     public String getRealPath(String arg0)
     {
         return null;

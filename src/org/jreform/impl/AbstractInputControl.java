@@ -7,8 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.jreform.Criterion;
 import org.jreform.InputControl;
 import org.jreform.InputDataType;
