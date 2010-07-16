@@ -1,14 +1,9 @@
 package org.jreform.types;
 
-import org.jreform.InputDataType;
 import org.jreform.util.ParsedValue;
 
-public final class IntType implements InputDataType<Integer>
+public final class IntType extends AbstractType<Integer>
 {
-    private static final IntType type = new IntType();
-    
-    private IntType() {}
-    
     public ParsedValue<Integer> parseValue(String value)
     {
         try
@@ -30,10 +25,4 @@ public final class IntType implements InputDataType<Integer>
     {
         return getInputDataClass().getName();
     }
-    
-    public static InputDataType<Integer> intType()
-    {
-        return type;
-    }
-    
 }

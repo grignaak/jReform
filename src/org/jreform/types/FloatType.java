@@ -1,14 +1,9 @@
 package org.jreform.types;
 
-import org.jreform.InputDataType;
 import org.jreform.util.ParsedValue;
 
-public final class FloatType implements InputDataType<Float>
+public final class FloatType extends AbstractType<Float>
 {
-    private static final FloatType type = new FloatType();
-    
-    private FloatType() {}
-    
     public ParsedValue<Float> parseValue(String value)
     {
         try
@@ -29,11 +24,6 @@ public final class FloatType implements InputDataType<Float>
     public String toString()
     {
         return getInputDataClass().getName();
-    }
-    
-    public static InputDataType<Float> floatType()
-    {
-        return type;
     }
     
 }

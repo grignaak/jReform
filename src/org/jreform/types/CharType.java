@@ -1,14 +1,9 @@
 package org.jreform.types;
 
-import org.jreform.InputDataType;
 import org.jreform.util.ParsedValue;
 
-public final class CharType implements InputDataType<Character>
+public final class CharType extends AbstractType<Character>
 {
-    private static final CharType type = new CharType();
-    
-    private CharType() {}
-    
     public ParsedValue<Character> parseValue(String value)
     {
         if (value.length() > 1)
@@ -28,10 +23,4 @@ public final class CharType implements InputDataType<Character>
     {
         return getInputDataClass().getName();
     }
-    
-    public static InputDataType<Character> charType()
-    {
-        return type;
-    }
-    
 }

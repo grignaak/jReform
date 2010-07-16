@@ -1,14 +1,9 @@
 package org.jreform.types;
 
-import org.jreform.InputDataType;
 import org.jreform.util.ParsedValue;
 
-public final class BooleanType implements InputDataType<Boolean>
+public final class BooleanType extends AbstractType<Boolean>
 {
-    private static final BooleanType type = new BooleanType();
-    
-    private BooleanType() {}
-    
     public ParsedValue<Boolean> parseValue(String value)
     {
         return ParsedValue.setUnlessNull(Boolean.valueOf(value));
@@ -23,10 +18,4 @@ public final class BooleanType implements InputDataType<Boolean>
     {
         return getInputDataClass().getName();
     }
-    
-    public static InputDataType<Boolean> booleanType()
-    {
-        return type;
-    }
-    
 }

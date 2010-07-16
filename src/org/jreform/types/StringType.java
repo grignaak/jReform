@@ -1,14 +1,9 @@
 package org.jreform.types;
 
-import org.jreform.InputDataType;
 import org.jreform.util.ParsedValue;
 
-public final class StringType implements InputDataType<String>
+public final class StringType extends AbstractType<String>
 {
-    private static final StringType type = new StringType();
-    
-    private StringType() {}
-    
     public ParsedValue<String> parseValue(String value)
     {
         return ParsedValue.setUnlessNull(value);
@@ -22,11 +17,6 @@ public final class StringType implements InputDataType<String>
     public String toString()
     {
         return getInputDataClass().getName();
-    }
-    
-    public static InputDataType<String> stringType()
-    {
-        return type;
     }
     
 }

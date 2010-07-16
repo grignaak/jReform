@@ -1,55 +1,52 @@
 package org.jreform.types;
 
-import java.util.Date;
-
-import org.jreform.InputDataType;
 
 public class Types
 {
 
-    public static InputDataType<Boolean> booleanType()
+    public static BooleanType booleanType()
     {
-        return BooleanType.booleanType();
+        return new BooleanType();
     }
 
-    public static InputDataType<Character> charType()
+    public static CharType charType()
     {
-        return CharType.charType();
+        return new CharType();
     }
 
-    public static InputDataType<Short> shortType()
+    public static ShortType shortType()
     {
-        return ShortType.shortType();
+        return new ShortType();
     }
 
-    public static InputDataType<Integer> intType()
+    public static IntType intType()
     {
-        return IntType.intType();
+        return new IntType();
     }
 
-    public static InputDataType<Long> longType()
+    public static LongType longType()
     {
-        return LongType.longType();
+        return new LongType();
     }
 
-    public static InputDataType<Double> doubleType()
+    public static DoubleType doubleType()
     {
-        return DoubleType.doubleType();
+        return new DoubleType();
     }
 
-    public static InputDataType<Float> floatType()
+    public static FloatType floatType()
     {
-        return FloatType.floatType();
+        return new FloatType();
     }
 
-    public static InputDataType<String> stringType()
+    public static StringType stringType()
     {
-        return StringType.stringType();
+        return new StringType();
     }
 
-    public static InputDataType<Date> dateType(String dateFormatPattern)
+    public static DateType dateType(String dateFormatPattern)
     {
-        return DateType.dateType(dateFormatPattern);
+        return new DateType(dateFormatPattern);
     }
 
 }

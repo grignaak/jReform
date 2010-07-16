@@ -5,14 +5,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.jreform.InputDataType;
 import org.jreform.util.ParsedValue;
 
-public final class DateType implements InputDataType<Date>
+public final class DateType extends AbstractType<Date>
 {
     private DateFormat dateFormat;
     
-    private DateType(String dateFormatPattern)
+    public DateType(String dateFormatPattern)
     {
         dateFormat = new SimpleDateFormat(dateFormatPattern);
         dateFormat.setLenient(false);
@@ -34,10 +33,4 @@ public final class DateType implements InputDataType<Date>
     {
         return Date.class;
     }
-    
-    public static InputDataType<Date> dateType(String dateFormatPattern)
-    {
-        return new DateType(dateFormatPattern);
-    }
-    
 }

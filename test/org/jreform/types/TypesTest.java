@@ -1,6 +1,7 @@
 package org.jreform.types;
 
-import static org.jreform.types.BooleanType.booleanType;
+import static org.jreform.types.Types.*;
+
 import junit.framework.TestCase;
 
 public class TypesTest extends TestCase
@@ -13,5 +14,11 @@ public class TypesTest extends TestCase
 		assertFalse(booleanType().parseValue(null).getValue());
 	}
 	
+	public void testShouldAcceptCustomErrorMessage()
+	{
+	    String customError = "Custom Message";
+        AbstractType<Character> charParser = charType().onError(customError);
+        assertEquals(customError, charParser.parse("Not a character").getError());
+	}
 	
 }

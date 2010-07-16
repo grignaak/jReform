@@ -1,11 +1,11 @@
 package org.jreform;
 
 import static org.jreform.criteria.Criteria.emailAddress;
-import static org.jreform.types.StringType.stringType;
 
 import org.jreform.exceptions.DuplicateNameException;
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
+import org.jreform.types.StringType;
 import org.jreform.types.Types;
 
 public class InputGroupTest extends BaseTestCase
@@ -44,7 +44,7 @@ public class InputGroupTest extends BaseTestCase
         try
         {
             // add to another group
-            form.getGroup(METRIC).input(stringType(), HEIGHT_M);
+            form.getGroup(METRIC).input(new StringType(), HEIGHT_M);
             fail("cannot add inputs with identical names");
         }
         catch(DuplicateNameException ex) { /* empty */ }
