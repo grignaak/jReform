@@ -24,11 +24,11 @@ public interface MultiInput<T> extends InputControl<T>
     /**
      * Return's this input's <tt>value</tt> attributes.
      */
-    public String[] getValueAttributes();
+    public List<String> getValueAttributes();
     
     /**
      * Sets this input's <tt>value</tt> attributes.
      */
-    public void setValueAttributes(String[] valueAttributes);
+    public void setValueAttributes(List<String> valueAttributes);
     
 }

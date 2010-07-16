@@ -1,5 +1,7 @@
 package org.jreform;
 
+import java.util.Arrays;
+
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Select;
@@ -60,7 +62,7 @@ public class SelectTest extends BaseTestCase
         form.country().setValueAttribute("country");
         assertEquals("country", form.country().getValue());
         
-        form.hotels().setValueAttributes(new String[] {"one", "two"});
+        form.hotels().setValueAttributes(Arrays.asList("one", "two"));
         assertTrue(form.hotels().getSelectedKeys().contains("one"));
         assertTrue(form.hotels().getSelectedKeys().contains("two"));
     }

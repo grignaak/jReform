@@ -52,17 +52,14 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     /**
      * Returns an array of <tt>value</tt> attributes or an empty array if none.
      */
-    public final String[] getValueAttributes()
+    public final List<String> getValueAttributes()
     {
-        // TODO make this return the list
-        return valueAttributes.toArray(new String[0]);
+        return Collections.unmodifiableList(valueAttributes);
     }
     
-    public void setValueAttributes(String[] input)
+    public void setValueAttributes(List<String> input)
     {
-        this.valueAttributes = input == null ?
-                Collections.<String>emptyList()
-                : Arrays.asList(input);
+        this.valueAttributes = new ArrayList<String>(input);
         
         Iterator<String> i = valueAttributes.iterator();
         while (i.hasNext())
@@ -121,13 +118,15 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     public void processRequest(HttpServletRequest req)
     {
         String[] parameterValues = req.getParameterValues(getInputName());
-        setValueAttributes(parameterValues);
+        if (parameterValues == null)
+            parameterValues = new String[0];
+        setValueAttributes(Arrays.asList(parameterValues));
     }
 
     private List<ParsedValue<T>> parseValues()
     {
         List<ParsedValue<T>> theRealParsedValues = new ArrayList<ParsedValue<T>>();
-        for (String attributeValue : getValueAttributes())
+        for (String attributeValue : valueAttributes)
         {
             ParsedValue<T> parsedValue = getType().parseValue(attributeValue);
             theRealParsedValues.add(parsedValue);
@@ -137,7 +136,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     public final String toString()
     {
-        return Arrays.toString(getValueAttributes());
+        return valueAttributes.toString();
     }
     
 }

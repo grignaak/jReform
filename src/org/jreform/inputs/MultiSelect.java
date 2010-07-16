@@ -1,6 +1,5 @@
 package org.jreform.inputs;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class MultiSelect<T> extends BasicMultiInput<T>
     
     public Set<String> getSelectedKeys()
     {
-        return new HashSet<String>(Arrays.asList(getValueAttributes()));
+        return new HashSet<String>(getValueAttributes());
     }
     
 }

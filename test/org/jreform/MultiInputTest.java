@@ -48,8 +48,8 @@ public class MultiInputTest extends BaseTestCase
         assertTrue(form.requiredInt().isBlank());
         assertTrue(form.requiredString().isBlank());
         
-        assertTrue(form.requiredInt().getValueAttributes().length == 0);
-        assertTrue(form.requiredString().getValueAttributes().length == 0);
+        assertTrue(form.requiredInt().getValueAttributes().isEmpty());
+        assertTrue(form.requiredString().getValueAttributes().isEmpty());
         
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.requiredString().isValid());
@@ -108,7 +108,7 @@ public class MultiInputTest extends BaseTestCase
         
         assertFalse("Criteria not satisfied", validateForm());
         
-        assertEquals(stringTooShort, form.optionalString().getValueAttributes()[0]);
+        assertEquals(stringTooShort, form.optionalString().getValueAttributes().get(0));
         assertEquals(numTooBig, form.requiredInt().getValues().get(0));
         
         assertFalse(form.requiredInt().isValid());
@@ -151,10 +151,10 @@ public class MultiInputTest extends BaseTestCase
         assertTrue(validateForm());
         
         assertTrue(form.optionalInt().getValues().isEmpty());
-        assertTrue(form.optionalInt().getValueAttributes().length == 0);
+        assertTrue(form.optionalInt().getValueAttributes().isEmpty());
         
         assertTrue(form.optionalString().getValues().isEmpty());
-        assertTrue(form.optionalString().getValueAttributes().length == 0);
+        assertTrue(form.optionalString().getValueAttributes().isEmpty());
     }
     
     private void setRequiredRequestParameters(String[] intField, String[] stringField)

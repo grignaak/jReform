@@ -1,5 +1,7 @@
 package org.jreform;
 
+import java.util.Arrays;
+
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.MultiCheckbox;
@@ -61,7 +63,7 @@ public class CheckboxTest extends BaseTestCase
         
         // TODO have this throw
         assertTrue(form.choices().getValues().isEmpty());
-        assertTrue(form.choices().getValueAttributes().length == 0);
+        assertTrue(form.choices().getValueAttributes().isEmpty());
     }
     
     public void testOptionalMultiCheckbox()
@@ -87,7 +89,7 @@ public class CheckboxTest extends BaseTestCase
         form.subscribe().setValueAttribute("value");
         assertTrue(form.subscribe().isSelected());
         
-        form.choices().setValueAttributes(new String[] {"one", "two"});
+        form.choices().setValueAttributes(Arrays.asList("one", "two"));
         assertTrue(form.choices().getCheckedKeys().contains("one"));
         assertTrue(form.choices().getCheckedKeys().contains("two"));
     }

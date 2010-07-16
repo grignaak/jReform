@@ -1,6 +1,5 @@
 package org.jreform.inputs;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +15,6 @@ public class MultiCheckbox<T> extends BasicMultiInput<T>
     // TODO better replaced by isChecked(key)
     public Set<String> getCheckedKeys()
     {
-        return new HashSet<String>(Arrays.asList(getValueAttributes()));
+        return new HashSet<String>(getValueAttributes());
     }
 }
