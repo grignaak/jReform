@@ -24,18 +24,11 @@ public abstract class AbstractCriterion<T> implements Criterion<T>
     
     public final boolean isSatisfied(T value)
     {
-        boolean isSatisfied = value != null && verify(value);
+        if (verify(value))
+            return true;
         
-        if(value == null)
-        {
-            setOnError("Please enter a valid value");
-        }
-        else if(!isSatisfied)
-        {
-            setOnError(generateErrorMessage());
-        }
-        
-        return isSatisfied;
+        setOnError(generateErrorMessage());
+        return false;
     }
     
     public final String getOnError()
