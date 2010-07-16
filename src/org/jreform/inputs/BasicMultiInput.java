@@ -15,6 +15,7 @@ import org.jreform.util.ParsedValue;
 
 /**
  * @author armandino (at) gmail.com
+ * @author michael.deardeuff (at) gmail.com
  */
 public class BasicMultiInput<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
@@ -77,14 +78,6 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     public String getStringValue()
     {
         return values.getValue().toString();
-    }
-    
-    @Deprecated
-    public boolean validateRequest(HttpServletRequest req)
-    {
-        processRequest(req);
-        return validate();
-
     }
     
     public boolean validate()

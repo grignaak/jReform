@@ -46,11 +46,6 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         this.isRequired = true;
     }
     
-    /**
-     * Validates this input's <tt>value</tt> attribute(s). 
-     */
-    public abstract boolean validateRequest(HttpServletRequest req);
-    
     public final InputDataType<T> getType()
     {
         return type;

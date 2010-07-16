@@ -4,8 +4,6 @@ import static org.jreform.criteria.Criteria.emailAddress;
 
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.jreform.Group;
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
@@ -20,18 +18,8 @@ public class CreditCardAppForm extends GenericForm
 {
     private static final EmploymentStatusDataType employmentType =
         new EmploymentStatusDataType();
-
-    private HttpServletRequest request;
-
     public CreditCardAppForm()
     {
-        // default no-arg contructor
-    }
-    
-    public CreditCardAppForm(HttpServletRequest request)
-    {
-        this.request = request;
-        
         radio(Types.stringType(), "title");
         input(Types.stringType(), "firstName");
         input(Types.stringType(), "lastName");
@@ -77,15 +65,15 @@ public class CreditCardAppForm extends GenericForm
         if(empStatus == EmploymentStatus.EMPLOYED)
         {
             employerInfo.setRequired(true);
-            employerInfo.validateRequest(request);
+            employerInfo.validate();
         }
         
         Group accountDetails = getGroup("accountDetails");
         
-        if(getHasAccountWithUs().getValue() == Boolean.TRUE)
+        if(getHasAccountWithUs().getValue())
         {
             accountDetails.setRequired(true);
-            accountDetails.validateRequest(request);
+            accountDetails.validate();
         }
     }
     

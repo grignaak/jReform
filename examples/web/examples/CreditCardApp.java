@@ -21,7 +21,7 @@ public class CreditCardApp extends HttpServlet
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException
     {
-        CreditCardAppForm form = new CreditCardAppForm(req);
+        CreditCardAppForm form = new CreditCardAppForm();
         
         if(req.getParameter("submit") != null)
         {

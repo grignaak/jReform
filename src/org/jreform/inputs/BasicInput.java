@@ -68,12 +68,6 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
         
         return value.getValue().toString();
     }
-    
-    public boolean validateRequest(HttpServletRequest req)
-    {
-        processRequest(req);
-        return validate();
-    }
 
     public boolean validate()
     {

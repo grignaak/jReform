@@ -10,21 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface HttpServletRequestValidator
 {
     /**
-     * Fills in the input using the passed in {@link HttpServletRequest} and then validates the form.
-     * 
-     * <p>This is exactly equivelent to
-     * <pre>
-     * this.processRequest(req);
-     * return this.validate();
-     * </pre>
-     * </p>
-     * 
-     * @see #processRequest(HttpServletRequest)
-     * @see #validate()
-     */
-    public boolean validateRequest(HttpServletRequest req);
-    
-    /**
      * Fills in the input using the passed in {@link HttpServletRequest}. 
      * 
      * @see #validateRequest(HttpServletRequest)
