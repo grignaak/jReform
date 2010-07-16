@@ -1,5 +1,7 @@
 package org.jreform.inputs;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.jreform.InputDataType;
@@ -77,15 +79,23 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     {
         if (valueAttribute.isEmpty())
         {
-            setValid(!isRequired());
-            setOnError("Missing value");
+            if (!isRequired())
+                setValid(true);
+            else
+            {
+                setValid(false);
+                addError("Missing value");
+            }
         }
         else
         {
-            setValid(allCriteriaSatisfied(maybeValue));
+            Set<String> criteriaErrors = getCriteriaErrors(maybeValue);
             
-            if(!isValid() && getOnError() == null)
-                setOnError("Invalid value");
+            getErrors().addAll(criteriaErrors);
+            
+            setValid(criteriaErrors.isEmpty());
+            if(!isValid())
+                addError("Invalid value");
         }
         return isValid();
     }
@@ -100,5 +110,4 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     {
         return getValueAttribute();
     }
-    
 }

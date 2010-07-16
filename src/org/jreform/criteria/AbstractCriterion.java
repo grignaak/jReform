@@ -44,8 +44,15 @@ public abstract class AbstractCriterion<T> implements Criterion<T>
         return messageOnError;
     }
     
+    @Deprecated
     public final void setOnError(String messageOnError)
     {
         this.messageOnError = messageOnError; 
+    }
+    
+    public final AbstractCriterion<T> onError(String customErrorMessage)
+    {
+        messageOnError = customErrorMessage;
+        return this;
     }
 }

@@ -1,5 +1,7 @@
 package org.jreform.inputs;
 
+import java.util.Set;
+
 import org.jreform.InputControl;
 
 /**
@@ -29,5 +31,7 @@ public interface Input<T> extends InputControl<T>
      * Sets this input's <tt>value</tt> attribute.
      */
     public void setValueAttribute(String valueAttribute);
+
+    public Set<String> getErrors();
     
 }

@@ -19,7 +19,7 @@ public class Criteria
         return new Or<T>(criteria);
     }
     
-    public static <T> Criterion<T> accept(T...values)
+    public static <T> Accept<T> accept(T...values)
     {
         return new Accept<T>(values);
     }
@@ -29,37 +29,37 @@ public class Criteria
         return new AcceptString(values);
     }
     
-    public static <T extends Comparable<T>> Criterion<T> min(T min)
+    public static <T extends Comparable<T>> Min<T> min(T min)
     {
         return new Min<T>(min);
     }
     
-    public static <T extends Comparable<T>> Criterion<T> max(T max)
+    public static <T extends Comparable<T>> Max<T> max(T max)
     {
         return new Max<T>(max);
     }
     
-    public static <T extends Comparable<T>> Criterion<T> range(T min, T max)
+    public static <T extends Comparable<T>> Range<T> range(T min, T max)
     {
         return new Range<T>(min, max);
     }
     
-    public static Criterion<String> length(int min, int max)
+    public static Length length(int min, int max)
     {
         return new Length(min, max);
     }
     
-    public static Criterion<String> exactLength(int length)
+    public static ExactLength exactLength(int length)
     {
         return new ExactLength(length);
     }
     
-    public static Criterion<String> minLength(int min)
+    public static MinLength minLength(int min)
     {
         return new MinLength(min);
     }
     
-    public static Criterion<String> maxLength(int max)
+    public static MaxLength maxLength(int max)
     {
         return new MaxLength(max);
     }

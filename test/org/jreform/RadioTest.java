@@ -37,7 +37,7 @@ public class RadioTest extends BaseTestCase
         
         assertTrue(form.subscribe().getValueAttribute().equals(""));
         
-        assertEquals(form.subscribe().getOnError(), SUBSCRIBE_ERROR_MSG);
+        assertContains(SUBSCRIBE_ERROR_MSG, form.subscribe().getErrors());
     }
     
     /** validation fails if criteria fail for required radio button */
@@ -50,7 +50,7 @@ public class RadioTest extends BaseTestCase
         assertFalse(form.subscribe().isValid());
         
         assertEquals(form.subscribe().getValue(), value);
-        assertEquals(form.subscribe().getOnError(), SUBSCRIBE_ERROR_MSG);
+        assertContains(SUBSCRIBE_ERROR_MSG, form.subscribe().getErrors());
     }
     
     /** validation passes if required radio button has a valid value */
@@ -62,7 +62,7 @@ public class RadioTest extends BaseTestCase
         
         assertTrue(validateForm());
         assertTrue(form.subscribe().isValid());
-        assertTrue(form.subscribe().getOnError().equals(""));
+        assertTrue(form.subscribe().getErrors().isEmpty());
         
         assertEquals(form.subscribe().getValue(), yes);
         assertEquals(yes, form.subscribe().getValue());
@@ -84,7 +84,7 @@ public class RadioTest extends BaseTestCase
         assertFalse(form.gender().isRequired());
         
         assertEquals(form.gender().getValue(), invalidValue);
-        assertEquals(form.gender().getOnError(), GENDER_ERROR_MSG);
+        assertContains(GENDER_ERROR_MSG, form.gender().getErrors());
     }
     
     /** validation passes when optional and required radios have valid values */
@@ -100,7 +100,7 @@ public class RadioTest extends BaseTestCase
         
         assertTrue(form.subscribe().isValid());
         assertTrue(form.gender().isValid());
-        assertTrue(form.gender().getOnError().equals(""));
+        assertTrue(form.gender().getErrors().isEmpty());
         
         assertEquals(form.gender().getValue(), validValue);
         
@@ -121,13 +121,11 @@ public class RadioTest extends BaseTestCase
         {
             // required
             radio(Types.stringType(), SUBSCRIBE)
-                .criterion(acceptString("yes", "no").ignoreCase())
-                .onError(SUBSCRIBE_ERROR_MSG);
+                .criterion(acceptString("yes", "no").ignoreCase()).onError(SUBSCRIBE_ERROR_MSG);
             
             // optional
             radio(Types.charType(), GENDER)
-                .criterion(accept('M', 'F')).optional()
-                .onError(GENDER_ERROR_MSG);
+                .criterion(accept('M', 'F')).optional().onError(GENDER_ERROR_MSG);
         }
         
         public Radio<String> subscribe()

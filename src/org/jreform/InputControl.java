@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author armandino (at) gmail.com
  * @param <T> data type of this input.
  */
-public interface InputControl<T> extends MessageOnError
+public interface InputControl<T>
 {
     /**
      * Returns this input's data type.
@@ -45,4 +45,9 @@ public interface InputControl<T> extends MessageOnError
 
     public void processRequest(HttpServletRequest req);
     public boolean validate();
+    
+    /**
+     * Sets the message to be displayed on error.
+     */
+    public void setOnError(String messageOnError);
 }

@@ -54,8 +54,8 @@ public class MultiInputTest extends BaseTestCase
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.requiredString().isValid());
         
-        assertTrue(form.requiredInt().getOnError().startsWith("Invalid or missing value"));
-        assertTrue(form.requiredString().getOnError().startsWith("Invalid or missing value"));
+        assertContains("Invalid or missing value", form.requiredInt().getErrors());
+        assertContains("Invalid or missing value", form.requiredString().getErrors());
     }
     
     /** Input fails if value can't be converted to input's type */
@@ -85,11 +85,11 @@ public class MultiInputTest extends BaseTestCase
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.optionalInt().isValid());
         
-        assertNotNull(form.requiredInt().getOnError());
-        assertNotNull(form.optionalInt().getOnError());
+        assertFalse(form.requiredInt().getErrors().isEmpty());
+        assertNotNull(form.optionalInt().getErrors().isEmpty());
         
-        assertTrue(form.requiredInt().getOnError().startsWith("Invalid or missing value"));
-        assertTrue(form.optionalInt().getOnError().startsWith("Invalid or missing value"));
+        assertContains("Invalid or missing value", form.requiredInt().getErrors());
+        assertContains("Invalid or missing value", form.optionalInt().getErrors());
     }
     
     /** Field fails if criteria are not satisfied */
@@ -116,8 +116,8 @@ public class MultiInputTest extends BaseTestCase
         assertTrue(form.optionalInt().isValid());
         assertTrue(form.requiredString().isValid());
         
-        assertTrue(form.requiredInt().getOnError().equals(
-                "The value must be between " + MIN + " and " + MAX));
+        assertContains("The value must be between " + MIN + " and " + MAX,
+                form.requiredInt().getErrors());
     }
 
     /** Required input passes with a valid value */

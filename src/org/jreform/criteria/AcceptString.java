@@ -1,6 +1,5 @@
 package org.jreform.criteria;
 
-import org.jreform.Criterion;
 
 /**
  * Checks if string is equal to one of the passed in strings.
@@ -27,7 +26,7 @@ public final class AcceptString extends Accept<String>
     /**
      * Specifies string comparison to be case-insensitive. 
      */
-    public Criterion<String> ignoreCase()
+    public AcceptString ignoreCase()
     {
         caseSensitive = false;
         return this;

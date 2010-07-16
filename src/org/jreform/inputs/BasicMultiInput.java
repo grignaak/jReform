@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -94,7 +95,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         else if (!isRequired())
             isValid = true;
         else
-            setOnError("Invalid or missing value");
+            addError("Invalid or missing value");
 
         setValid(isValid);
         return isValid;
@@ -104,17 +105,22 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     {
         if (values.isNotParsed())
         {
-            setOnError("Invalid or missing value");
+            addError("Invalid or missing value");
             return false; 
         }
         
+        boolean isValid = true;
         for (T value : values.getValue())
         {
-            if (!allCriteriaSatisfied(ParsedValue.setUnlessNull(value)))
-                return false;
+            Set<String> criteriaErrors = getCriteriaErrors(ParsedValue.setUnlessNull(value));
+            if (!criteriaErrors.isEmpty())
+            {
+                getErrors().addAll(criteriaErrors);
+                isValid = false;
+            }
         }
         
-        return true;
+        return isValid;
     }
 
     public void processRequest(HttpServletRequest req)

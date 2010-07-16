@@ -1,5 +1,7 @@
 package org.jreform;
 
+import java.util.Collection;
+
 import junit.framework.TestCase;
 
 import org.jreform.util.HttpServletRequestStub;
@@ -32,6 +34,12 @@ abstract class BaseTestCase extends TestCase
     protected void setParameters(String key, String[] values)
     {
         req.setParameterValues(key, values);
+    }
+    
+    protected static <T> void assertContains(T thing, Collection<? super T> things)
+    {
+        assertTrue(things + " does not contain " + thing,
+                things.contains(thing));
     }
     
 }

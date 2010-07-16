@@ -1,7 +1,10 @@
 package org.jreform.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,15 +18,18 @@ import org.jreform.util.ParsedValue;
  * Validation rules are implemented by subclasses.
  * 
  * @author armandino (at) gmail.com
+ * @author michael.deardeuff (at) gmail.com
  */
 public abstract class AbstractInputControl<T> implements InputControl<T>
 {
     private InputDataType<T> type;
     private String name;
-    private String messageOnError;
     private boolean isRequired;
     private boolean isValid;
     private List<Criterion<T>> criteria = new ArrayList<Criterion<T>>();
+    
+    private Set<String> errors = new LinkedHashSet<String>();
+    private String customErrorMessage;
     
     /**
      * Constructor.
@@ -56,15 +62,9 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         return name;
     }
     
-    public final String getOnError()
-    {
-        return isValid() ? "" : messageOnError;
-    }
-    
     public final void setOnError(String message)
     {
-        if(messageOnError == null)
-            messageOnError = message;
+        customErrorMessage = message;
     }
     
     public final void addCriterion(Criterion<T> criterion)
@@ -92,21 +92,36 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         this.isValid = isValid;
     }
 
-    protected boolean allCriteriaSatisfied(ParsedValue<T> parsedValue)
+    protected Set<String> getCriteriaErrors(ParsedValue<T> parsedValue)
     {
         if(parsedValue.isNotParsed())
-            return false;
+            return Collections.singleton(parsedValue.getError());
         
-        // TODO add the ability to add all the errors to the input
+        Set<String> localErrors = new LinkedHashSet<String>();
         for(Criterion<T> criterion : criteria)
         {
-            if (criterion.isSatisfied(parsedValue.getValue()))
-                continue;
-            
-            setOnError(criterion.getOnError());
-            return false;
+            if (!criterion.isSatisfied(parsedValue.getValue()))
+            {
+                localErrors.add(criterion.getOnError());
+                isValid = false;
+            }
         }
         
-        return true;
+        return localErrors;
     }
+    
+
+    public Set<String> getErrors()
+    {
+        return errors;
+    }
+
+    protected void addError(String error)
+    {
+        if (customErrorMessage == null)
+            errors.add(error);
+        else
+            errors.add(customErrorMessage);
+    }
+    
 }

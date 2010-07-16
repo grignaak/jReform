@@ -53,8 +53,16 @@ public class InputTest extends BaseTestCase
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.requiredString().isValid());
         
-        assertTrue(form.requiredInt().getOnError().startsWith("Missing value"));
-        assertTrue(form.requiredString().getOnError().startsWith("Missing value"));
+        assertTrue(form.requiredInt().getErrors().contains("Missing value"));
+    }
+    
+    public void testParseErrorsAreCaptured()
+    {
+        setRequiredRequestParameters("not an int", "a string");
+        setOptionalRequestParameters("also not an int", "a string");
+        assertFalse(validateForm());
+        assertContains("Invalid value", form.requiredInt().getErrors());
+        assertContains("Invalid value", form.optionalInt().getErrors());
     }
     
     /** Input fails if value can't be converted to input's type */
@@ -78,11 +86,11 @@ public class InputTest extends BaseTestCase
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.optionalInt().isValid());
         
-        assertNotNull(form.requiredInt().getOnError());
-        assertNotNull(form.optionalInt().getOnError());
+        assertFalse(form.requiredInt().getErrors().isEmpty());
+        assertFalse(form.optionalInt().getErrors().isEmpty());
         
-        assertTrue(form.requiredInt().getOnError().startsWith("Invalid value"));
-        assertTrue(form.optionalInt().getOnError().startsWith("Invalid value"));
+        assertTrue(form.requiredInt().getErrors().contains("Invalid value"));
+        assertTrue(form.optionalInt().getErrors().contains("Invalid value"));
     }
     
     /** Field fails if criteria are not satisfied */
@@ -104,7 +112,7 @@ public class InputTest extends BaseTestCase
         assertTrue(form.optionalInt().isValid());
         assertTrue(form.requiredString().isValid());
         
-        assertTrue(form.requiredInt().getOnError().equals(
+        assertTrue(form.requiredInt().getErrors().contains(
                 "The value must be between " + MIN + " and " + MAX));
     }
 
@@ -125,6 +133,9 @@ public class InputTest extends BaseTestCase
         
         assertTrue(form.requiredString().isValid());
         assertTrue(form.requiredString().getValue().length() >= MIN_LENGTH);
+        
+        assertTrue(form.requiredInt().getErrors().isEmpty());
+        assertTrue(form.optionalInt().getErrors().isEmpty());
     }
     
     /** Optional input passes without a value */

@@ -5,7 +5,7 @@ package org.jreform;
  * 
  * @author armandino (at) gmail.com
  */
-public interface Criterion<T> extends MessageOnError
+public interface Criterion<T>
 {
     /**
      * Tests whether the specified value satisfies this criterion.
@@ -14,5 +14,10 @@ public interface Criterion<T> extends MessageOnError
      *         <code>false</code> otherwise.
      */
     public boolean isSatisfied(T value);
-    
+
+    /**
+     * Returns a message describing an error or an empty
+     * string if there was no error. 
+     */
+    public String getOnError();
 }
