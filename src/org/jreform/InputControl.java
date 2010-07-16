@@ -45,6 +45,8 @@ public interface InputControl<T>
 
     public void processRequest(HttpServletRequest req);
     public boolean validate();
+    public void setRequired(boolean isRequired);
+    public void addCriterion(Criterion<T> criterion);
     
     /**
      * Sets the message to be displayed on error.

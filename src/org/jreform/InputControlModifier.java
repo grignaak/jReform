@@ -1,15 +1,14 @@
 package org.jreform;
 
-import org.jreform.impl.AbstractInputControl;
 
 /**
  * @author armandino (at) gmail.com
  */
 public class InputControlModifier<T>
 {
-    private AbstractInputControl<T> input;
+    private InputControl<T> input;
     
-    public InputControlModifier(AbstractInputControl<T> input)
+    public InputControlModifier(InputControl<T> input)
     {
         this.input = input;
     }
