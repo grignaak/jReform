@@ -97,7 +97,6 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         else
             addError("Invalid or missing value");
 
-        setValid(isValid);
         return isValid;
     }
     

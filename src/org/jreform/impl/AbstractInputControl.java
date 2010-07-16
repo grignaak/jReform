@@ -26,7 +26,6 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
     private InputDataType<T> type;
     private String name;
     private boolean isRequired;
-    private boolean isValid;
     private List<Criterion<T>> criteria = new ArrayList<Criterion<T>>();
     
     private Set<String> errors = new LinkedHashSet<String>();
@@ -45,7 +44,6 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         this.type = type;
         this.name = name;
         this.isRequired = true;
-        this.isValid = true;
     }
     
     /**
@@ -85,12 +83,7 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
     
     public final boolean isValid()
     {
-        return isValid;
-    }
-    
-    protected final void setValid(boolean isValid)
-    {
-        this.isValid = isValid;
+        return errors.isEmpty();
     }
 
     protected Set<String> getCriteriaErrors(ParsedValue<T> parsedValue)
@@ -98,23 +91,22 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         if(parsedValue.isNotParsed())
             return Collections.singleton(parsedValue.getError());
         
-        Set<String> localErrors = new LinkedHashSet<String>();
+        Set<String> errors = new LinkedHashSet<String>();
         for(Criterion<T> criterion : criteria)
         {
             if (!criterion.isSatisfied(parsedValue.getValue()))
             {
-                localErrors.add(criterion.getOnError());
-                isValid = false;
+                errors.add(criterion.getOnError());
             }
         }
         
-        return localErrors;
+        return errors;
     }
     
 
     public Set<String> getErrors()
     {
-        return errors;
+        return Collections.unmodifiableSet(errors);
     }
 
     protected void addError(String error)

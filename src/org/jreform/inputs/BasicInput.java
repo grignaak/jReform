@@ -13,7 +13,7 @@ import org.jreform.util.ParsedValue;
  */
 public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
 {
-    private ParsedValue<T> maybeValue = ParsedValue.error("Empty value");
+    private ParsedValue<T> value = ParsedValue.error("Empty value");
     private String valueAttribute = "";
     
     public BasicInput(InputDataType<T> type, String name)
@@ -24,13 +24,13 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     public final T getValue()
     {
         // TODO make this throw
-        return maybeValue.getValueOrDefault(null);
+        return value.getValueOrDefault(null);
     }
     
     @Deprecated
     public final void setValue(T value)
     {
-        this.maybeValue = ParsedValue.setUnlessNull(value);
+        this.value = ParsedValue.setUnlessNull(value);
     }
     
     /**
@@ -48,7 +48,7 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     public void setValueAttribute(String input)
     {
         valueAttribute = input == null ? "" : input.trim();
-        maybeValue = getType().parseValue(valueAttribute);
+        value = getType().parseValue(valueAttribute);
     }
     
     public final boolean isBlank()
@@ -63,10 +63,10 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
      */
     public final String getStringValue()
     {
-        if (maybeValue.isNotParsed())
+        if (value.isNotParsed())
             return "";
         
-        return maybeValue.getValue().toString();
+        return value.getValue().toString();
     }
     
     public boolean validateRequest(HttpServletRequest req)
@@ -77,31 +77,21 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
 
     public boolean validate()
     {
-        if (valueAttribute.isEmpty())
+        if (!isBlank())
         {
-            if (!isRequired())
-                setValid(true);
-            else
-            {
-                setValid(false);
-                addError("Missing value");
-            }
-        }
-        else
-        {
-            Set<String> criteriaErrors = getCriteriaErrors(maybeValue);
-            
+            Set<String> criteriaErrors = getCriteriaErrors(value);
             addErrors(criteriaErrors);
-            
-            setValid(criteriaErrors.isEmpty());
         }
+        else if (isRequired())
+            addError("Missing value");
+        
         return isValid();
     }
     
     public void processRequest(HttpServletRequest req)
     {
-        String value = req.getParameter(getInputName());
-        setValueAttribute(value);
+        String parameter = req.getParameter(getInputName());
+        setValueAttribute(parameter);
     }
     
     public final String toString()
