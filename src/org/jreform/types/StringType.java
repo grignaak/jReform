@@ -14,9 +14,4 @@ public final class StringType extends AbstractType<String>
         return String.class;
     }
     
-    public String toString()
-    {
-        return getInputDataClass().getName();
-    }
-    
 }

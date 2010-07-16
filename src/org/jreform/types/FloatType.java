@@ -1,29 +1,16 @@
 package org.jreform.types;
 
-import org.jreform.util.ParsedValue;
 
-public final class FloatType extends AbstractType<Float>
+public final class FloatType extends AbstractNumberType<Float>
 {
-    public ParsedValue<Float> parseValue(String value)
+    public Float parseNumber(String value)
     {
-        try
-        {
-            return ParsedValue.setUnlessNull(Float.valueOf(value));
-        }
-        catch (NumberFormatException ex)
-        {
-            return ParsedValue.error(ex.getMessage());
-        }
+        return Float.valueOf(value);
     }
     
     public Class<Float> getInputDataClass()
     {
         return Float.class;
-    }
-    
-    public String toString()
-    {
-        return getInputDataClass().getName();
     }
     
 }

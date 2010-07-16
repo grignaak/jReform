@@ -24,4 +24,9 @@ public abstract class AbstractType<T> implements InputDataType<T>
         
         return parsedValue;
     }
+
+    public String toString()
+    {
+        return getInputDataClass().getName();
+    }
 }

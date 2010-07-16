@@ -91,11 +91,9 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
         {
             Set<String> criteriaErrors = getCriteriaErrors(maybeValue);
             
-            getErrors().addAll(criteriaErrors);
+            addErrors(criteriaErrors);
             
             setValid(criteriaErrors.isEmpty());
-            if(!isValid())
-                addError("Invalid value");
         }
         return isValid();
     }

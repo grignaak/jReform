@@ -115,7 +115,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
             Set<String> criteriaErrors = getCriteriaErrors(ParsedValue.setUnlessNull(value));
             if (!criteriaErrors.isEmpty())
             {
-                getErrors().addAll(criteriaErrors);
+                addErrors(criteriaErrors);
                 isValid = false;
             }
         }

@@ -13,9 +13,4 @@ public final class BooleanType extends AbstractType<Boolean>
     {
         return Boolean.class;
     }
-    
-    public String toString()
-    {
-        return getInputDataClass().getName();
-    }
 }

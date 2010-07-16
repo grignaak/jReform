@@ -1,28 +1,15 @@
 package org.jreform.types;
 
-import org.jreform.util.ParsedValue;
 
-public final class LongType extends AbstractType<Long>
+public final class LongType extends AbstractNumberType<Long>
 {
-    public ParsedValue<Long> parseValue(String value)
+    public Long parseNumber(String value)
     {
-        try
-        {
-            return ParsedValue.setUnlessNull(Long.valueOf(value));
-        }
-        catch (NumberFormatException ex)
-        {
-            return ParsedValue.error(ex.getMessage());
-        }
+        return Long.valueOf(value);
     }
     
     public Class<Long> getInputDataClass()
     {
         return Long.class;
-    }
-    
-    public String toString()
-    {
-        return getInputDataClass().getName();
     }
 }

@@ -18,9 +18,4 @@ public final class CharType extends AbstractType<Character>
     {
         return Character.class;
     }
-    
-    public String toString()
-    {
-        return getInputDataClass().getName();
-    }
 }

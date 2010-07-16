@@ -1,28 +1,15 @@
 package org.jreform.types;
 
-import org.jreform.util.ParsedValue;
 
-public final class ShortType extends AbstractType<Short>
+public final class ShortType extends AbstractNumberType<Short>
 {
-    public ParsedValue<Short> parseValue(String value)
+    public Short parseNumber(String value)
     {
-        try
-        {
-            return ParsedValue.setUnlessNull(Short.valueOf(value));
-        }
-        catch(NumberFormatException ex)
-        {
-            return null;
-        }
+        return Short.valueOf(value);
     }
     
     public Class<Short> getInputDataClass()
     {
         return Short.class;
-    }
-    
-    public String toString()
-    {
-        return getInputDataClass().getName();
     }    
 }

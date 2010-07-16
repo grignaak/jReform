@@ -61,8 +61,8 @@ public class InputTest extends BaseTestCase
         setRequiredRequestParameters("not an int", "a string");
         setOptionalRequestParameters("also not an int", "a string");
         assertFalse(validateForm());
-        assertContains("Invalid value", form.requiredInt().getErrors());
-        assertContains("Invalid value", form.optionalInt().getErrors());
+        assertContains("Cannot convert to a number", form.requiredInt().getErrors());
+        assertContains("Cannot convert to a number", form.optionalInt().getErrors());
     }
     
     /** Input fails if value can't be converted to input's type */
@@ -89,8 +89,8 @@ public class InputTest extends BaseTestCase
         assertFalse(form.requiredInt().getErrors().isEmpty());
         assertFalse(form.optionalInt().getErrors().isEmpty());
         
-        assertTrue(form.requiredInt().getErrors().contains("Invalid value"));
-        assertTrue(form.optionalInt().getErrors().contains("Invalid value"));
+        assertContains("Cannot convert to a number", form.requiredInt().getErrors());
+        assertContains("Cannot convert to a number", form.optionalInt().getErrors());
     }
     
     /** Field fails if criteria are not satisfied */
