@@ -1,11 +1,14 @@
 package org.jreform;
 
+import static junit.framework.Assert.*;
+
 import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.acceptString;
 
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Radio;
 import org.jreform.types.Types;
+import org.junit.Test;
 
 public class RadioTest extends BaseTestCase
 {
@@ -28,6 +31,7 @@ public class RadioTest extends BaseTestCase
     }
     
     /** validation fails if required radio button is not checked */
+    @Test
     public void testValidationFailsIfRequiredRadioNotChecked()
     {
         assertFalse(validateForm());
@@ -41,6 +45,7 @@ public class RadioTest extends BaseTestCase
     }
     
     /** validation fails if criteria fail for required radio button */
+    @Test
     public void testValidationFailsIfRequiredRadioCriteriaFail()
     {
         final String value = "need_yes_or_no_to_validate_successfully";
@@ -54,6 +59,7 @@ public class RadioTest extends BaseTestCase
     }
     
     /** validation passes if required radio button has a valid value */
+    @Test
     public void testValidationPassesIfRequiredRadioButtonHasValidValue()
     {
         final String yes = "YES"; // ignoreCase() enabled
@@ -69,6 +75,7 @@ public class RadioTest extends BaseTestCase
     }
     
     /** validation fails if optional radio button has invalid value */
+    @Test
     public void testValidationFailsIfOptionalRadioCriteriaFail()
     {
         char invalidValue = 'm'; // criterion is case sensitive
@@ -88,6 +95,7 @@ public class RadioTest extends BaseTestCase
     }
     
     /** validation passes when optional and required radios have valid values */
+    @Test
     public void testValidationPassesIfOptionalRadioHasValidValue()
     {
         final String no = "no";
@@ -108,6 +116,7 @@ public class RadioTest extends BaseTestCase
         assertEquals(validValue, form.gender().getValue());
     }
     
+    @Test
     public void testSetValueAttributeSetsState()
     {
         form.gender().setValueAttribute("X");

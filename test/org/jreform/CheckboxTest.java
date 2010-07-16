@@ -2,6 +2,9 @@ package org.jreform;
 
 import java.util.Arrays;
 
+import static junit.framework.Assert.*;
+import org.junit.Test;
+
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.MultiCheckbox;
@@ -26,6 +29,7 @@ public class CheckboxTest extends BaseTestCase
     }
     
     /** single value checkbox can only be optional and is always valid */
+    @Test
     public void testSingleValueCheckboxIsAlwaysOptionalAndValid()
     {
         final String choiceOne = "choiceOne";
@@ -54,6 +58,7 @@ public class CheckboxTest extends BaseTestCase
     }
     
     /** validation fails if required multi checkbox is not checked */
+    @Test
     public void testMulticheckboxIsRequired()
     {
         assertFalse(validateForm());
@@ -66,6 +71,7 @@ public class CheckboxTest extends BaseTestCase
         assertTrue(form.choices().getValueAttributes().isEmpty());
     }
     
+    @Test
     public void testOptionalMultiCheckbox()
     {
         Integer optChoiceOne = 10;
@@ -84,6 +90,7 @@ public class CheckboxTest extends BaseTestCase
         assertFalse(form.optionalChoices().getCheckedKeys().contains("doesntExist"));
     }
     
+    @Test
     public void testSetValueAttributeSetsState()
     {
         form.subscribe().setValueAttribute("value");

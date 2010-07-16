@@ -1,11 +1,14 @@
 package org.jreform;
 
+import static junit.framework.Assert.*;
+
 import java.util.Arrays;
 
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Select;
 import org.jreform.types.Types;
+import org.junit.Test;
 
 public class SelectTest extends BaseTestCase
 {
@@ -25,6 +28,7 @@ public class SelectTest extends BaseTestCase
     }
     
     /** select multiple selections */
+    @Test
     public void testSelectingMultipleSelections()
     {
         final String england = "England";
@@ -56,7 +60,7 @@ public class SelectTest extends BaseTestCase
         assertTrue(form.hotels().getValues().size() == 2);
     }
     
-    
+    @Test
     public void testSetValueAttributeSetsState()
     {
         form.country().setValueAttribute("country");

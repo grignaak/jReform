@@ -1,17 +1,19 @@
 package org.jreform;
 
+import static junit.framework.Assert.assertTrue;
+
 import java.util.Collection;
 
-import junit.framework.TestCase;
-
 import org.jreform.util.HttpServletRequestStub;
+import org.junit.Before;
 
 
-abstract class BaseTestCase extends TestCase
+public abstract class BaseTestCase
 {
     private HttpServletRequestStub req;
     
-    protected final void setUp() throws Exception
+    @Before
+    public final void setUp() throws Exception
     {
         req = new HttpServletRequestStub();
         init();

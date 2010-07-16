@@ -1,5 +1,7 @@
 package org.jreform;
 
+import static junit.framework.Assert.*;
+
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
@@ -7,6 +9,7 @@ import org.jreform.impl.GenericForm;
 import org.jreform.inputs.MultiCheckbox;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.types.Types;
+import org.junit.Test;
 
 //
 // test required and optional fields:
@@ -41,6 +44,7 @@ public class MultiInputTest extends BaseTestCase
     }
     
     /** Required input fails without a value */
+    @Test
     public void testRequiredFieldFailsWithoutAValue()
     {
         assertFalse(validateForm());
@@ -59,6 +63,7 @@ public class MultiInputTest extends BaseTestCase
     }
     
     /** Input fails if value can't be converted to input's type */
+    @Test
     public void testFieldFailsIfGivenInvalidType()
     {
         setRequiredRequestParameters(
@@ -93,6 +98,7 @@ public class MultiInputTest extends BaseTestCase
     }
     
     /** Field fails if criteria are not satisfied */
+    @Test
     public void testFieldFailsIfCriteriaAreNotSatisfied()
     {
         String stringTooShort = "x";
@@ -121,6 +127,7 @@ public class MultiInputTest extends BaseTestCase
     }
 
     /** Required input passes with a valid value */
+    @Test
     public void testRequiredFieldPassesWithValidValue()
     {
         int number = 15;
@@ -144,6 +151,7 @@ public class MultiInputTest extends BaseTestCase
     }
     
     /** Optional input passes without a value */
+    @Test
     public void testOptionalFieldPassesWithoutAValue()
     {
         setRequiredRequestParameters(new String[] {"15"}, new String[] {"some input"});

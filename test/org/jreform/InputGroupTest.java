@@ -1,5 +1,7 @@
 package org.jreform;
 
+import static junit.framework.Assert.*;
+
 import static org.jreform.criteria.Criteria.emailAddress;
 
 import org.jreform.exceptions.DuplicateNameException;
@@ -7,6 +9,8 @@ import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
 import org.jreform.types.StringType;
 import org.jreform.types.Types;
+import org.junit.Ignore;
+import org.junit.Test;
 
 public class InputGroupTest extends BaseTestCase
 {
@@ -39,6 +43,7 @@ public class InputGroupTest extends BaseTestCase
     }
     
     /** test add duplicate input throws exception */
+    @Test
     public void testAddDuplicateInputThrowsException()
     {   
         try
@@ -51,7 +56,9 @@ public class InputGroupTest extends BaseTestCase
     }
     
     /** test input instance is the same from form and group */
-    public void xtestInputInstanceIsTheSameFromFormAndGroup()
+    @Test
+    @Ignore
+    public void testInputInstanceIsTheSameFromFormAndGroup()
     {
         setContactGroupWithValidData();
         setMetric("1.9", "95");
@@ -61,6 +68,7 @@ public class InputGroupTest extends BaseTestCase
     }
     
     /** validation fails if contact group is empty */
+    @Test
     public void testValidationFailsIfContactGroupIsEmpty()
     {
         setMetric("1.9", "95");
@@ -80,6 +88,7 @@ public class InputGroupTest extends BaseTestCase
     }
     
     /** test additonal validation fails if both optional groups are empty */
+    @Test
     public void testAdditionalValidationFailsIfBothOptionalGroupsAreEmpty()
     {
         setContactGroupWithValidData();
@@ -91,6 +100,7 @@ public class InputGroupTest extends BaseTestCase
     }
     
     /** validation passes if metric group has valid data */
+    @Test
     public void testValidationPassesIfMetricGroupHasValidData()
     {
         final double heightM = 1.75;
@@ -109,6 +119,7 @@ public class InputGroupTest extends BaseTestCase
     }
     
     /** validation passes if imperial group has valid data */
+    @Test
     public void testValidationPassesIfImperialGroupHasValidData()
     {
         final int heightFt = 5;
@@ -129,6 +140,7 @@ public class InputGroupTest extends BaseTestCase
     }
     
     /** validation fails if metric group has invalid data */
+    @Test
     public void testValidationFailsIfMetricGroupHasInvalidData()
     {
         final double heightM = 1.75;
@@ -153,6 +165,7 @@ public class InputGroupTest extends BaseTestCase
     
     
     /** validation fails if contact group has invalid data */
+    @Test
     public void testValidationFailsIfContactGroupHasInvalidData()
     {
         setContact("Adam", "Smith", "this should be a valid email address");

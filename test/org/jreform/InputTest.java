@@ -1,11 +1,14 @@
 package org.jreform;
 
+import static junit.framework.Assert.*;
+
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
 import org.jreform.types.Types;
+import org.junit.Test;
 
 //
 // test required and optional fields:
@@ -40,6 +43,7 @@ public class InputTest extends BaseTestCase
     }
     
     /** Required input fails without a value */
+    @Test
     public void testRequiredFieldFailsWithoutAValue()
     {
         assertFalse(validateForm());
@@ -56,6 +60,7 @@ public class InputTest extends BaseTestCase
         assertTrue(form.requiredInt().getErrors().contains("Missing value"));
     }
     
+    @Test
     public void testParseErrorsAreCaptured()
     {
         setRequiredRequestParameters("not an int", "a string");
@@ -66,6 +71,7 @@ public class InputTest extends BaseTestCase
     }
     
     /** Input fails if value can't be converted to input's type */
+    @Test
     public void testFieldFailsIfGivenInvalidType()
     {
         setRequiredRequestParameters("Passing string instead of an int.", "some value");
@@ -94,6 +100,7 @@ public class InputTest extends BaseTestCase
     }
     
     /** Field fails if criteria are not satisfied */
+    @Test
     public void testFieldFailsIfCriteriaAreNotSatisfied()
     {
         String stringTooShort = "x";
@@ -117,6 +124,7 @@ public class InputTest extends BaseTestCase
     }
 
     /** Required input passes with a valid value */
+    @Test
     public void testRequiredFieldPassesWithValidValue()
     {
         int number = 15;
@@ -139,6 +147,7 @@ public class InputTest extends BaseTestCase
     }
     
     /** Optional input passes without a value */
+    @Test
     public void testOptionalFieldPassesWithoutAValue()
     {
         setRequiredRequestParameters("15", "some input");

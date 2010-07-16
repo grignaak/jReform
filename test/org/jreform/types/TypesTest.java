@@ -1,11 +1,17 @@
 package org.jreform.types;
 
-import static org.jreform.types.Types.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+import static org.jreform.types.Types.booleanType;
+import static org.jreform.types.Types.charType;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class TypesTest extends TestCase
+
+public class TypesTest
 {
+    @Test
 	public void testParseBoolean()
 	{
 		assertTrue(booleanType().parseValue("TRUE").getValue());
@@ -14,6 +20,7 @@ public class TypesTest extends TestCase
 		assertFalse(booleanType().parseValue(null).getValue());
 	}
 	
+    @Test
 	public void testShouldAcceptCustomErrorMessage()
 	{
 	    String customError = "Custom Message";

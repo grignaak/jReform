@@ -1,8 +1,11 @@
 package org.jreform;
 
+import static junit.framework.Assert.*;
+
 import org.jreform.exceptions.UndefinedInputControlException;
 import org.jreform.impl.GenericForm;
 import org.jreform.types.Types;
+import org.junit.Test;
 
 public class FormTest extends BaseTestCase
 {
@@ -22,6 +25,7 @@ public class FormTest extends BaseTestCase
         return form;
     }
     
+    @Test
     public void testGetInputThatDoesNotExistThrowsException()
     {
         try

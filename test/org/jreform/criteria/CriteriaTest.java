@@ -1,5 +1,9 @@
 package org.jreform.criteria;
 
+import static junit.framework.Assert.*;
+
+import org.junit.Test;
+
 import static org.jreform.criteria.Criteria.accept;
 import static org.jreform.criteria.Criteria.acceptString;
 import static org.jreform.criteria.Criteria.and;
@@ -15,11 +19,11 @@ import static org.jreform.criteria.Criteria.postcodeCA;
 import static org.jreform.criteria.Criteria.range;
 import static org.jreform.criteria.Criteria.startsWith;
 import static org.jreform.criteria.Criteria.zipcode;
-import junit.framework.TestCase;
 
 @SuppressWarnings("unchecked")
-public class CriteriaTest extends TestCase
+public class CriteriaTest
 {
+    @Test
     public void testMin()
     {
         assertFalse(min(10).isSatisfied(3));
@@ -27,6 +31,7 @@ public class CriteriaTest extends TestCase
         assertTrue(min(10).isSatisfied(10));
     }
     
+    @Test
     public void testMax()
     {
         assertFalse(max(10).isSatisfied(15));
@@ -34,6 +39,7 @@ public class CriteriaTest extends TestCase
         assertTrue(max(10).isSatisfied(10));
     }
 
+    @Test
     public void testMinLength()
     {
         assertFalse(minLength(5).isSatisfied("abc"));
@@ -41,6 +47,7 @@ public class CriteriaTest extends TestCase
         assertTrue(minLength(5).isSatisfied("abcdefgh"));
     }
     
+    @Test
     public void testMaxLength()
     {
         assertFalse(maxLength(5).isSatisfied("abcdefgh"));
@@ -48,12 +55,14 @@ public class CriteriaTest extends TestCase
         assertTrue(maxLength(5).isSatisfied("a"));
     }
     
+    @Test
     public void testExactLength()
     {
         assertFalse(exactLength(5).isSatisfied("abc"));
         assertTrue(exactLength(5).isSatisfied("abcde"));
     }
     
+    @Test
     public void testLenght()
     {
         assertTrue(length(1, 5).isSatisfied("a"));
@@ -64,6 +73,7 @@ public class CriteriaTest extends TestCase
         assertFalse(length(1, 5).isSatisfied("abcdef"));
     }
     
+    @Test
     public void testRange()
     {
         assertTrue(range(5, 10).isSatisfied(5));
@@ -74,6 +84,7 @@ public class CriteriaTest extends TestCase
         assertFalse(range(5, 10).isSatisfied(11));
     }
 
+    @Test
     public void testAccept()
     {
         assertTrue(accept(-3, 7, 145).isSatisfied(-3));
@@ -89,6 +100,7 @@ public class CriteriaTest extends TestCase
         assertFalse(accept('A', 'B', 'C').isSatisfied('a'));
     }
     
+    @Test
     public void testAcceptString()
     {
         assertFalse(acceptString("A", "B", "C").isSatisfied("a"));
@@ -101,6 +113,7 @@ public class CriteriaTest extends TestCase
         assertTrue(acceptString("A", "B", "C").ignoreCase().isSatisfied("b"));
     }
     
+    @Test
     public void testStartsWith()
     {
         assertTrue(startsWith("moo").isSatisfied("moo"));
@@ -110,7 +123,7 @@ public class CriteriaTest extends TestCase
         assertFalse(startsWith("moo").isSatisfied("Moose"));
     }
     
-    
+    @Test
     public void testOr()
     {
         assertTrue(or(acceptString("a", "b"), acceptString("x", "y")).isSatisfied("a"));
@@ -130,6 +143,7 @@ public class CriteriaTest extends TestCase
         catch(IllegalArgumentException ex) { /* empty */ }
     }
     
+    @Test
     public void testAnd()
     {
         assertTrue(and(min(200), max(300)).isSatisfied(200));
@@ -148,6 +162,7 @@ public class CriteriaTest extends TestCase
         catch(IllegalArgumentException ex) { /* empty */ }
     }
     
+    @Test
     public void testEmail()
     {
         assertTrue(emailAddress().isSatisfied("xxxx@domain.xx"));
@@ -157,6 +172,7 @@ public class CriteriaTest extends TestCase
         assertTrue(emailAddress().isSatisfied("xxx_-#%$&^*(&*xx.x.x@subdomain.domain.xx.xxxxxxx"));
     }
     
+    @Test
     public void testZipcode()
     {
         assertTrue(zipcode().isSatisfied("12345"));
@@ -171,6 +187,7 @@ public class CriteriaTest extends TestCase
         assertFalse(zipcode().isSatisfied("abcde"));
     }
     
+    @Test
     public void testPostcodeCA()
     {
         assertTrue(postcodeCA().isSatisfied("V1V 1V1"));
