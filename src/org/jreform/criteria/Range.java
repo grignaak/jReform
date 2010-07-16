@@ -23,9 +23,7 @@ public final class Range<T extends Comparable<T>> extends AbstractCriterion<T>
     
     protected String generateErrorMessage()
     {
-        StringBuilder sb = new StringBuilder();
-        return sb.append("The value must be between ")
-                 .append(min).append(" and ").append(max).toString();
+        return "The value must be between " + min + " and " + max;
     }
     
 }

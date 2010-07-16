@@ -11,14 +11,14 @@ public final class AcceptString extends Accept<String>
 {
     private boolean caseSensitive = true;
     
-    AcceptString(String...values)
+    public AcceptString(String...values)
     {
         super(values);
     }
     
     protected boolean areEqual(String v1, String v2)
     {
-        if(caseSensitive)
+        if (caseSensitive)
             return super.areEqual(v1, v2);
         
         return v1.equalsIgnoreCase(v2);

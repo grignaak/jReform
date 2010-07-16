@@ -9,10 +9,6 @@ import org.jreform.Criterion;
  */
 public class Criteria
 {
-    private static final Email email = new Email();
-    private static final ZipCode zipCode = new ZipCode();
-    private static final PostcodeCA postcodeCA = new PostcodeCA();
-    
     public static <T> Criterion<T> and(Criterion<T>...criteria)
     {
         return new And<T>(criteria);
@@ -80,17 +76,17 @@ public class Criteria
     
     public static Criterion<String> emailAddress()
     {
-        return email;
+        return new Email();
     }
     
     public static Criterion<String> zipcode()
     {
-        return zipCode;
+        return new ZipCode();
     }
     
     public static Criterion<String> postcodeCA()
     {
-        return postcodeCA;
+        return new PostcodeCA();
     }
     
 }

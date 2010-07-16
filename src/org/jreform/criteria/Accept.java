@@ -1,26 +1,28 @@
 package org.jreform.criteria;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Checks that value is equal to one of the acceptable values.
  * 
  * @author armandino (at) gmail.com
+ * @author michael.deardeuff (at) gmail.com
  */
 public class Accept<T> extends AbstractCriterion<T>
 {
-    private T[] acceptableValues;
+    private List<T> acceptableValues;
     
-    Accept(T...values)
+    public Accept(T...values)
     {
-        this.acceptableValues = values;   
+        this.acceptableValues = Arrays.asList(values);
     }
     
     protected final boolean verify(T value)
     {
-        for(T v : acceptableValues)
+        for (T v : acceptableValues)
         {
-            if(areEqual(v, value))
+            if (areEqual(v, value))
                 return true;
         }
         
@@ -34,7 +36,6 @@ public class Accept<T> extends AbstractCriterion<T>
     
     protected String generateErrorMessage()
     {
-        return "Please enter one of the allowed values " +Arrays.asList(acceptableValues);
+        return "Please enter one of the allowed values " + acceptableValues;
     }
-    
 }

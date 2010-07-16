@@ -7,6 +7,7 @@ import org.jreform.Criterion;
  * if validation fails. 
  * 
  * @author armandino (at) gmail.com
+ * @author michael.deardeuff (at) gmail.com
  */
 public abstract class AbstractCriterion<T> implements Criterion<T>
 {
@@ -27,8 +28,15 @@ public abstract class AbstractCriterion<T> implements Criterion<T>
         if (verify(value))
             return true;
         
-        setOnError(generateErrorMessage());
+        if (!isCustomMessageSet())
+            messageOnError = generateErrorMessage();
+        
         return false;
+    }
+
+    private boolean isCustomMessageSet()
+    {
+        return messageOnError != null;
     }
     
     public final String getOnError()
@@ -40,5 +48,4 @@ public abstract class AbstractCriterion<T> implements Criterion<T>
     {
         this.messageOnError = messageOnError; 
     }
-    
 }
