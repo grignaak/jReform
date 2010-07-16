@@ -88,8 +88,8 @@ public class MultiInputTest extends BaseTestCase
         assertFalse(form.requiredInt().getErrors().isEmpty());
         assertNotNull(form.optionalInt().getErrors().isEmpty());
         
-        assertContains("Invalid or missing value", form.requiredInt().getErrors());
-        assertContains("Invalid or missing value", form.optionalInt().getErrors());
+        assertContains("Cannot convert to a number", form.requiredInt().getErrors());
+        assertContains("Cannot convert to a number", form.optionalInt().getErrors());
     }
     
     /** Field fails if criteria are not satisfied */

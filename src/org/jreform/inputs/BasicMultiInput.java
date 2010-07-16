@@ -19,7 +19,7 @@ import org.jreform.util.ParsedValue;
  */
 public class BasicMultiInput<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
-    private ParsedValue<List<T>> values = ParsedValue.error("Empty value");
+    private List<ParsedValue<T>> values = Collections.emptyList();
     private List<String> valueAttributes = Collections.emptyList();
     
     protected BasicMultiInput(InputDataType<T> type, String name)
@@ -32,12 +32,21 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
      */
     public final List<T> getValues()
     {
-        return values.getValue();
+        List<T> parsedValues = new ArrayList<T>(values.size());
+        for (ParsedValue<T> parsedValue : values)
+        {
+            parsedValues.add(parsedValue.getValue());
+        }
+        return parsedValues;
     }
     
-    public final void setValues(List<T> value)
+    public final void setValues(List<T> values)
     {
-        this.values = ParsedValue.setUnlessNull(value);
+        this.values = new ArrayList<ParsedValue<T>>();
+        for (T value : values)
+        {
+            this.values.add(ParsedValue.setUnlessNull(value));
+        }
     }
     
     /**
@@ -77,7 +86,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     public String getStringValue()
     {
-        return values.getValue().toString();
+        return getValues().toString();
     }
     
     public boolean validate()
@@ -95,16 +104,10 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     private boolean isValidInput()
     {
-        if (values.isNotParsed())
-        {
-            addError("Invalid or missing value");
-            return false; 
-        }
-        
         boolean isValid = true;
-        for (T value : values.getValue())
+        for (ParsedValue<T> value : values)
         {
-            Set<String> criteriaErrors = getCriteriaErrors(ParsedValue.setUnlessNull(value));
+            Set<String> criteriaErrors = getCriteriaErrors(value);
             if (!criteriaErrors.isEmpty())
             {
                 addErrors(criteriaErrors);
@@ -121,20 +124,15 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         setValueAttributes(parameterValues);
     }
 
-    private ParsedValue<List<T>> parseValues()
+    private List<ParsedValue<T>> parseValues()
     {
-        List<T> parsedValues = new ArrayList<T>();
+        List<ParsedValue<T>> theRealParsedValues = new ArrayList<ParsedValue<T>>();
         for (String attributeValue : getValueAttributes())
         {
             ParsedValue<T> parsedValue = getType().parseValue(attributeValue);
-            
-            if (parsedValue.isNotParsed())
-                return ParsedValue.error(parsedValue.getError());
-            
-            parsedValues.add(parsedValue.getValue());
+            theRealParsedValues.add(parsedValue);
         }
-        
-        return ParsedValue.setUnlessNull(parsedValues);
+        return theRealParsedValues;
     }
     
     public final String toString()
