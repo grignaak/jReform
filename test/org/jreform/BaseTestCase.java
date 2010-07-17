@@ -8,24 +8,22 @@ import org.jreform.util.HttpServletRequestStub;
 import org.junit.Before;
 
 
-public abstract class BaseTestCase
+public abstract class BaseTestCase<T extends Form>
 {
     private HttpServletRequestStub req;
+    protected T form = createForm();
+    
+    protected abstract T createForm();
     
     @Before
     public final void setUp() throws Exception
     {
         req = new HttpServletRequestStub();
-        init();
     }
-    
-    protected abstract Form getForm();
-    protected void init() {}
-    protected void destroy() {}
     
     protected boolean validateForm()
     {
-        return getForm().validateRequest(req) && getForm().isValid();
+        return form.validateRequest(req);
     }
     
     protected void setParameter(String key, String value)

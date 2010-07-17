@@ -7,22 +7,15 @@ import org.jreform.impl.GenericForm;
 import org.jreform.types.Types;
 import org.junit.Test;
 
-public class FormTest extends BaseTestCase
+public class FormTest extends BaseTestCase<FormTest.TestForm>
 {
     private static final String STRING_INPUT = "StringInput";
     private static final String INT_INPUT = "intInput";
     private static final String INT_MULTI_INPUT = "intMultiInput";
     
-    private TestForm form;
-    
-    protected void init()
+    protected TestForm createForm()
     {
-        form = new TestForm();
-    }
-    
-    protected Form getForm()
-    {
-        return form;
+        return new TestForm();
     }
     
     @Test
@@ -35,7 +28,7 @@ public class FormTest extends BaseTestCase
         } catch(UndefinedInputControlException e) {}
     }
     
-    private static class TestForm extends GenericForm
+    static class TestForm extends GenericForm
     {
         public TestForm()
         {

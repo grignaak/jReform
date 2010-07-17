@@ -10,6 +10,7 @@ import org.jreform.util.ParsedValue;
 
 /**
  * @author armandino (at) gmail.com
+ * @author michael.deardeuff (at) gmail.com
  */
 public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
 {
@@ -23,13 +24,15 @@ public class BasicInput<T> extends AbstractInputControl<T> implements Input<T>
     
     public final T getValue()
     {
-        // TODO make this throw
-        return value.getValueOrDefault(null);
+        if (!isValid())
+            throw new IllegalStateException("Cannot retrieve an invalid value");
+        
+        return value.getValue();
     }
     
-    @Deprecated
     public final void setValue(T value)
     {
+        setValueAttribute(value != null ? value.toString() : null);
         this.value = ParsedValue.setUnlessNull(value);
     }
     

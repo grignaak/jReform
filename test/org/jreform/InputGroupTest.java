@@ -12,7 +12,7 @@ import org.jreform.types.Types;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class InputGroupTest extends BaseTestCase
+public class InputGroupTest extends BaseTestCase<InputGroupTest.TestForm>
 {
     private static final String CONTACT = "contact";
     private static final String METRIC = "metric";
@@ -30,16 +30,9 @@ public class InputGroupTest extends BaseTestCase
     private static final String HEIGHT_IN = "heightInches";
     private static final String WEIGHT_LB = "weightLbs";
     
-    private TestForm form;
-    
-    protected void init()
+    protected TestForm createForm()
     {
-        form = new TestForm();
-    }
-    
-    protected GenericForm getForm()
-    {
-        return form;
+        return new TestForm();
     }
     
     /** test add duplicate input throws exception */
@@ -210,7 +203,7 @@ public class InputGroupTest extends BaseTestCase
         setParameter(WEIGHT_LB, lb);
     }
     
-    private static class TestForm extends GenericForm
+    static class TestForm extends GenericForm
     {
         public TestForm()
         {

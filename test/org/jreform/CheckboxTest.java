@@ -10,22 +10,15 @@ import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.MultiCheckbox;
 import org.jreform.types.Types;
 
-public class CheckboxTest extends BaseTestCase
+public class CheckboxTest extends BaseTestCase<CheckboxTest.TestForm>
 {
     private static final String SUBSCRIBE = "subscribe";
     private static final String CHOICES = "choices";
     private static final String OPT_CHOICES = "optionalChoices";
     
-    private TestForm form;
-    
-    protected void init()
+    protected TestForm createForm()
     {
-        form = new TestForm();
-    }
-    
-    protected Form getForm()
-    {
-        return form;
+        return new TestForm();
     }
     
     /** single value checkbox can only be optional and is always valid */
@@ -66,8 +59,6 @@ public class CheckboxTest extends BaseTestCase
         assertTrue(form.choices().isRequired());
         assertFalse(form.choices().isValid());
         
-        // TODO have this throw
-        assertTrue(form.choices().getValues().isEmpty());
         assertTrue(form.choices().getValueAttributes().isEmpty());
     }
     
@@ -101,7 +92,7 @@ public class CheckboxTest extends BaseTestCase
         assertTrue(form.choices().getCheckedKeys().contains("two"));
     }
 
-    private static class TestForm extends GenericForm
+    static class TestForm extends GenericForm
     {
         public TestForm()
         {

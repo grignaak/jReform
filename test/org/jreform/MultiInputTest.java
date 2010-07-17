@@ -2,11 +2,16 @@ package org.jreform;
 
 import static junit.framework.Assert.*;
 
+import java.util.Arrays;
+
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
 
+import org.jreform.criteria.Criteria;
 import org.jreform.impl.GenericForm;
+import org.jreform.inputs.BasicMultiInput;
 import org.jreform.inputs.MultiCheckbox;
+import org.jreform.inputs.MultiInput;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.types.Types;
 import org.junit.Test;
@@ -17,7 +22,7 @@ import org.junit.Test;
 //    without criteria
 //
 
-public class MultiInputTest extends BaseTestCase
+public class MultiInputTest extends BaseTestCase<MultiInputTest.TestForm>
 {
     private static final int MIN = 10;
     private static final int MAX = 20;
@@ -30,17 +35,21 @@ public class MultiInputTest extends BaseTestCase
     private static final String REQ_STRING = "required_string_field";
     private static final String OPT_STRING = "optional_string_field";
 
-    
-    private TestForm form;
-    
-    protected void init()
+    protected TestForm createForm()
     {
-        form = new TestForm();
+        return new TestForm();
     }
     
-    protected GenericForm getForm()
+    @Test(expected=Exception.class)
+    public void shouldThrowWhenRetrievingInvalidValues()
     {
-        return form;
+        MultiInput<Integer> input = new BasicMultiInput<Integer>(Types.intType(), "invalid");
+        input.addCriterion(Criteria.max(4));
+        
+        input.setValues(Arrays.asList(5));
+        input.validate();
+        
+        input.getValues();
     }
     
     /** Required input fails without a value */
@@ -115,7 +124,6 @@ public class MultiInputTest extends BaseTestCase
         assertFalse("Criteria not satisfied", validateForm());
         
         assertEquals(stringTooShort, form.optionalString().getValueAttributes().get(0));
-        assertEquals(numTooBig, form.requiredInt().getValues().get(0));
         
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.optionalString().isValid());
@@ -177,7 +185,7 @@ public class MultiInputTest extends BaseTestCase
         setParameters(OPT_STRING, stringField);
     }
     
-    private static class TestForm extends GenericForm
+    static class TestForm extends GenericForm
     {
         public TestForm()
         {

@@ -10,21 +10,14 @@ import org.jreform.inputs.Select;
 import org.jreform.types.Types;
 import org.junit.Test;
 
-public class SelectTest extends BaseTestCase
+public class SelectTest extends BaseTestCase<SelectTest.TestForm>
 {
     private static final String COUNTRY = "country";
     private static final String HOTELS = "hotels";
     
-    private TestForm form;
-    
-    protected void init()
+    protected TestForm createForm()
     {
-        form = new TestForm();
-    }
-    
-    protected Form getForm()
-    {
-        return form;
+        return new TestForm();
     }
     
     /** select multiple selections */
@@ -71,7 +64,7 @@ public class SelectTest extends BaseTestCase
         assertTrue(form.hotels().getSelectedKeys().contains("two"));
     }
     
-    private static class TestForm extends GenericForm
+    static class TestForm extends GenericForm
     {
         public TestForm()
         {

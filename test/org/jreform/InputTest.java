@@ -1,11 +1,16 @@
 package org.jreform;
 
-import static junit.framework.Assert.*;
-
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+import static org.jreform.criteria.Criteria.max;
 import static org.jreform.criteria.Criteria.minLength;
 import static org.jreform.criteria.Criteria.range;
+import static org.jreform.types.Types.intType;
+import static org.jreform.types.Types.stringType;
 
 import org.jreform.impl.GenericForm;
+import org.jreform.inputs.BasicInput;
 import org.jreform.inputs.Input;
 import org.jreform.types.Types;
 import org.junit.Test;
@@ -16,7 +21,7 @@ import org.junit.Test;
 //    without criteria
 //
 
-public class InputTest extends BaseTestCase
+public class InputTest extends BaseTestCase<InputTest.TestForm>
 {
     private static final int MIN = 10;
     private static final int MAX = 20;
@@ -29,17 +34,79 @@ public class InputTest extends BaseTestCase
     private static final String REQ_STRING = "required_string_field";
     private static final String OPT_STRING = "optional_string_field";
 
-    
-    private TestForm form;
-    
-    protected void init()
+    protected TestForm createForm()
     {
-        form = new TestForm();
+        return new TestForm();
     }
     
-    protected GenericForm getForm()
+    @Test
+    public void shouldSucceedWhenDirectlySettingValue()
     {
-        return form;
+        Input<String> input = createAValidInputTypeByDirectlyInsertingTheValue();
+        assertTrue(input.validate());
+    }
+
+    private Input<String> createAValidInputTypeByDirectlyInsertingTheValue()
+    {
+        Input<String> input = new BasicInput<String>(stringType(), "string type");
+        input.setValue("a value");
+        return input;
+    }
+    
+    @Test
+    public void shouldGetTheSameValueBackWhenDiretlySettingAValue()
+    {
+        Input<String> input = createAValidInputTypeByDirectlyInsertingTheValue();
+        input.validate();
+        assertEquals("a value", input.getValue());
+    }
+
+    
+    @Test
+    public void shouldFailWhenDirectlySettingANullValue()
+    {
+        Input<String> input = createInputWithDirectNullInserted();
+        assertFalse(input.validate());
+    }
+
+    private Input<String> createInputWithDirectNullInserted()
+    {
+        Input<String> input = new BasicInput<String>(stringType(), "gets a null");
+        input.setValue(null);
+        return input;
+    }
+    
+    @Test(expected=Exception.class)
+    public void shouldThrowWhenAttemptingToRetrieveNullValue()
+    {
+        Input<String> input = createInputWithDirectNullInserted();
+        input.validate();
+        input.getValue();
+    }
+    
+    @Test
+    public void shouldFailWhenSettingAnInvalidValue()
+    {
+        Input<Integer> input = createInvalidInputThroughDirectlySettingValue();
+        
+        assertFalse("input out of range", input.validate());
+    }
+
+    private Input<Integer> createInvalidInputThroughDirectlySettingValue()
+    {
+        Input<Integer> input = new BasicInput<Integer>(intType(), "int type");
+        input.addCriterion(max(4));
+
+        input.setValue(5);
+        return input;
+    }
+    
+    @Test(expected=Exception.class)
+    public void shouldThrowWhenAttemptingToRetrieveInvalidValue()
+    {
+        Input<Integer> input = createInvalidInputThroughDirectlySettingValue();
+        input.validate();
+        System.out.println(input.getValue());
     }
     
     /** Required input fails without a value */
@@ -86,9 +153,6 @@ public class InputTest extends BaseTestCase
         assertFalse(form.requiredInt().isBlank());
         assertFalse(form.requiredString().isBlank());
         
-        assertNull(form.requiredInt().getValue());
-        assertNull(form.optionalInt().getValue());
-        
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.optionalInt().isValid());
         
@@ -112,7 +176,6 @@ public class InputTest extends BaseTestCase
         assertFalse("Criteria not satisfied", validateForm());
         
         assertEquals(stringTooShort, form.optionalString().getValueAttribute());
-        assertEquals(numTooBig, form.requiredInt().getValue());
         
         assertFalse(form.requiredInt().isValid());
         assertFalse(form.optionalString().isValid());
@@ -154,7 +217,6 @@ public class InputTest extends BaseTestCase
         
         assertTrue(validateForm());
         
-        assertNull(form.optionalInt().getValue());
         assertEquals(form.optionalInt().getValueAttribute(), "");
         
         assertEquals(form.optionalString().getValueAttribute(), "");
@@ -172,7 +234,7 @@ public class InputTest extends BaseTestCase
         setParameter(OPT_STRING, stringField);
     }
     
-    private static class TestForm extends GenericForm
+    static class TestForm extends GenericForm
     {
         public TestForm()
         {

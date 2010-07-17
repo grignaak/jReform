@@ -22,7 +22,7 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     private List<ParsedValue<T>> values = Collections.emptyList();
     private List<String> valueAttributes = Collections.emptyList();
     
-    protected BasicMultiInput(InputDataType<T> type, String name)
+    public BasicMultiInput(InputDataType<T> type, String name)
     {
         super(type, name);
     }
@@ -32,6 +32,9 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
      */
     public final List<T> getValues()
     {
+        if (!isValid())
+            throw new IllegalStateException("Cannot retrieve invalid inputs");
+        
         List<T> parsedValues = new ArrayList<T>(values.size());
         for (ParsedValue<T> parsedValue : values)
         {

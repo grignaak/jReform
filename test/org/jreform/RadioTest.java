@@ -10,7 +10,7 @@ import org.jreform.inputs.Radio;
 import org.jreform.types.Types;
 import org.junit.Test;
 
-public class RadioTest extends BaseTestCase
+public class RadioTest extends BaseTestCase<RadioTest.TestForm>
 {
     private static final String SUBSCRIBE = "subscribe";
     private static final String GENDER = "gender";
@@ -18,16 +18,9 @@ public class RadioTest extends BaseTestCase
     private static final String SUBSCRIBE_ERROR_MSG = "Must be yes or no";
     private static final String GENDER_ERROR_MSG = "M or F expected";
     
-    private TestForm form;
-    
-    protected void init()
+    protected TestForm createForm()
     {
-        form = new TestForm();
-    }
-    
-    protected Form getForm()
-    {
-        return form;
+        return new TestForm();
     }
     
     /** validation fails if required radio button is not checked */
@@ -54,7 +47,6 @@ public class RadioTest extends BaseTestCase
         assertFalse(validateForm());
         assertFalse(form.subscribe().isValid());
         
-        assertEquals(form.subscribe().getValue(), value);
         assertContains(SUBSCRIBE_ERROR_MSG, form.subscribe().getErrors());
     }
     
@@ -90,7 +82,6 @@ public class RadioTest extends BaseTestCase
         assertFalse(form.gender().isValid());
         assertFalse(form.gender().isRequired());
         
-        assertEquals(form.gender().getValue(), invalidValue);
         assertContains(GENDER_ERROR_MSG, form.gender().getErrors());
     }
     
@@ -124,7 +115,7 @@ public class RadioTest extends BaseTestCase
     }
 
     
-    private static class TestForm extends GenericForm
+    static class TestForm extends GenericForm
     {
         public TestForm()
         {

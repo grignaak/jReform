@@ -13,13 +13,19 @@ public interface Input<T> extends InputControl<T>
 {
     /**
      * Returns this input's value.
+     * 
+     * @throws IllegalStateException if !{@link #isValid()}
      */
     public T getValue();
     
     /**
      * Sets this input's value.
+     * 
+     * <p>
+     * Setting the value directly invalidates the form.
+     * {@link #validate()} must be called to assure the input is valid.
+     * </p>
      */
-    @Deprecated
     public void setValue(T value);
     
     /**
