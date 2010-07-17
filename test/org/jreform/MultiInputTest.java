@@ -194,7 +194,7 @@ public class MultiInputTest extends BaseTestCase<MultiInputTest.TestForm>
             multiCheckbox(Types.stringType(), OPT_STRING).criterion(minLength(MIN_LENGTH)).optional();
             
             // required and optional fields without criteria
-            multiCheckbox(Types.stringType(), REQ_STRING);
+            multiCheckbox(Types.stringType(), REQ_STRING).required();
             multiSelect(Types.intType(), OPT_INT).optional();
         }
         

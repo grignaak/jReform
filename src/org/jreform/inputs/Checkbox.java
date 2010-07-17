@@ -9,11 +9,17 @@ public class Checkbox<T> extends BasicInput<T>
     {
         super(type, name);
         
-        setRequired(false); // single checkbox always optional
+        super.setRequired(false); // single checkbox always optional
     }
     
     public boolean isSelected()
     {
         return !getValueAttribute().isEmpty();
+    }
+    
+    public void setRequired(boolean isRequired)
+    {
+        if (isRequired)
+            throw new IllegalArgumentException("cannot make checkbox required");
     }
 }

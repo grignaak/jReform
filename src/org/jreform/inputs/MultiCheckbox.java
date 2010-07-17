@@ -9,7 +9,8 @@ public class MultiCheckbox<T> extends BasicMultiInput<T>
 {  
     public MultiCheckbox(InputDataType<T> type, String name)
     {
-        super(type, name);   
+        super(type, name);
+        super.setRequired(false);
     }
     
     // TODO better replaced by isChecked(key)

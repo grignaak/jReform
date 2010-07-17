@@ -3,60 +3,35 @@ package org.jreform;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
+import static org.jreform.BaseTestCase.assertContains;
 import static org.jreform.criteria.Criteria.max;
-import static org.jreform.criteria.Criteria.minLength;
-import static org.jreform.criteria.Criteria.range;
 import static org.jreform.types.Types.intType;
 import static org.jreform.types.Types.stringType;
 
-import org.jreform.impl.GenericForm;
 import org.jreform.inputs.BasicInput;
 import org.jreform.inputs.Input;
-import org.jreform.types.Types;
 import org.junit.Test;
 
-//
-// test required and optional fields:
-//    with criteria
-//    without criteria
-//
-
-public class InputTest extends BaseTestCase<InputTest.TestForm>
-{
-    private static final int MIN = 10;
-    private static final int MAX = 20;
-    
-    private static final int MIN_LENGTH = 3;
-    
-    private static final String REQ_INT = "required_int_field";
-    private static final String OPT_INT = "optional_int_field";
-    
-    private static final String REQ_STRING = "required_string_field";
-    private static final String OPT_STRING = "optional_string_field";
-
-    protected TestForm createForm()
-    {
-        return new TestForm();
-    }
-    
+public class InputTest
+{    
     @Test
     public void shouldSucceedWhenDirectlySettingValue()
     {
-        Input<String> input = createAValidInputTypeByDirectlyInsertingTheValue();
+        Input<String> input = directStringInput("a value");
         assertTrue(input.validate());
     }
 
-    private Input<String> createAValidInputTypeByDirectlyInsertingTheValue()
+    private Input<String> directStringInput(String value)
     {
-        Input<String> input = new BasicInput<String>(stringType(), "string type");
-        input.setValue("a value");
+        Input<String> input = new BasicInput<String>(stringType(), "my name");
+        input.setValue(value);
         return input;
     }
-    
+
     @Test
     public void shouldGetTheSameValueBackWhenDiretlySettingAValue()
     {
-        Input<String> input = createAValidInputTypeByDirectlyInsertingTheValue();
+        Input<String> input = directStringInput("a value");
         input.validate();
         assertEquals("a value", input.getValue());
     }
@@ -65,21 +40,14 @@ public class InputTest extends BaseTestCase<InputTest.TestForm>
     @Test
     public void shouldFailWhenDirectlySettingANullValue()
     {
-        Input<String> input = createInputWithDirectNullInserted();
-        assertFalse(input.validate());
+        Input<String> input = directStringInput(null);
+        assertFalse("null value given", input.validate());
     }
 
-    private Input<String> createInputWithDirectNullInserted()
-    {
-        Input<String> input = new BasicInput<String>(stringType(), "gets a null");
-        input.setValue(null);
-        return input;
-    }
-    
     @Test(expected=Exception.class)
     public void shouldThrowWhenAttemptingToRetrieveNullValue()
     {
-        Input<String> input = createInputWithDirectNullInserted();
+        Input<String> input = directStringInput(null);
         input.validate();
         input.getValue();
     }
@@ -87,16 +55,25 @@ public class InputTest extends BaseTestCase<InputTest.TestForm>
     @Test
     public void shouldFailWhenSettingAnInvalidValue()
     {
-        Input<Integer> input = createInvalidInputThroughDirectlySettingValue();
+        Input<Integer> input = directIntegerInput();
+        input.addCriterion(max(4));
         
         assertFalse("input out of range", input.validate());
     }
-
-    private Input<Integer> createInvalidInputThroughDirectlySettingValue()
+    
+    @Test
+    public void shouldHaveAnErrorWhenACriteriaFails()
     {
-        Input<Integer> input = new BasicInput<Integer>(intType(), "int type");
+        Input<Integer> input = directIntegerInput();
         input.addCriterion(max(4));
+        
+        input.validate();
+        assertFalse("must have an error", input.getErrors().isEmpty());
+    }
 
+    private Input<Integer> directIntegerInput()
+    {
+        Input<Integer> input = integerInput();
         input.setValue(5);
         return input;
     }
@@ -104,168 +81,91 @@ public class InputTest extends BaseTestCase<InputTest.TestForm>
     @Test(expected=Exception.class)
     public void shouldThrowWhenAttemptingToRetrieveInvalidValue()
     {
-        Input<Integer> input = createInvalidInputThroughDirectlySettingValue();
+        Input<Integer> input = directIntegerInput();
+        input.addCriterion(max(4));
+        
         input.validate();
-        System.out.println(input.getValue());
-    }
-    
-    /** Required input fails without a value */
-    @Test
-    public void testRequiredFieldFailsWithoutAValue()
-    {
-        assertFalse(validateForm());
-        
-        assertEquals(form.requiredInt().getValueAttribute(), "");
-        assertEquals(form.requiredString().getValueAttribute(), "");
-        
-        assertTrue(form.requiredInt().isBlank());
-        assertTrue(form.requiredString().isBlank());
-        
-        assertFalse(form.requiredInt().isValid());
-        assertFalse(form.requiredString().isValid());
-        
-        assertTrue(form.requiredInt().getErrors().contains("Missing value"));
+        input.getValue();
     }
     
     @Test
-    public void testParseErrorsAreCaptured()
+    public void shouldSucceedWhenSettingThroughValueAttribute()
     {
-        setRequiredRequestParameters("not an int", "a string");
-        setOptionalRequestParameters("also not an int", "a string");
-        assertFalse(validateForm());
-        assertContains("Cannot convert to a number", form.requiredInt().getErrors());
-        assertContains("Cannot convert to a number", form.optionalInt().getErrors());
+        assertTrue("a valid integer", validateInteger("123"));
     }
     
-    /** Input fails if value can't be converted to input's type */
-    @Test
-    public void testFieldFailsIfGivenInvalidType()
+    private boolean validateInteger(String value)
     {
-        setRequiredRequestParameters("Passing string instead of an int.", "some value");
-        setOptionalRequestParameters("Passing string instead of an int.", "some value");
-        
-        // values blank prior to validate method
-        assertTrue(form.requiredInt().isBlank());
-        assertTrue(form.requiredString().isBlank());
-        
-        assertFalse(validateForm());
-        
-        assertFalse(form.requiredInt().isBlank());
-        assertFalse(form.requiredString().isBlank());
-        
-        assertFalse(form.requiredInt().isValid());
-        assertFalse(form.optionalInt().isValid());
-        
-        assertFalse(form.requiredInt().getErrors().isEmpty());
-        assertFalse(form.optionalInt().getErrors().isEmpty());
-        
-        assertContains("Cannot convert to a number", form.requiredInt().getErrors());
-        assertContains("Cannot convert to a number", form.optionalInt().getErrors());
-    }
-    
-    /** Field fails if criteria are not satisfied */
-    @Test
-    public void testFieldFailsIfCriteriaAreNotSatisfied()
-    {
-        String stringTooShort = "x";
-        Integer numTooBig = 100;
-        
-        setRequiredRequestParameters(String.valueOf(numTooBig), "some input");
-        setOptionalRequestParameters(String.valueOf(15), stringTooShort);
-        
-        assertFalse("Criteria not satisfied", validateForm());
-        
-        assertEquals(stringTooShort, form.optionalString().getValueAttribute());
-        
-        assertFalse(form.requiredInt().isValid());
-        assertFalse(form.optionalString().isValid());
-        assertTrue(form.optionalInt().isValid());
-        assertTrue(form.requiredString().isValid());
-        
-        assertTrue(form.requiredInt().getErrors().contains(
-                "The value must be between " + MIN + " and " + MAX));
+        Input<Integer> input = integerInput(value);
+        return input.validate();
     }
 
-    /** Required input passes with a valid value */
-    @Test
-    public void testRequiredFieldPassesWithValidValue()
+    private Input<Integer> integerInput(String value)
     {
-        int number = 15;
-        
-        setRequiredRequestParameters(String.valueOf(number), "some input");
-        
-        assertTrue(number >= MIN && number <= MAX);
-        assertTrue(validateForm());
-        
-        assertTrue(form.requiredInt().isValid());
-        assertTrue(form.requiredInt().getValue() == number);
-        assertTrue(form.requiredInt().getValue() >= MIN);
-        assertTrue(form.requiredInt().getValue() <= MAX);
-        
-        assertTrue(form.requiredString().isValid());
-        assertTrue(form.requiredString().getValue().length() >= MIN_LENGTH);
-        
-        assertTrue(form.requiredInt().getErrors().isEmpty());
-        assertTrue(form.optionalInt().getErrors().isEmpty());
-    }
-    
-    /** Optional input passes without a value */
-    @Test
-    public void testOptionalFieldPassesWithoutAValue()
-    {
-        setRequiredRequestParameters("15", "some input");
-        
-        assertTrue(validateForm());
-        
-        assertEquals(form.optionalInt().getValueAttribute(), "");
-        
-        assertEquals(form.optionalString().getValueAttribute(), "");
-    }
-    
-    private void setRequiredRequestParameters(String intField, String stringField)
-    {
-        setParameter(REQ_INT, intField);
-        setParameter(REQ_STRING, stringField);
+        Input<Integer> input = integerInput();
+        input.setValueAttribute(value);
+        return input;
     }
 
-    private void setOptionalRequestParameters(String intField, String stringField)
+    private Input<Integer> integerInput()
     {
-        setParameter(OPT_INT, intField);
-        setParameter(OPT_STRING, stringField);
+        return new BasicInput<Integer>(intType(), "who knows");
+    }
+
+    @Test
+    public void shouldGetParsedValueOnSuccess()
+    {
+        Input<Integer> input = integerInput("34");
+        input.validate();
+        assertEquals("should parse number", 34, (int)input.getValue());
     }
     
-    static class TestForm extends GenericForm
+    @Test
+    public void shouldFailWhenPassingInEmptyString()
     {
-        public TestForm()
-        {
-            // required and optional fields with criteria
-            input(Types.intType(), REQ_INT).criterion(range(MIN, MAX));
-            input(Types.stringType(), OPT_STRING).criterion(minLength(MIN_LENGTH)).optional();
-            
-            // required and optional fields without criteria
-            input(Types.stringType(), REQ_STRING);
-            input(Types.intType(), OPT_INT).optional();
-        }
-        
-        public Input<Integer> requiredInt()
-        {
-            return getInput(REQ_INT);
-        }
-        
-        public Input<Integer> optionalInt()
-        {
-            return getInput(OPT_INT);
-        }
-        
-        public Input<String> requiredString()
-        {
-            return getInput(REQ_STRING);
-        }
-        
-        public Input<String> optionalString()
-        {
-            return getInput(OPT_STRING);
-        }
+        assertFalse("required field cannot be blank", validateInteger(""));
     }
     
+    @Test
+    public void shouldHaveInformedErrorWhenPassingInEmptyString()
+    {
+        Input<Integer> input = integerInput("");
+        input.validate();
+        assertContains("Missing value", input.getErrors());
+    }
+
+    @Test
+    public void shouldFailWhenPassingInNull()
+    {
+        assertFalse("required field cannot accept null", validateInteger(null));
+    }
+    
+    @Test
+    public void shouldHaveInformedErrorOnParseFail()
+    {
+        Input<Integer> input = integerInput("not an integer");
+        input.validate();
+        assertContains("Cannot convert to a number", input.getErrors());
+    }
+    
+    @Test
+    public void shouldPassWhenBlankAndOptional()
+    {
+        Input<Integer> input = optionalIntegerInput("");
+        assertTrue("optional field can be blank", input.validate());
+    }
+
+    private Input<Integer> optionalIntegerInput(String value)
+    {
+        Input<Integer> input = integerInput(value);
+        input.setRequired(false);
+        return input;
+    }
+    
+    @Test
+    public void shouldPassWhenNullAndOptional()
+    {
+        Input<Integer> input = optionalIntegerInput(null);
+        assertTrue("optional field can accept null", input.validate());
+    }
 }

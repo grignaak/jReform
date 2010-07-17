@@ -69,7 +69,7 @@ public abstract class AbstractInputControl<T> implements InputControl<T>
         return isRequired;
     }
     
-    public final void setRequired(boolean isRequired)
+    public void setRequired(boolean isRequired)
     {
         this.isRequired = isRequired;
     }

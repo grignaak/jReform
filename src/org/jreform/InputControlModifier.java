@@ -30,4 +30,10 @@ public class InputControlModifier<T>
         input.addCriterion(criterion);
         return this;   
     }
+
+    public InputControlModifier<T> required()
+    {
+        input.setRequired(true);
+        return this;
+    }
 }
