@@ -8,7 +8,6 @@ import org.jreform.Group;
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
 import org.jreform.inputs.Radio;
-import org.jreform.inputs.Select;
 import org.jreform.types.Types;
 
 /**
@@ -32,7 +31,7 @@ public class CreditCardAppForm extends GenericForm
         input(Types.stringType(), "phoneNumber");
 
         // uses a custom InputDataType
-        select(employmentType, "employmentStatus");
+        input(employmentType, "employmentStatus");
         
         Group employer = optionalGroup("employer");
         employer.input(Types.stringType(), "company");
@@ -41,7 +40,7 @@ public class CreditCardAppForm extends GenericForm
         radio(Types.booleanType(), "hasAccountWithUs");
 
         Group account = optionalGroup("accountDetails");
-        account.select(Types.stringType(), "accountType");
+        account.input(Types.stringType(), "accountType");
         account.input(Types.intType(), "accountNumber");
         account.input(Types.intType(), "branchNumber");
 
@@ -127,9 +126,9 @@ public class CreditCardAppForm extends GenericForm
         return getInput("phoneNumber");
     }
 
-    public Select<EmploymentStatus> getEmploymentStatus()
+    public Input<EmploymentStatus> getEmploymentStatus()
     {
-        return getSelect("employmentStatus");
+        return getInput("employmentStatus");
     }
 
     public Input<String> getCompany()

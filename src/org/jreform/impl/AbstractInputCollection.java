@@ -20,7 +20,6 @@ import org.jreform.inputs.Input;
 import org.jreform.inputs.MultiCheckbox;
 import org.jreform.inputs.MultiSelect;
 import org.jreform.inputs.Radio;
-import org.jreform.inputs.Select;
 
 /**
  * @author armandino (at) gmail.com
@@ -128,12 +127,6 @@ public abstract class AbstractInputCollection implements InputCollection
     }
     
     @SuppressWarnings("unchecked")
-    public final <T> Select<T> getSelect(String name)
-    {
-        return (Select<T>)getInputControl(name);
-    }
-    
-    @SuppressWarnings("unchecked")
     public final <T> MultiSelect<T> getMultiSelect(String name)
     {
         return (MultiSelect<T>)getInputControl(name);
@@ -162,11 +155,6 @@ public abstract class AbstractInputCollection implements InputCollection
     public final <T> InputControlModifier<T> radio(InputDataType<T> type, String name)
     {
         return create(new Radio<T>(type, name));
-    }
-    
-    public final <T> InputControlModifier<T> select(InputDataType<T> type, String name)
-    {
-        return create(new Select<T>(type, name));
     }
     
     public final <T> InputControlModifier<T> multiSelect(InputDataType<T> type, String name)
