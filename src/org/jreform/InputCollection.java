@@ -2,8 +2,7 @@ package org.jreform;
 
 import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.Input;
-import org.jreform.inputs.MultiCheckbox;
-import org.jreform.inputs.MultiSelect;
+import org.jreform.inputs.MultiInput;
 import org.jreform.inputs.Radio;
 
 /**
@@ -13,13 +12,11 @@ public interface InputCollection extends HttpServletRequestValidator
 {
     public <T> Input<T> getInput(String name);
     public <T> Checkbox<T> getCheckbox(String name);
-    public <T> MultiCheckbox<T> getMultiCheckbox(String name);
+    public <T> MultiInput<T> getMultiInput(String name);
     public <T> Radio<T> getRadio(String name);
-    public <T> MultiSelect<T> getMultiSelect(String name);
   
     public <T> InputControlModifier<T> input(InputDataType<T> type, String name);
     public <T> InputControlModifier<T> checkbox(InputDataType<T> type, String name);
-    public <T> InputControlModifier<T> multiCheckbox(InputDataType<T> type, String name);
+    public <T> InputControlModifier<T> multiInput(InputDataType<T> type, String name);
     public <T> InputControlModifier<T> radio(InputDataType<T> type, String name);
-    public <T> InputControlModifier<T> multiSelect(InputDataType<T> type, String name);
 }

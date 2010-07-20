@@ -15,10 +15,10 @@ import org.jreform.InputDataType;
 import org.jreform.exceptions.DuplicateNameException;
 import org.jreform.exceptions.UndefinedInputControlException;
 import org.jreform.inputs.BasicInput;
+import org.jreform.inputs.BasicMultiInput;
 import org.jreform.inputs.Checkbox;
 import org.jreform.inputs.Input;
-import org.jreform.inputs.MultiCheckbox;
-import org.jreform.inputs.MultiSelect;
+import org.jreform.inputs.MultiInput;
 import org.jreform.inputs.Radio;
 
 /**
@@ -115,21 +115,15 @@ public abstract class AbstractInputCollection implements InputCollection
     }
     
     @SuppressWarnings("unchecked")
-    public final <T> MultiCheckbox<T> getMultiCheckbox(String name)
+    public final <T> MultiInput<T> getMultiInput(String name)
     {
-        return (MultiCheckbox<T>)getInputControl(name);
+        return (MultiInput<T>)getInputControl(name);
     }
     
     @SuppressWarnings("unchecked")
     public final <T> Radio<T> getRadio(String name)
     {
         return (Radio<T>)getInputControl(name);
-    }
-    
-    @SuppressWarnings("unchecked")
-    public final <T> MultiSelect<T> getMultiSelect(String name)
-    {
-        return (MultiSelect<T>)getInputControl(name);
     }
     
     
@@ -147,19 +141,14 @@ public abstract class AbstractInputCollection implements InputCollection
         return create(new Checkbox<T>(type, name));
     }
     
-    public final <T> InputControlModifier<T> multiCheckbox(InputDataType<T> type, String name)
+    public final <T> InputControlModifier<T> multiInput(InputDataType<T> type, String name)
     {
-        return create(new MultiCheckbox<T>(type, name));
+        return create(new BasicMultiInput<T>(type, name));
     }
     
     public final <T> InputControlModifier<T> radio(InputDataType<T> type, String name)
     {
         return create(new Radio<T>(type, name));
-    }
-    
-    public final <T> InputControlModifier<T> multiSelect(InputDataType<T> type, String name)
-    {
-        return create(new MultiSelect<T>(type, name));
     }
 
     private <T> InputControlModifier<T> create(AbstractInputControl<T> input)

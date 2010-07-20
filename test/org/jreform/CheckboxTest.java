@@ -5,7 +5,6 @@ import static junit.framework.Assert.assertTrue;
 import static org.jreform.types.Types.intType;
 
 import org.jreform.inputs.Checkbox;
-import org.jreform.inputs.MultiCheckbox;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,19 +45,5 @@ public class CheckboxTest
         checkbox.setValueAttribute("not an int");
         
         assertFalse("invalid on error", checkbox.validate());
-    }
-
-    @Test
-    public void multiCheckBoxShouldDefaultToOptional()
-    {
-        assertFalse("default to optional", new MultiCheckbox<Integer>(intType(), "multi check").isRequired());
-    }
-    
-    @Test
-    public void shouldStillSetMultiCheckBoxToRequired()
-    {
-        MultiCheckbox<Integer> multicheckbox = new MultiCheckbox<Integer>(intType(), "multi check");
-        multicheckbox.setRequired(true);
-        assertTrue("can be required", multicheckbox.isRequired());
     }
 }

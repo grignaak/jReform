@@ -3,7 +3,6 @@ package org.jreform.inputs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +16,7 @@ import org.jreform.util.ParsedValue;
  * @author armandino (at) gmail.com
  * @author michael.deardeuff (at) gmail.com
  */
+// TODO accept collections instead of lists
 public class BasicMultiInput<T> extends AbstractInputControl<T> implements MultiInput<T>
 {
     private List<ParsedValue<T>> values = Collections.emptyList();
@@ -52,9 +52,6 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
         }
     }
     
-    /**
-     * Returns an array of <tt>value</tt> attributes or an empty array if none.
-     */
     public final List<String> getValueAttributes()
     {
         return Collections.unmodifiableList(valueAttributes);
@@ -62,15 +59,11 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     public void setValueAttributes(List<String> input)
     {
-        this.valueAttributes = new ArrayList<String>(input);
+        this.valueAttributes = new ArrayList<String>(input.size());
         
-        Iterator<String> i = valueAttributes.iterator();
-        while (i.hasNext())
-        {
-            if (i.next() == null)
-                i.remove();
-        }
-        
+        for (String value : input)
+            valueAttributes.add(value != null ? value.trim() : "");
+            
         values = parseValues();
     }
     
@@ -91,18 +84,15 @@ public class BasicMultiInput<T> extends AbstractInputControl<T> implements Multi
     
     public boolean validate()
     {
-        boolean isValid = false;  
-        if (!valueAttributes.isEmpty())
-            isValid = isValidInput();
-        else if (!isRequired())
-            isValid = true;
-        else
+        if (!isBlank())
+            validateInput();
+        else if (isRequired())
             addError("Invalid or missing value");
-
-        return isValid;
+        
+        return isValid();
     }
     
-    private boolean isValidInput()
+    private boolean validateInput()
     {
         boolean isValid = true;
         for (ParsedValue<T> value : values)

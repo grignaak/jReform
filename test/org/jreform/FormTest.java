@@ -34,7 +34,7 @@ public class FormTest extends BaseTestCase<FormTest.TestForm>
         {
             input(Types.stringType(), STRING_INPUT).optional();
             input(Types.intType(), INT_INPUT).optional();
-            multiCheckbox(Types.intType(), INT_MULTI_INPUT).optional();
+            multiInput(Types.intType(), INT_MULTI_INPUT).optional();
         }
     }
 
