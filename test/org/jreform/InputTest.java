@@ -1,15 +1,15 @@
 package org.jreform;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 import static org.jreform.BaseTestCase.assertContains;
 import static org.jreform.criteria.Criteria.max;
-import static org.jreform.types.Types.intType;
-import static org.jreform.types.Types.stringType;
+import static org.jreform.types.Types.*;
+
+import java.util.Date;
 
 import org.jreform.inputs.BasicInput;
 import org.jreform.inputs.Input;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class InputTest
@@ -167,5 +167,28 @@ public class InputTest
     {
         Input<Integer> input = optionalIntegerInput(null);
         assertTrue("optional field can accept null", input.validate());
+    }
+    
+    @Test
+    public void shouldNotBeBlankWhenSettingValueDirectly()
+    {
+        Input<Integer> input = integerInput();
+        input.setValue(1);
+        assertFalse(input.isBlank());
+    }
+    
+    @Test
+    @Ignore // TODO
+    public void shouldGetParsableValueWhenSettingValueDirectly()
+    {
+        Input<Date> input1 = new BasicInput<Date>(dateType("dd MMM yyyy"), "a date");
+        Input<Date> input2 = new BasicInput<Date>(dateType("dd MMM yyyy"), "another date");
+        
+        Date today = new Date();
+        input1.setValue(today);
+        
+        String valueAttribute = input1.getValueAttribute();
+        input2.setValueAttribute(valueAttribute);
+        assertEquals(today, input2.getValue());
     }
 }

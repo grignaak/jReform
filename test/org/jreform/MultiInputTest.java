@@ -10,6 +10,7 @@ import org.jreform.inputs.BasicMultiInput;
 import org.jreform.inputs.MultiInput;
 import org.jreform.types.Types;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class MultiInputTest
@@ -82,5 +83,13 @@ public class MultiInputTest
         input.setRequired(false);
         input.setValueAttributes(Arrays.asList(""));
         assertTrue(input.validate());
+    }
+    
+    @Test
+    @Ignore // TODO
+    public void shouldNotBeBlankWhenSettingValueDirectly()
+    {
+        input.setValues(Arrays.asList(1, 2));
+        assertFalse(input.isBlank());
     }
 }
