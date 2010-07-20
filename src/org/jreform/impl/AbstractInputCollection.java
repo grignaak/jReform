@@ -24,7 +24,7 @@ public abstract class AbstractInputCollection implements InputCollection
      * @throws DuplicateNameException if there is an existing input
      *         with the same name in this collection
      */
-    <T> void add(InputControl<T> input)
+    <T> void addInput(InputControl<T> input)
     {
         String name = input.getInputName();
         
@@ -101,7 +101,7 @@ public abstract class AbstractInputCollection implements InputCollection
 
     private <T> InputControlModifier<T> create(InputControl<T> input)
     {
-        add(input);
+        addInput(input);
         return new InputControlModifier<T>(input);
     }
     
@@ -131,5 +131,10 @@ public abstract class AbstractInputCollection implements InputCollection
     {
         for (InputControl<?> input : inputs.values())
             input.processRequest(req);
+    }
+
+    protected void addErrors(Set<String> errors)
+    {
+        errors.addAll(errors);
     }
 }

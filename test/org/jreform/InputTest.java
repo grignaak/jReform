@@ -1,10 +1,10 @@
 package org.jreform;
 
 import static junit.framework.Assert.*;
-import static org.jreform.BaseTestCase.assertContains;
 import static org.jreform.criteria.Criteria.max;
 import static org.jreform.types.Types.*;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.jreform.inputs.BasicInput;
@@ -13,7 +13,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class InputTest
-{    
+{
+    protected static <T> void assertContains(T thing, Collection<? super T> things)
+    {
+        assertTrue(things + " does not contain " + thing,
+                things.contains(thing));
+    }
+    
     @Test
     public void shouldSucceedWhenDirectlySettingValue()
     {

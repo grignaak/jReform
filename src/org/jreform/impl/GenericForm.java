@@ -1,7 +1,6 @@
 package org.jreform.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,9 +51,7 @@ public class GenericForm extends AbstractInputCollection implements Form
         super.processRequest(req);
         
         for (Group g : groups.values())
-        {
             g.processRequest(req);
-        }
     }
     
     public final boolean validateRequest(HttpServletRequest req)
@@ -75,13 +72,11 @@ public class GenericForm extends AbstractInputCollection implements Form
     private void validateGroups()
     {
         for (Group group : groups.values())
-        {
             if (!group.validate())
-                getErrors().addAll(group.getErrors());
-        }
+                addErrors(group.getErrors());
     }
 
-    protected final Group requiredGroup(String name)
+    protected Group requiredGroup(String name)
     {
         GenericGroup group = new GenericGroup(name);
         group.setRequired(true);
@@ -89,7 +84,7 @@ public class GenericForm extends AbstractInputCollection implements Form
         return group;
     }
 
-    protected final Group optionalGroup(String name)
+    protected Group optionalGroup(String name)
     {
         Group group = new GenericGroup(name);
         addGroup(group);

@@ -3,6 +3,7 @@ package org.jreform;
 import static org.jreform.types.Types.*;
 import static org.junit.Assert.*;
 
+import org.jreform.exceptions.DuplicateNameException;
 import org.jreform.impl.AbstractInputCollection;
 import org.jreform.inputs.Input;
 import org.junit.Before;
@@ -82,5 +83,13 @@ public class AbstractInputCollectionTest
     {
         getInput().setValueAttribute("123");
         assertTrue(inputs.validate());
+    }
+    
+    @Test(expected=DuplicateNameException.class)
+    public void shouldNotAcceptTwoInputsWithSameName()
+    {
+        MockInputCollection collection = new MockInputCollection();
+        collection.input(intType(), "an input");
+        collection.checkbox(intType(), "an input");
     }
 }
