@@ -7,7 +7,6 @@ import java.util.Date;
 import org.jreform.Group;
 import org.jreform.impl.GenericForm;
 import org.jreform.inputs.Input;
-import org.jreform.inputs.Radio;
 import org.jreform.types.Types;
 
 /**
@@ -81,9 +80,9 @@ public class CreditCardAppForm extends GenericForm
     // Getters
     //
     
-    public Radio<String> getTitle()
+    public Input<String> getTitle()
     {
-        return getRadio("title");
+        return getInput("title");
     }
 
     public Input<String> getFirstName()
@@ -111,9 +110,9 @@ public class CreditCardAppForm extends GenericForm
         return getInput("city");
     }
 
-    public Radio<String> getOwnOrRent()
+    public Input<String> getOwnOrRent()
     {
-        return getRadio("ownOrRent");
+        return getInput("ownOrRent");
     }
 
     public Input<String> getEmail()
@@ -141,9 +140,9 @@ public class CreditCardAppForm extends GenericForm
         return getInput("businessPhoneNumber");
     }
 
-    public Radio<Boolean> getHasAccountWithUs()
+    public Input<Boolean> getHasAccountWithUs()
     {
-        return getRadio("hasAccountWithUs");
+        return getInput("hasAccountWithUs");
     }
 
     public Input<String> getAccountType()

@@ -71,7 +71,7 @@ public class GenericGroupTest
     public void shouldBeEmptyIfRadioInputSuppliedButOtherwiseEmpty()
     {
         group.radio(stringType(), "a radio");
-        group.getRadio("a radio").setValueAttribute("a value");
+        group.getInput("a radio").setValueAttribute("a value");
         assertTrue(group.isEmpty());   
     }
     

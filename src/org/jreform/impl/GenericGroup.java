@@ -64,4 +64,10 @@ public class GenericGroup extends AbstractInputCollection implements Group
         
         return isValid();
     }
+
+    /**
+     * Perform additional validation of form data where necessary.
+     */
+    protected void additionalValidate()
+    {}
 }

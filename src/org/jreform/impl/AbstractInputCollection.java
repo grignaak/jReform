@@ -11,6 +11,7 @@ import org.jreform.inputs.*;
 
 /**
  * @author armandino (at) gmail.com
+ * @author michael.deardeuff (at) gmail.com
  */
 public abstract class AbstractInputCollection implements InputCollection
 {
@@ -61,23 +62,6 @@ public abstract class AbstractInputCollection implements InputCollection
         return inputs.values();
     }
     
-    /**
-     * Perform additional validation of form data where necessary.
-     */
-    protected void additionalValidate() {}
-    
-    
-    
-    //
-    // ----------------------------------------------------------------
-    // ------------------InputCollection methods ----------------------
-    // ----------------------------------------------------------------
-    //
-    
-    //
-    // Getters
-    //
-    
     @SuppressWarnings("unchecked")
     public final <T> Input<T> getInput(String name)
     {
@@ -85,21 +69,9 @@ public abstract class AbstractInputCollection implements InputCollection
     }
     
     @SuppressWarnings("unchecked")
-    public final <T> Checkbox<T> getCheckbox(String name)
-    {
-        return (Checkbox<T>)getInputControl(name);
-    }
-    
-    @SuppressWarnings("unchecked")
     public final <T> MultiInput<T> getMultiInput(String name)
     {
         return (MultiInput<T>)getInputControl(name);
-    }
-    
-    @SuppressWarnings("unchecked")
-    public final <T> Radio<T> getRadio(String name)
-    {
-        return (Radio<T>)getInputControl(name);
     }
     
     

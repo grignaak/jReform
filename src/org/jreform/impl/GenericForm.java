@@ -95,5 +95,11 @@ public class GenericForm extends AbstractInputCollection implements Form
         addGroup(group);
         return group;
     }
+
+    /**
+     * Perform additional validation of form data where necessary.
+     */
+    protected void additionalValidate()
+    {}
     
 }
