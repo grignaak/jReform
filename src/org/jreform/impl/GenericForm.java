@@ -69,7 +69,6 @@ public class GenericForm extends AbstractInputCollection implements Form
         validateGroups();
         additionalValidate();
         
-        setValid(getErrors().isEmpty());
         return isValid();
     }
 
@@ -84,17 +83,15 @@ public class GenericForm extends AbstractInputCollection implements Form
 
     protected final Group requiredGroup(String name)
     {
-        return addNewGroup(name, true);
+        GenericGroup group = new GenericGroup(name);
+        group.setRequired(true);
+        addGroup(group);
+        return group;
     }
 
     protected final Group optionalGroup(String name)
     {
-        return addNewGroup(name, false);
-    }
-
-    private Group addNewGroup(String name, boolean isRequired)
-    {
-        Group group = new GenericGroup(name, isRequired);
+        Group group = new GenericGroup(name);
         addGroup(group);
         return group;
     }

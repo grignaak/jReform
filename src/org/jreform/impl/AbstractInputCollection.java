@@ -1,25 +1,13 @@
 package org.jreform.impl;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jreform.InputCollection;
-import org.jreform.InputControl;
-import org.jreform.InputControlModifier;
-import org.jreform.InputDataType;
+import org.jreform.*;
 import org.jreform.exceptions.DuplicateNameException;
 import org.jreform.exceptions.UndefinedInputControlException;
-import org.jreform.inputs.BasicInput;
-import org.jreform.inputs.BasicMultiInput;
-import org.jreform.inputs.Checkbox;
-import org.jreform.inputs.Input;
-import org.jreform.inputs.MultiInput;
-import org.jreform.inputs.Radio;
+import org.jreform.inputs.*;
 
 /**
  * @author armandino (at) gmail.com
@@ -28,7 +16,6 @@ public abstract class AbstractInputCollection implements InputCollection
 {
     private final Map<String, InputControl<?>> inputs = new HashMap<String, InputControl<?>>();
     private final Set<String> errors = new HashSet<String>();
-    private boolean isValid;
     
     /**
      * Adds the specified input to the collection.
@@ -58,7 +45,7 @@ public abstract class AbstractInputCollection implements InputCollection
     {
         return errors;
     }
-    
+        
     public final void addError(String errorKey)
     {
         errors.add(errorKey);
@@ -66,23 +53,12 @@ public abstract class AbstractInputCollection implements InputCollection
     
     public final boolean isValid()
     {
-        return isValid;
-    }
-
-    @Deprecated
-    final Map<String,InputControl<?>> getInputsWithNames()
-    {
-        return inputs;
+        return errors.isEmpty();
     }
     
     protected Iterable<InputControl<?>> getInputs()
     {
         return inputs.values();
-    }
-    
-    final void setValid(boolean isValid)
-    {
-        this.isValid = isValid;
     }
     
     /**
@@ -151,7 +127,7 @@ public abstract class AbstractInputCollection implements InputCollection
         return create(new Radio<T>(type, name));
     }
 
-    private <T> InputControlModifier<T> create(AbstractInputControl<T> input)
+    private <T> InputControlModifier<T> create(InputControl<T> input)
     {
         add(input);
         return new InputControlModifier<T>(input);
@@ -162,35 +138,26 @@ public abstract class AbstractInputCollection implements InputCollection
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        Iterator<String> iter = inputs.keySet().iterator();
         
-        while(iter.hasNext())
+        for (InputControl<?> input : inputs.values())
         {
-            String inputName = iter.next();
-            InputControl<?> input = inputs.get(inputName);
-            sb.append(inputName).append(": ")
-              .append(input.getStringValue())
-              .append(System.getProperty("line.separator"));
+            sb.append(input.getInputName()).append(": ")
+                .append(input.getStringValue())
+                .append(System.getProperty("line.separator"));
         }
-        
         return sb.toString();
     }
 
     protected void validateInputs()
     {
-        for (InputControl<?> input : getInputsWithNames().values())
-        {
+        for (InputControl<?> input : inputs.values())
             if (!input.validate())
                 getErrors().add(input.getInputName());
-        }
     }
 
     public void processRequest(HttpServletRequest req)
     {
-        for (InputControl<?> input : getInputsWithNames().values())
-        {
+        for (InputControl<?> input : inputs.values())
             input.processRequest(req);
-        }
     }
-    
 }

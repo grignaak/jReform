@@ -1,7 +1,5 @@
 package org.jreform.impl;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.jreform.Group;
 import org.jreform.InputControl;
 
@@ -18,22 +16,19 @@ import org.jreform.InputControl;
  *     for the group to be valid <b>OR</b> all inputs satisfy imposed criteria.
  *
  * @author armandino (at) gmail.com
+ * @author michael.deardeuff (at) gmail.com
  */
 public class GenericGroup extends AbstractInputCollection implements Group
 {
     private String name;
     private boolean isRequired;
-    private boolean isEmpty = true;
     
     /**
      * Create a new input group.
-     * @param name of the group.
-     * @param isRequired if this group should be treated as valid when empty.
      */
-    public GenericGroup(String name, boolean isRequired)
+    public GenericGroup(String name)
     {
         this.name = name;
-        this.isRequired = isRequired;
     }
     
     public final String getName()
@@ -46,47 +41,27 @@ public class GenericGroup extends AbstractInputCollection implements Group
         return isRequired;
     }
     
-    public final boolean isEmpty()
+    public boolean isEmpty()
     {
-        return isEmpty;
+        for (InputControl<?> input : getInputs())
+            if (!input.isBlank())
+                return false;
+        
+        return true;
     }
     
     public final void setRequired(boolean isRequired)
     {
         this.isRequired = isRequired;
     }
-    
-    public final boolean validateRequest(HttpServletRequest req)
-    {
-        processRequest(req);
-        return validate();
-    }
 
     public boolean validate()
     {
-        if(isRequired || !isEmpty)
+        if(isRequired() || !isEmpty())
             validateInputs();
         
-        setValid(getErrors().isEmpty());
+        additionalValidate();
         
         return isValid();
     }
-    
-    public void processRequest(HttpServletRequest req)
-    {
-        super.processRequest(req);
-        isEmpty = !containsInputData();
-    }
-
-    private boolean containsInputData()
-    {
-        for (InputControl<?> input : getInputs())
-        {
-            if (!input.isBlank())
-                return true;
-        }
-        
-        return false;
-    }
-    
 }
