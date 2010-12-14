@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet for accessing/updating the user profile page.
  */
+@SuppressWarnings("serial")
 public class UserProfile extends HttpServlet
 {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -17,13 +18,13 @@ public class UserProfile extends HttpServlet
     {
         doPost(req, res);
     }
-    
+
     @SuppressWarnings("unused")
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException
     {
         UserProfileForm form = new UserProfileForm();
-        
+
         if(req.getParameter("submit") != null)
         {
             // Validate form data
@@ -31,15 +32,15 @@ public class UserProfile extends HttpServlet
             {
                 String fullName = form.getFullName().getValue();
                 String phone = form.getPhone().getValue();
-				int age = form.getAge().getValue();
+                int age = form.getAge().getValue();
                 char gender = form.getGender().getValue();
-                
+
                 // process data..
             }
         }
-        
+
         req.setAttribute("form", form);
         getServletContext().getRequestDispatcher("/UserProfile.jsp").forward(req, res);
     }
-    
+
 }

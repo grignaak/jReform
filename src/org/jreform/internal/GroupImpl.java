@@ -16,7 +16,7 @@ import org.jreform.InputControl;
  * 
  * <li>If required: all inputs must satisfy imposed criteria for
  *     the group to be deemed valid.
- *     
+ * 
  * <li>Otherwise: either all inputs in this group are empty (have no values)
  *     for the group to be valid <b>OR</b> all inputs satisfy imposed criteria.
  *
@@ -28,7 +28,7 @@ class GroupImpl extends AbstractInputCollection implements Group
     private String name;
     private boolean isRequired;
     private boolean isEmpty = true;
-    
+
     /**
      * Create a new input group.
      * @param parent to which this group will belong.
@@ -41,7 +41,7 @@ class GroupImpl extends AbstractInputCollection implements Group
         this.name = name;
         this.isRequired = isRequired;
     }
-    
+
     /**
      * Adds the input to this input group and its parent form.
      */
@@ -51,85 +51,85 @@ class GroupImpl extends AbstractInputCollection implements Group
         super.add(input);
         parent.add(input);
     }
-    
+
     public final String getName()
     {
         return name;
     }
-    
+
     public final boolean isRequired()
     {
         return isRequired;
     }
-    
+
     public final boolean isEmpty()
     {
         return isEmpty;
     }
-    
+
     public final void setRequired(boolean isRequired)
     {
         this.isRequired = isRequired;
     }
-    
+
     public final boolean validate(HttpServletRequest req)
     {
         isEmpty = !containsInputData(req);
-        
+
         if(isRequired || !isEmpty)
         {
             validateInputs(req);
         }
-        
+
         setValid(getErrors().isEmpty());
-        
+
         return isValid();
     }
-    
+
     final void validateInputs(HttpServletRequest req)
     {
         Iterator<String> iter = getInputs().keySet().iterator();
         AbstractInputControl<?> input;
-        
+
         while(iter.hasNext())
         {
             input = (AbstractInputControl<?>)getInputs().get(iter.next());
-            
+
             if(!input.validate(req))
                 getErrors().add(input.getInputName());
         }
     }
-    
+
     /*
      * Returns true if the request contains any data that belong
-     * to this group's inputs. 
+     * to this group's inputs.
      */
     private boolean containsInputData(HttpServletRequest req)
     {
         boolean foundInputData = false;
         Iterator<String> iter = getInputs().keySet().iterator();
-        
+
         while(iter.hasNext() && !foundInputData)
         {
             InputControl<?> input = getInputs().get(iter.next());
-            
-            if(input instanceof Input)
+
+            if(input instanceof Input<?>)
             {
                 String value = req.getParameter(input.getInputName());
-                
+
                 if(value != null && !value.trim().equals(""))
                     foundInputData = true;
             }
             else
             {
                 String[] values = req.getParameterValues(input.getInputName());
-                
+
                 if(values != null && values.length > 0)
                     foundInputData = true;
             }
         }
-        
+
         return foundInputData;
     }
-    
+
 }

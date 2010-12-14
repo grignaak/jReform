@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("serial")
 public class CreditCardApp extends HttpServlet
 {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -15,13 +16,13 @@ public class CreditCardApp extends HttpServlet
     {
         doPost(req, res);
     }
-    
+
     @SuppressWarnings("unused")
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException
     {
         CreditCardAppForm form = new CreditCardAppForm(req);
-        
+
         if(req.getParameter("submit") != null)
         {
             if(form.validate(req))
@@ -34,13 +35,13 @@ public class CreditCardApp extends HttpServlet
                 String email = form.getEmail().getValue();
                 EmploymentStatus status = form.getEmploymentStatus().getValue();
                 Integer monthlyIncome = form.getMonthlyIncome().getValue();
-                
+
                 // etc...
             }
         }
-        
+
         req.setAttribute("form", form);
         getServletContext().getRequestDispatcher("/CreditCardApp.jsp").forward(req, res);
     }
-    
+
 }
